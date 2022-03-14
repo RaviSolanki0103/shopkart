@@ -35,7 +35,7 @@ function About() {
   console.log("userdata", userdata);
   useEffect(() => {
     callAboutpage();
-  }, []);
+  });
 
   return (
     <div>
