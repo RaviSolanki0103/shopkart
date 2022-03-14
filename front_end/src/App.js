@@ -7,6 +7,7 @@ import Contactus from "./components/Contactus";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="logout" element={<Logout />} />
         <Route exact path="*" element={<Login />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
