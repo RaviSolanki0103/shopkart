@@ -27,3 +27,29 @@
     /* justify-content: start; */
     /* padding: auto; */
 }
+
+@media only screen and (max-width: 400px) {
+    .footer-container{
+      /* background-color: lightblue; */
+      display:block;
+      text-align: center;
+      height: auto;
+      margin: auto;
+      padding: auto;
+    }
+    .footer-1{
+        text-align: center;
+        margin: auto;
+
+    }
+    .footer-2{
+        border: none;
+        height: auto;
+        text-align: center;
+        margin: auto;
+
+
+
+        
+    }
+  }
