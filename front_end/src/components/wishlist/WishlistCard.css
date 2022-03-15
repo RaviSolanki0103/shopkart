@@ -60,10 +60,7 @@
 }
 
 @media only screen and (max-width: 400px) {
-    .card-button{
-        /* display: block; */
-        /* background:red; */
-    }
+    
     .card-container{
         display: block;
 
