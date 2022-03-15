@@ -4,7 +4,7 @@ import About from "./components/About";
 import { Route, Routes } from "react-router-dom";
 import Contactus from "./components/Contactus";
 import Signup from "./components/Signup";
-import Login from "./components/Login";
+import Login from "./components/login/Login";
 import Logout from "./components/Logout";
 import Footer from "./components/footer/footer";
 import Homepage from "./screens/Homepage";
@@ -12,8 +12,8 @@ import Homepage from "./screens/Homepage";
 function App() {
   return (
     <div className="App">
-      <Homepage />
-
+      {/*<Homepage />*/} 
+      <Login />
       {/* <Navbar /> */}
       {/* <Routes>
         <Route exact path="/" element={<Home />} />
@@ -24,7 +24,7 @@ function App() {
         <Route exact path="logout" element={<Logout />} />
         <Route exact path="*" element={<Login />} />
       </Routes> */}
-      <Footer />
+      {/*<Footer />*/}
     </div>
   );
 }

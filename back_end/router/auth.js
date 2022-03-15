@@ -86,7 +86,7 @@ router.post("/signin", async (req, res) => {
       return res.status(400).json({ erroe: "Please fill the data" });
     }
     const userLogin = await User.findOne({ email: email });
-    console.log("User Is Logdin", userLogin);
+    console.log("User Is Logedin", userLogin);
 
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
