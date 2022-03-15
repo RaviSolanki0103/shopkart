@@ -15,9 +15,8 @@ import WishlistCard from "./components/wishlist/WishlistCard";
 function App() {
   return (
     <div className="App">
-      {/* <Homepage /> */}
-      <WishlistCard />
-      {/* <Wishlist /> */}
+      <Homepage />
+      
 
       {/* <Navbar /> */}
       {/* <Routes>

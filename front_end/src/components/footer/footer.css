@@ -4,7 +4,7 @@
   width: 100%;
   height: auto;
   color: white;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0px;
 }
 .footer-text-container {
@@ -22,6 +22,7 @@
 }
 .footer-2 {
   border-left-style: solid;
+  /*  */
   width: 50%;
   height: auto;
   margin: auto;

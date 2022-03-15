@@ -9,10 +9,7 @@ function Wishlist() {
         <div className='wishlist-card'>
               <WishlistCard />
               <WishlistCard />
-              <WishlistCard />
-              
-
-        </div>
+         </div>
     </div>
   )
 }
