@@ -6,8 +6,11 @@ import Contactus from "./components/Contactus";
 import Signup from "./components/Signup";
 import Login from "./components/login/Login";
 import Logout from "./components/Logout";
-import Footer from "./components/footer/footer";
+
 import Homepage from "./screens/Homepage";
+import Wishlist from "./components/wishlist/Wishlist";
+import WishlistCard from "./components/wishlist/WishlistCard";
+
 
 function App() {
   return (

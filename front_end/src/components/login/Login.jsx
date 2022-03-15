@@ -87,7 +87,7 @@ function Login() {
 
         <Form.Item>
           <Button name="login" value="login" autoComplete="off" type="primary" id="login" htmlType="submit" className="login-form-button" onClick={loginuser}>
-            LOGIN
+            Log in
           </Button>
           Or <a href="">Register Now!</a>
         </Form.Item>

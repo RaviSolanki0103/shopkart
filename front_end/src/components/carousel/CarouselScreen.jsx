@@ -6,12 +6,10 @@ function CarouselScreen() {
   return (
     <div>
       <Carousel autoplay>
-        <div>
-          <div className="carousel-img-one"></div>
-        </div>
         <div className="carousel-img-one"></div>
+        <div className="carousel-img-two"></div>
         <div className="carousel-img-one"></div>
-        <div className="carousel-img-one"></div>
+        <div className="carousel-img-two"></div>
       </Carousel>
     </div>
   );
