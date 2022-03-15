@@ -24,7 +24,7 @@ function App() {
         <Route exact path="logout" element={<Logout />} />
         <Route exact path="*" element={<Login />} />
       </Routes> */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
