@@ -1,8 +1,8 @@
 
 import React from "react";
 import CarouselScreen from "../components/carousel/CarouselScreen";
-import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/footer";
+import Navbar from "../components/navbar/Navbar";
 import ProductCategory from "../components/product-category/ProductCategory";
 
 function Homepage() {
