@@ -1,27 +1,28 @@
+:root {
+  --header-size: 100px;
+  --primary-color: #2874f0;
+}
+
 .main-navbar {
-  background-color: #2874f0;
+  background-color: var(--primary-color);
   display: flex;
-  height: 100px;
+  height: var(--header-size);
   justify-content: space-around;
 }
 
 .navbar-menu {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  width: 30%;
+  margin-right: 10px;
 }
 
 .navbar-menu ul {
-  margin: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  column-gap: 15px;
-  width: 100%;
-}
-
-.navbar-menu ul li {
-  list-style-type: none;
+  width: 40%;
 }
 
 .navbar-icon {
@@ -38,9 +39,60 @@
   align-items: center;
 }
 
-.navbar-search input {
-  width: 100%;
-  border-radius: 50px;
-  padding: 8px 10px;
-  border: none;
+.navbar-search .global-search input {
+  font-size: 18px;
+  padding: 3px 5px;
+}
+
+.navbar-search .global-search svg {
+  width: 14px;
+  height: 14px;
+}
+
+.shopping-cart-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.login-btn svg {
+  color: #fff;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+@media only screen and (max-width: 1526px) {
+  .navbar-menu {
+    width: 30%;
+  }
+  .navbar-menu ul {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .navbar-menu {
+    width: 30%;
+  }
+  .navbar-menu ul {
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 801px) {
+  .navbar-menu {
+    width: 30%;
+  }
+  .navbar-search {
+    width: 60%;
+  }
+  .navbar-search .global-search input {
+    font-size: 12px;
+    padding: 0px;
+  }
+  .navbar-icon {
+    width: 20%;
+  }
+  .navbar-menu ul {
+    width: 35%;
+    height: 32%;
+  }
 }
