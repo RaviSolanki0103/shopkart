@@ -9,7 +9,7 @@ function Login() {
 
   const loginuser = async (e) => {
     e.preventDefault();
-    console.log("User responce",e);
+    console.log("User responce", e);
     const res = await fetch("/signin", {
       method: "POST",
       headers: {
