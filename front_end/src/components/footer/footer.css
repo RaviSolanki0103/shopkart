@@ -36,7 +36,8 @@
   }
   .footer-text-container {
     display: block;
-  }
+    /* border-bottom:solid ; */
+ }
   .footer-1 {
     text-align: center;
     margin: auto;

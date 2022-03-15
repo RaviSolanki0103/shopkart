@@ -1,0 +1,9 @@
+.wishlist-body{
+    height: auto;
+    width: auto;
+}
+.wishlist-header{
+    font-size: 2rem;
+    text-align: left;
+    font-weight: bold;
+}
