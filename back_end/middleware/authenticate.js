@@ -25,7 +25,7 @@ const authenticate = async (req, res, next) => {
     return next();
   } catch (err) {
     res.status(401).send("Unauthorized: No token provied");
-    console.log("LAst Error in AUthenticator", err);
+    console.log("Last Error in Authenticator", err);
   }
 };
 

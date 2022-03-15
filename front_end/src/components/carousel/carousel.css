@@ -1,5 +1,39 @@
 .carousel-img-one {
     background: url(../../assets/cr1.png) no-repeat;
     background-size: cover;
+    background-position: center;
     height: 18rem;
+}
+
+.carousel-img-two {
+    background: url(../../assets/cr3.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 18rem;
+}
+
+@media only screen and (max-width: 1023px) {
+    .carousel-img-one, .carousel-img-two {
+        height: 15rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel-img-one, .carousel-img-two {
+        transform: scale(0.95);
+        height: 15rem;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .carousel-img-one, .carousel-img-two {
+        transform: scale(0.9);
+        height: 11rem;        
+    }
+}
+@media only screen and (max-width: 320px) {
+    .carousel-img-one, .carousel-img-two {
+        transform: scale(0.9);
+        height: 9rem;        
+    }
 }
