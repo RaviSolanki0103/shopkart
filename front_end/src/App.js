@@ -4,7 +4,6 @@ import About from "./components/About";
 import { Route, Routes } from "react-router-dom";
 import Contactus from "./components/Contactus";
 import Signup from "./components/Signup";
-import Login from "./components/login/Login";
 import Logout from "./components/Logout";
 
 import Homepage from "./screens/Homepage";
@@ -15,8 +14,7 @@ import WishlistCard from "./components/wishlist/WishlistCard";
 function App() {
   return (
     <div className="App">
-      {/*<Homepage />*/} 
-      <Login />
+      <Homepage /> 
       {/* <Navbar /> */}
       {/* <Routes>
         <Route exact path="/" element={<Home />} />
