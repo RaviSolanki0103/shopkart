@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Modal } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.css";
@@ -12,6 +14,11 @@ function Login() {
   const [password, setpassword] = useState("");
 
   const loginuser = async (e) => {
+    const form = this.formRef.current;
+    if (!form.checkValidity()) {
+        form.reportValidity()
+        return
+    }
     e.preventDefault();
     console.log("User responce", e);
     const res = await fetch("/signin", {
@@ -45,6 +52,7 @@ function Login() {
     <div className="main-div">
       <Modal
         title="Login"
+        footer={null}
         visible={myaction.openLogin}
         onOk={() => dispatch(openLogin(false))}
         onCancel={() => dispatch(openLogin(false))}
@@ -62,7 +70,9 @@ function Login() {
             id="email"
             autoComplete="off"
             value={email}
-            onChange={(e) => setemail(e.target.value)}
+            onChange={(e) => setemail(e.target.value)
+            
+            }
             rules={[
               {
                 required: true,
@@ -72,6 +82,7 @@ function Login() {
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
+              onChange={(e) => validator.isEmail(e.target.value)}
               placeholder="Username"
               name="email"
             />
@@ -118,7 +129,7 @@ function Login() {
             >
               Log in
             </Button>
-            Or <a href="">Register Now!</a>
+             Or <Link to="/" >Register Now!</Link>
           </Form.Item>
         </Form>
       </Modal>

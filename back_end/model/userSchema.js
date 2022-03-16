@@ -15,18 +15,18 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  work: {
-    type: String,
-    required: true,
-  },
+  // work: {
+  //   type: String,
+  //   required: true,
+  // },
   password: {
     type: String,
     required: true,
   },
-  cpassword: {
-    type: String,
-    required: true,
-  },
+  // cpassword: {
+  //   type: String,
+  //   required: true,
+  // },
   tokens: [
     {
       token: {
