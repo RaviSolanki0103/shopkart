@@ -1,11 +1,15 @@
-import React from "react";
-import { Card, Col, Row } from "antd";
+import React, { useState } from "react";
+import { Card } from "antd";
 import "./productcategory.css";
 import img1 from "../../assets/men-tshirt.png";
 import img2 from "../../assets/women-were.png";
-import img3 from "../../assets/kids-were.png";
+import img3 from "../../assets/kidn.png";
+import { Link } from "react-router-dom";
+import { HeartFilled } from "@ant-design/icons";
 
 function ProductCategory() {
+  const [status, setStatus] = useState(true);
+
   const { Meta } = Card;
   const number = [
     {
@@ -55,20 +59,42 @@ function ProductCategory() {
       <Card
         className="card"
         type="inner"
-        title="Men's wear"
-        extra={<a href="#">More</a>}
+        title={<h2 style={{ fontSize: "2rem" }}>Men's Wear</h2>}
+        extra={
+          <Link style={{ fontSize: "2rem" }} to="/product-category">
+            More
+          </Link>
+        }
       >
         <div className="div">
-          {number.map((x) => {
+          {number.map((x, key) => {
             return (
               <Card
+                key={key}
                 className="inner-card"
                 hoverable
-                style={{ width: 240 }}
-                cover={<img alt="example" src={img1} />}
+                style={{ width: 320, height: "100%" }}
+                cover={<img alt="example" className="img" src={img1} />}
               >
-                <Meta title={x.men_title} />
-                price <Meta title={x.men_price} />
+                <div>
+                  {status ? (
+                    <button
+                      className="wishlist-btn-new"
+                      onClick={() => setStatus(!status)}
+                    >
+                      <HeartFilled style={{ color: "#cccccc" }} />
+                    </button>
+                  ) : (
+                    <button
+                      className="wishlist-btn-new"
+                      onClick={() => setStatus(!status)}
+                    >
+                      <HeartFilled style={{ color: "hotpink" }} />
+                    </button>
+                  )}
+                  <Meta title={x.men_title} />
+                  price <Meta title={x.men_price} />
+                </div>
               </Card>
             );
           })}
@@ -78,18 +104,38 @@ function ProductCategory() {
       <Card
         className="card"
         type="inner"
-        title="Women's wear"
-        extra={<a href="#">More</a>}
+        title={<h2 style={{ fontSize: "2rem" }}>Women's Wear</h2>}
+        extra={
+          <Link style={{ fontSize: "2rem" }} to="#">
+            More
+          </Link>
+        }
       >
         <div className="div">
-          {number.map((x) => {
+          {number.map((x, key) => {
             return (
               <Card
+                key={key}
                 className="inner-card"
                 hoverable
-                style={{ width: 240 }}
-                cover={<img alt="example" src={img2} />}
+                style={{ width: 320, height: "100%" }}
+                cover={<img className="img" alt="example" src={img2} />}
               >
+                {status ? (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "#cccccc" }} />
+                  </button>
+                ) : (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "hotpink" }} />
+                  </button>
+                )}
                 <Meta title={x.women_title} />
                 price
                 <Meta title={x.women_price} />
@@ -102,20 +148,38 @@ function ProductCategory() {
       <Card
         className="card"
         type="inner"
-        title="Kid's wear"
-        extra={<a href="#">More</a>}
+        title={<h2 style={{ fontSize: "2rem" }}>Kid's Wear</h2>}
+        extra={
+          <Link style={{ fontSize: "2rem" }} to="#">
+            More
+          </Link>
+        }
       >
         <div className="div">
-          {number.map((x) => {
+          {number.map((x, key) => {
             return (
               <Card
+                key={key}
                 className="inner-card"
                 hoverable
-                style={{ width: 240 }}
-                cover={
-                  <img alt="example" style={{ height: "25rem" }} src={img3} />
-                }
+                style={{ width: 320, height: "100%" }}
+                cover={<img className="img" alt="example" src={img3} />}
               >
+                {status ? (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "#cccccc" }} />
+                  </button>
+                ) : (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "hotpink" }} />
+                  </button>
+                )}
                 <Meta title={x.kid_title} />
                 Price
                 <Meta title={x.kid_price} />
