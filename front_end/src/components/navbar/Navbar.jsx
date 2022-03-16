@@ -6,17 +6,23 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Input, Badge } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { openLogin } from "../../redux/actions/index";
+import Login from "../login/Login";
 const { SubMenu } = Menu;
 
 export default function Navbar() {
   const [current, setCurrent] = useState("");
-  const status = true;
+  const [searchValue, setSearchValue] = useState("");
+  const [loginStatus, setLoginStatus] = useState(false);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     setCurrent(e.key);
   };
-
-  const onChange = (e) => console.log(e.target.value);
 
   return (
     <nav className="main-navbar">
@@ -26,11 +32,16 @@ export default function Navbar() {
           placeholder="input with clear icon"
           allowClear
           className="global-search"
-          onChange={onChange}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
       </div>
       <div className="navbar-menu">
-        {status ? (
+        {/* Checking login status,
+          if login then show account and cart options else
+          show login option
+        */}
+        {loginStatus ? (
           <Menu onClick={handleClick} selectedKeys={current} mode="horizontal">
             {/* account menu with available options */}
             <SubMenu key="account" icon={<UserOutlined />} title="Account">
@@ -52,8 +63,18 @@ export default function Navbar() {
           </Menu>
         ) : (
           // login button
-          <LoginOutlined className="login-btn" />
+          <LoginOutlined
+            className="login-btn"
+            onClick={() => {
+              dispatch(openLogin(true));
+              // navigate("/login");
+              // setLoginStatus(true);
+            }}
+          />
         )}
+      </div>
+      <div style={{display:"none"}} >
+        <Login />
       </div>
     </nav>
   );

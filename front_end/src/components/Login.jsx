@@ -1,3 +1,4 @@
+import { Button, Modal } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +10,7 @@ function Login() {
 
   const loginuser = async (e) => {
     e.preventDefault();
-    console.log("User responce",e);
+    console.log("User responce", e);
     const res = await fetch("/signin", {
       method: "POST",
       headers: {
@@ -34,6 +35,8 @@ function Login() {
     }
   };
 
+
+ 
   return (
     <div>
       <form method="POST">
@@ -64,6 +67,20 @@ function Login() {
           onClick={loginuser}
         />
       </form>
+
+      <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
     </div>
   );
 }

@@ -1,16 +1,5 @@
 import "./App.css";
-import Home from "./components/Home";
-import About from "./components/About";
-import { Route, Routes } from "react-router-dom";
-import Contactus from "./components/Contactus";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
-
-import Homepage from "./screens/Homepage";
-import Wishlist from "./components/wishlist/Wishlist";
-import WishlistCard from "./components/wishlist/WishlistCard";
-
+import Routing from "./router/Routing.jsx";
 
 function App() {
   return (
