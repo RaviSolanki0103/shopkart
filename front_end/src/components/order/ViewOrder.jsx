@@ -10,7 +10,7 @@ const ViewOrder = () => {
 
   const data = [
     {
-      image: "cr1.png",
+      image: "kid.webp",
       name: "cr1",
       color: "black",
       seller: "xyz",
@@ -18,7 +18,7 @@ const ViewOrder = () => {
       status: "Delivered",
     },
     {
-      image: "cr2.png",
+      image: "kidn.png",
       name: "cr2",
       color: "black",
       seller: "xyz",
@@ -26,7 +26,7 @@ const ViewOrder = () => {
       status: "Delivered",
     },
     {
-      image: "cr3.png",
+      image: "kids-were.png",
       name: "cr3",
       color: "black",
       seller: "xyz",
@@ -42,8 +42,8 @@ const ViewOrder = () => {
     console.log(`checked = ${checkedValues}`);
   }
   return (
-    <Layout>
-      <Sider theme="light">
+    <Layout className="order-page-layout">
+      <Sider theme="light" className="order-filter">
         <Card size="small" title="Filter" extra={<a href="/">clear all</a>}>
           <Collapse defaultActiveKey={["1"]} onChange={callback}>
             <Panel header="Order Status" key="1">
@@ -65,7 +65,7 @@ const ViewOrder = () => {
         </Card>
       </Sider>
       <Content>
-        <div className="margin-10-px">
+        <div className="margin-10-px order-search">
           <Input
             placeholder="Search your orders here"
             allowClear
@@ -73,7 +73,7 @@ const ViewOrder = () => {
             onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
-        <div className="margin-10-px">
+        <div className="margin-10-px order-list-of-card">
           <Card title="Orders">
             {data.map((orderGrid, index) => (
               <Card.Grid key={index} className="order-grid">
