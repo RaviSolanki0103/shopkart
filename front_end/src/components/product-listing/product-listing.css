@@ -13,13 +13,17 @@
     justify-content: center;
 }
 
-.wishlist-btn {
+.img {
+    height: 28rem;
+}
+
+.wishlist-btn-cat {
     border: none;
     z-index: 10;
     position: relative;
     top: -28rem;
-    right: -9.3rem;
-    background:none;
+    right: -8.3rem;
+    background: none;
     transform: scale(2);
 }
 

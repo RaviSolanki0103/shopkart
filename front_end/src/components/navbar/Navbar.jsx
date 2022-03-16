@@ -6,12 +6,19 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Input, Badge } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { openLogin } from "../../redux/actions/index";
+import Login from "../login/Login";
 const { SubMenu } = Menu;
 
 export default function Navbar() {
   const [current, setCurrent] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     setCurrent(e.key);
@@ -58,9 +65,16 @@ export default function Navbar() {
           // login button
           <LoginOutlined
             className="login-btn"
-            onClick={() => setLoginStatus(true)}
+            onClick={() => {
+              dispatch(openLogin(true));
+              // navigate("/login");
+              // setLoginStatus(true);
+            }}
           />
         )}
+      </div>
+      <div style={{display:"none"}} >
+        <Login />
       </div>
     </nav>
   );

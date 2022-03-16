@@ -1,10 +1,4 @@
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-}
-
-.main-div{
+.main-div {
     background-color: rgb(230, 230, 223);
     border-radius: 2%;
     width: 50vh;
@@ -15,6 +9,5 @@ body{
 }
 
 .login-form-button {
-        width: 100%;
-        
+    width: 100%;
 }

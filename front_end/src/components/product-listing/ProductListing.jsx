@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Number } from "./data";
 import img1 from "../../assets/men-tshirt.png";
 import "./product-listing.css";
-import { HeartFilled, HeartOutlined } from "@ant-design/icons";
+import { HeartFilled } from "@ant-design/icons";
 
-function Product_Listing() {
+function ProductListing() {
   const { Meta } = Card;
   const { Panel } = Collapse;
 
@@ -50,12 +50,7 @@ function Product_Listing() {
         </Collapse>
       </div>
       <div>
-        <Card
-          className="new-card"
-          type="inner"
-          title={<h1>Men's Wear</h1>}
-          extra={<a href="#">More</a>}
-        >
+        <Card className="new-card" type="inner" title={<h1>Men's Wear</h1>}>
           <div className="space_data ">
             {Number.map((x) => {
               console.log(x);
@@ -63,19 +58,19 @@ function Product_Listing() {
                 <Card
                   className="inner-card"
                   hoverable
-                  style={{ width: 340 }}
-                  cover={<img alt="example" src={img1} />}
+                  style={{ width: 320, height: "100%" }}
+                  cover={<img alt="example" className="img" src={img1} />}
                 >
                   {status ? (
                     <button
-                      className="wishlist-btn"
+                      className="wishlist-btn-cat"
                       onClick={() => setStatus(!status)}
                     >
-                      <HeartOutlined />
+                      <HeartFilled style={{ color: "#cccccc" }} />
                     </button>
                   ) : (
                     <button
-                      className="wishlist-btn"
+                      className="wishlist-btn-cat"
                       onClick={() => setStatus(!status)}
                     >
                       <HeartFilled style={{ color: "hotpink" }} />
@@ -93,4 +88,4 @@ function Product_Listing() {
   );
 }
 
-export default Product_Listing;
+export default ProductListing;
