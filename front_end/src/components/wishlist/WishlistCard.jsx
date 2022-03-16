@@ -1,5 +1,6 @@
 import React from 'react'
 import "./WishlistCard.css"
+import { DeleteOutlined } from '@ant-design/icons';
 
 function WishlistCard() {
   return (
@@ -12,7 +13,7 @@ function WishlistCard() {
            <p className='price'>₹259</p>
         </div>
         <div className='card-button'>
-            <button>delet</button>
+            <button><DeleteOutlined /></button>
         </div>
     </div>
   )
