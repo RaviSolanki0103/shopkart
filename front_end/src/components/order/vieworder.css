@@ -5,3 +5,14 @@
 p {
   margin: 0;
 }
+
+.order-img {
+  height: 150;
+  width: 100%;
+  object-fit: "contain";
+}
+
+.order-grid {
+  width: 100%;
+  text-align: "center";
+}

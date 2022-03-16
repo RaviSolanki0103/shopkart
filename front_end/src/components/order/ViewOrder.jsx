@@ -7,15 +7,6 @@ const { Panel } = Collapse;
 
 const ViewOrder = () => {
   const [searchValue, setSearchValue] = useState("");
-  const imgStyle = {
-    height: 150,
-    width: "100%",
-    objectFit: "contain",
-  };
-  const gridStyle = {
-    width: "100%",
-    textAlign: "center",
-  };
 
   const data = [
     {
@@ -85,13 +76,13 @@ const ViewOrder = () => {
         <div className="margin-10-px">
           <Card title="Orders">
             {data.map((orderGrid, index) => (
-              <Card.Grid key={index} style={gridStyle}>
+              <Card.Grid key={index} className="order-grid">
                 <Row gutter={[16, 16]} align="middle">
                   <Col span={6}>
                     <img
                       src={require(`../../assets/${orderGrid.image}`)}
                       alt="img not found"
-                      style={imgStyle}
+                      className="order-img"
                     />
                   </Col>
                   <Col span={6}>
