@@ -9,12 +9,15 @@ import Logout from "./components/Logout";
 import Homepage from "./screens/Homepage";
 import Wishlist from "./components/wishlist/Wishlist";
 import WishlistCard from "./components/wishlist/WishlistCard";
+import Routing from "./router/Routing.jsx";
 
 
 function App() {
   return (
     <div className="App">
-      <Homepage /> 
+      {/* <Homepage /> */}
+    <Routing/>      
+
       {/* <Navbar /> */}
       {/* <Routes>
         <Route exact path="/" element={<Home />} />

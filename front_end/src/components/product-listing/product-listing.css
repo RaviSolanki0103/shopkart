@@ -1,0 +1,33 @@
+.listing {
+    display: flex;
+}
+
+.filter {
+    width: 30%;
+}
+
+.rating-checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wishlist-btn {
+    border: none;
+    z-index: 10;
+    position: relative;
+    top: -28rem;
+    right: -9.3rem;
+    background:none;
+    transform: scale(2);
+}
+
+.space_data {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.inner-card {
+    margin: 1rem !important;
+}
