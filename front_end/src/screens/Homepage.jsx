@@ -1,4 +1,3 @@
-
 import React from "react";
 import CarouselScreen from "../components/carousel/CarouselScreen";
 import Footer from "../components/footer/footer";
@@ -9,9 +8,9 @@ function Homepage() {
   return (
     <div>
       <Navbar />
-      <CarouselScreen/>
-      <ProductCategory/>
-      <Footer/>
+      <CarouselScreen />
+      <ProductCategory />
+      <Footer />
     </div>
   );
 }

@@ -5,7 +5,7 @@
   height: auto;
   color: white;
   /* position: absolute; */
-  /* bottom: 0px; */
+  /* bottom: auto; */
 }
 .footer-text-container {
   display: flex;
@@ -38,7 +38,7 @@
   .footer-text-container {
     display: block;
     /* border-bottom:solid ; */
- }
+  }
   .footer-1 {
     text-align: center;
     margin: auto;

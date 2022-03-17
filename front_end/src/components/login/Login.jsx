@@ -45,6 +45,7 @@ function Login() {
     <div className="main-div">
       <Modal
         title="Login"
+        footer={null}
         visible={myaction.openLogin}
         onOk={() => dispatch(openLogin(false))}
         onCancel={() => dispatch(openLogin(false))}
