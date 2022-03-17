@@ -1,0 +1,53 @@
+.specific-product {
+    padding: 1rem 20rem;
+    display: flex;
+}
+
+.img-sp {
+    height: 35rem;
+}
+
+.wishlist-btn-sp {
+    border: none;
+    z-index: 10;
+    position: relative;
+    top: -35.5rem !important;
+    right: -11.3rem !important;
+    background: none;
+    transform: scale(2.5);
+}
+
+.right-div{
+    margin-left: 1rem;
+display: flex;
+flex-direction: column;
+}
+.right-div h3{
+    font-size: 1.4rem;
+}
+.right-div h2{
+    text-align: left;
+    font-size: 3rem;
+}
+.action-btn{
+    display: flex;
+    justify-content: space-around;
+}
+.action-btn button{
+    height: 3rem;
+}
+
+
+@media only screen and (max-width: 1023px) {
+    .specific-product {
+        padding: 0;
+        display: block;
+    }
+    .wishlist-btn-sp{
+        top: -25.5rem !important;
+    right: -8rem !important;
+    }
+    .img-sp {
+        height: 25rem;
+    }
+}
