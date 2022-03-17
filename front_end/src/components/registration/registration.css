@@ -1,35 +1,13 @@
-
-body{
-   text-align:center;
-   justify-content: center;
-   align-items:center;
-   display:flex;
-   flex-direction: column;
-
+.registration-form-button {
+    width: 100%;
+    font-weight:bold;
 }
-
-.reg_form{
-    background-color: rgb(118, 143, 143);
-    border-radius:5px;
-    height: 50vh;
-    width: 50vh;
-    justify-content: center;
-    align-items:center;
-    display:flex;
-    flex-direction: column;
- 
+.login-btn{
+    border: none;
+    color: #1890ff;
+    cursor: pointer;
+   
 }
-
-.reg_submit{
-    width: 40vh;
-    font-weight: bold;
-}
-
-.redirect_login{
-    color: white;
-    font-weight: bold;
-}
-
-.redirect_login:hover{
-    color:rgb(98, 20, 223);
+.login-btn:hover{
+    color:#4f23e2;
 }

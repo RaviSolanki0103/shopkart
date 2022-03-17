@@ -10,6 +10,7 @@ function Routing() {
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/product-category" element={<Category />} />
         <Route exact path="*" element={<Homepage />} />
+       
       </Routes>
     </div>
   );

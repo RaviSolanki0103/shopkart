@@ -11,3 +11,17 @@
 .login-form-button {
     width: 100%;
 }
+.reg-btn{
+    border: none;
+    color: #1890ff;
+    cursor: pointer;
+   
+}
+.reg-btn:hover{
+    color:#4f23e2;
+}
+.forgot-btn{
+    border: none;
+    color: #1890ff;
+    cursor: pointer;
+}
