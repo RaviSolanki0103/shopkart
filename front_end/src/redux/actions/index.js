@@ -1,4 +1,5 @@
 import { OPEN_LOGIN } from "./action-types";
+import { SENDDATA_WISHLIST } from "./action-types";
 
 export const openLogin = (data) => {
   console.log(data, "DATA");
@@ -7,3 +8,16 @@ export const openLogin = (data) => {
     payload: data,
   };
 };
+
+
+
+// ronak-------------------------------------
+
+export const senddataWishlist =(number) => {
+  return {
+    type:SENDDATA_WISHLIST,
+    payload : number
+    
+  };
+  
+}

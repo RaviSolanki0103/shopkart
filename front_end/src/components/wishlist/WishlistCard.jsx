@@ -2,15 +2,15 @@ import React from 'react'
 import "./WishlistCard.css"
 import { DeleteOutlined } from '@ant-design/icons';
 
-function WishlistCard() {
+function WishlistCard(props) {
   return (
     <div className='card-container'> 
         <div className='card-img'>
             <div className='card-img-main'></div>
         </div>
         <div className='card-detail'>
-           <p>Running Shoes For Men </p>
-           <p className='price'>₹259</p>
+           <p>{props.title} </p>
+           <p className='price'>₹{props.price}</p>
         </div>
         <div className='card-button'>
             <button><DeleteOutlined /></button>

@@ -1,9 +1,16 @@
 .wishlist-body{
     height: auto;
     width: auto;
+    background-color: #f1f3f6;
+     /* margin:5px; */
 }
 .wishlist-header{
     font-size: 2rem;
     text-align: left;
     font-weight: bold;
+    width: 70%;
+    margin: auto;
+}
+.wishlist-card{
+    padding: 20px;
 }

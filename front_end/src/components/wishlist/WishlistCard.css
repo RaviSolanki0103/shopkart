@@ -5,13 +5,15 @@
     /* background-color:#2874f0 ; */
     background-color: white;
     color: white;
-    width: 100%;
-    height: auto;
-    margin: 5px;
+    width: 70%;
+    height:auto;
+    margin: auto;
+    margin:10px auto 10px auto;
     padding: 5px;
     border: 1px solid black;
-    box-shadow: 5px 5px 15px black;
-    border-radius: 10px;
+    /* box-shadow: 5px 5px 15px black; */
+    /* border-radius: 10px; */
+    /* border-color: #2874f0; */
 }
 .card-img{
     /* background-image: url(../../assets/Shoes.jpg); */

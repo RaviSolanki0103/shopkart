@@ -1,12 +1,15 @@
 import "./App.css";
+
 import Routing from "./router/Routing.jsx";
+import Homepage from "./screens/Homepage";
+import Wishlist from "./screens/Wishlist";
 
 function App() {
   return (
     <div className="App">
-      <Homepage />
-      {/* <Wishlist /> */}
-
+      {/* <Homepage /> */}
+     <Wishlist />
+    
       {/* <Navbar /> */}
       {/* <Routes>
         <Route exact path="/" element={<Home />} />

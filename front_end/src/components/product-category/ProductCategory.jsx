@@ -6,8 +6,16 @@ import img2 from "../../assets/women-were.png";
 import img3 from "../../assets/kidn.png";
 import { Link } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { senddataWishlist } from "../../redux/actions";
+
 
 function ProductCategory() {
+  // ronak---------
+  const ronak = useSelector(state=>state.senddataWishlist);
+  console.log(ronak,"sdkjvnsdnasdjncjasnjkcnasjkcnjasncjasnj");
+  const dispatch=useDispatch();
+  // end---------------
   const [status, setStatus] = useState(true);
 
   const { Meta } = Card;
@@ -77,10 +85,10 @@ function ProductCategory() {
                 cover={<img alt="example" className="img" src={img1} />}
               >
                 <div>
-                  {status ? (
+                  {/* {status ? (
                     <button
                       className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
+                      onClick={() => {setStatus(!status)}}
                     >
                       <HeartFilled style={{ color: "#cccccc" }} />
                     </button>
@@ -91,7 +99,31 @@ function ProductCategory() {
                     >
                       <HeartFilled style={{ color: "hotpink" }} />
                     </button>
+                  )} */}
+     {/* ronak change --------------------------------------------------------------------- */}
+     {status ? (
+                    <button
+                      className="wishlist-btn-new"
+                      onClick={() => {
+                        setStatus(!status)
+                        dispatch(senddataWishlist(number));
+
+                      }}
+                    >
+                      <HeartFilled style={{ color: "#cccccc" }} />
+                    </button>
+
+                  ) : (
+                    <button
+                      className="wishlist-btn-new"
+                      onClick={() => setStatus(!status)}
+                    >
+                      <HeartFilled style={{ color: "hotpink" }} />
+                    </button>
                   )}
+
+              {/* ronak chabges till here---------------------------------------------------------- */}
+
                   <Meta title={x.men_title} />
                   price <Meta title={x.men_price} />
                 </div>
@@ -189,6 +221,7 @@ function ProductCategory() {
         </div>
       </Card>
     </div>
+    
   );
 }
 
