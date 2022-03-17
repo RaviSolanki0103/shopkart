@@ -1,19 +1,19 @@
 import React from "react";
 import Footer from "../components/footer/footer";
 import Navbar from "../components/navbar/Navbar";
-import ViewOrder from "../components/order/ViewOrder";
 import Container from "../utils/Container/Container";
+import ViewOrderTrack from "../components/order-track/ViewOrderTrack";
 
-function Order() {
+function OrderTrack() {
   return (
     <div>
       <Navbar />
       <Container>
-        <ViewOrder />
+        <ViewOrderTrack />
       </Container>
       <Footer />
     </div>
   );
 }
 
-export default Order;
+export default OrderTrack;

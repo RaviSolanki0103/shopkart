@@ -50,13 +50,18 @@ const ViewOrder = () => {
               <Checkbox.Group onChange={onChange}>
                 <Row>
                   <Col>
-                    <Checkbox value="On the way">On the way</Checkbox>
+                    <Checkbox value="Ordered">Ordered</Checkbox>
+                  </Col>
+                  <Col>
+                    <Checkbox value="Shipped">Shipped</Checkbox>
+                  </Col>
+                  <Col>
+                    <Checkbox value="Out For Delivery">
+                      Out For Delivery
+                    </Checkbox>
                   </Col>
                   <Col>
                     <Checkbox value="Delivered">Delivered</Checkbox>
-                  </Col>
-                  <Col>
-                    <Checkbox value="Cancelled">Cancelled</Checkbox>
                   </Col>
                 </Row>
               </Checkbox.Group>
@@ -64,7 +69,7 @@ const ViewOrder = () => {
           </Collapse>
         </Card>
       </Sider>
-      <Content>
+      <Content className="order-page-content">
         <div className="margin-10-px order-search">
           <Input
             placeholder="Search your orders here"

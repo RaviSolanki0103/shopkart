@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Category from "../screens/Category";
 import Homepage from "../screens/Homepage";
 import Order from "../screens/Order";
+import OrderTrack from "../screens/OrderTrack";
 
 function Routing() {
   return (
@@ -11,6 +12,7 @@ function Routing() {
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/product-category" element={<Category />} />
         <Route exact path="/order" element={<Order />} />
+        <Route exact path="/order-track" element={<OrderTrack />} />
         <Route exact path="*" element={<Homepage />} />
       </Routes>
     </div>
