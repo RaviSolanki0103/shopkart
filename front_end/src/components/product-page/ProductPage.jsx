@@ -2,9 +2,8 @@ import {
   HeartFilled,
   ShoppingCartOutlined,
   ThunderboltFilled,
-  ThunderboltOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Checkbox, Collapse, Descriptions } from "antd";
+import { Button, Card, Descriptions } from "antd";
 import React, { useState } from "react";
 import "./productpage.css";
 import img1 from "../../assets/kidn.png";
@@ -51,7 +50,6 @@ const mydata = Object.keys(details[0]);
 
 function ProductPage() {
   const [status, setStatus] = useState(true);
-  const { Panel } = Collapse;
   return (
     <div className="specific-product">
       <Card
@@ -92,22 +90,18 @@ function ProductPage() {
         <h2>₹299</h2>
 
         <div>
-            <h2>Product Details</h2>
+          <h2>Product Details</h2>
           <Descriptions style={{}}>
             {details.map((x, key) => {
               console.log(x, "x");
-              const fdata = mydata[x.id -1]
+              const fdata = mydata[x.id - 1];
               return (
                 <Descriptions.Item key={key} label={mydata[x.id - 1]} span={3}>
-                  {
-                  fdata
-                  }
-                  
+                  {fdata}
                 </Descriptions.Item>
               );
             })}
           </Descriptions>
-
         </div>
       </div>
     </div>
