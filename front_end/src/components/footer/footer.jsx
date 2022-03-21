@@ -6,16 +6,16 @@ const Footer = () => {
     <div className="footer-container">
       <div className="footer-text-container">
         <div className="footer-1">
-          <div>About us</div>
-          <div>Contect us</div>
+          <div>About Us</div>
+          <div>Contact Us</div>
         </div>
         <div className="footer-2">
           <p> Phone : 8346789034 </p>
-          <p> email: cdsnckjd@gmail.com </p>
+          <p> Email: Shopkart@gmail.com </p>
         </div>
       </div>
       <div className="copy-right">
-        <p>© Copyright Agency and contributors 2022.</p>
+        <p>© Copyright Agency and Contributors 2022</p>
       </div>
     </div>
   );

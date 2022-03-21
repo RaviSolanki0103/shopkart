@@ -1,0 +1,13 @@
+.registration-form-button {
+    width: 100%;
+    font-weight:bold;
+}
+.login-btn{
+    border: none;
+    color: #1890ff;
+    cursor: pointer;
+   
+}
+.login-btn:hover{
+    color:#4f23e2;
+}
