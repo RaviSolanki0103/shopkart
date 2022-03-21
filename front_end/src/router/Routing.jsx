@@ -4,6 +4,8 @@ import Category from "../screens/Category";
 import Homepage from "../screens/Homepage";
 import SpecificProduct from "../screens/SpecificProduct";
 import Order from "../screens/Order";
+import AddProduct from "../screens/AddProduct";
+import ShowProduct from "../components/product/ShowProduct";
 
 function Routing() {
   return (
@@ -13,8 +15,9 @@ function Routing() {
         <Route exact path="/product-category" element={<Category />} />
         <Route exact path="/product" element={<SpecificProduct />} />
         <Route exact path="/order" element={<Order />} />
+        <Route exact path="/addproduct" element={<AddProduct />} />
+        <Route exact path="/getproduct" element={<ShowProduct />} />
         <Route exact path="*" element={<Homepage />} />
-       
       </Routes>
     </div>
   );

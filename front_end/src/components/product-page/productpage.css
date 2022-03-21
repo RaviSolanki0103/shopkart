@@ -1,7 +1,15 @@
+.outer-div{
+    width: 100%;
+    display: flex;justify-content: center;
+}
 .specific-product {
     width: 100%;
     display: flex;
     margin: 1rem;
+}
+
+.left-div {
+    margin-right: 1rem;
 }
 
 .specific-product div {
@@ -86,7 +94,7 @@ h2 {
         top: -25.5rem !important;
         right: -8rem !important;
     } */
-    .specific-product{
+    .specific-product {
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -97,21 +105,34 @@ h2 {
 @media only screen and (max-width: 768px) {}
 
 @media only screen and (max-width: 425px) {
-    .img-class{
+    .outer-div{
+        width: 100%;
+        display: flex;justify-content: center;
+    }
+    .specific-product {
+        width: 20rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-class {
         width: 22rem;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    .img-div{
+
+    .img-div {
         width: 10rem !important;
     }
-    .left-div{
-        width: 10rem;
-    }
-    .btn-div{
-        width: 10rem;
 
+    .left-div {
+        /* width: 10rem; */
+    }
+
+    .btn-div {
+        width: 22rem;
     }
 }
 
