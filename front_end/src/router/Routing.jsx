@@ -5,6 +5,8 @@ import Homepage from "../screens/Homepage";
 import SpecificProduct from "../screens/SpecificProduct";
 import Order from "../screens/Order";
 import Profilescreen from "../screens/Profilescreen";
+import ManageAddress from "../screens/ManageAddress";
+
 
 function Routing() {
   return (
@@ -16,7 +18,7 @@ function Routing() {
         <Route exact path="/order" element={<Order />} />
         <Route exact path="/profile" element={<Profilescreen />} />
         <Route exact path="*" element={<Homepage />} />
-       
+       <Route exact path="/address" element={<ManageAddress/>} />
       </Routes>
     </div>
   );

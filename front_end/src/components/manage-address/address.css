@@ -1,0 +1,82 @@
+.address-page-layout {
+    min-height: 82.4vh;
+}
+
+.address-sidebar{
+  font-weight: bold;
+}
+
+.Main-container{
+    background-color:white;
+}
+.card-title{
+    font-weight: bold;
+    font-size: 20px;
+
+}
+.add-address{
+    border:none;
+    font-weight: bold;
+    background-color:white;
+    text-align:left;
+    font-size:15px;
+    cursor: pointer;
+    color: #1890ff;
+    float: left;
+}
+.address-div{
+    border: 1px solid rgba(102, 98, 98, 0.294);
+    text-align:left;
+    width:80vh;
+    height: 120px;
+    padding:20px;
+}
+.three-dots{
+   float: right; 
+}
+.three-dots:after {
+    cursor: pointer;
+    color: black;
+    content: '\2807';
+    font-size: 20px;
+    padding: 0 5px;
+    text-align: right;
+    justify-content:right;
+    align-items: right;
+
+  }
+  
+  /* a {
+    text-decoration: none;
+    color: white;
+  }
+   */
+  a div {
+    padding: 4px;
+  }
+  
+  .dropdown {
+    /* position: absolute; */
+    background-color: rgb(223, 223, 235);
+    box-shadow: 0px 0px 3px 3px rgba(102, 102, 221, 0.253);
+    outline: none;
+    opacity: 0;
+    z-index: -1;
+    max-height: 0;
+    float: right;
+    position: relative;
+  }
+  
+  .dropdown-container:focus {
+    outline: none;
+  }
+  
+  .dropdown-container:focus .dropdown {
+    opacity: 1;
+    z-index: 100;
+    max-height: 100vh;
+   
+  }
+  .user-name{
+      font-weight: bold;
+  }

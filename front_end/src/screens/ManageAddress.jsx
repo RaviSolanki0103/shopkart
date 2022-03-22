@@ -1,19 +1,19 @@
 import React from "react";
 import Footer from "../components/footer/footer";
 import Navbar from "../components/navbar/Navbar";
-import Profile from "../components/profile/Profile";
 import Container from "../utils/Container/Container";
+import Address from "../components/manage-address/Address";
 
-function Profilescreen() {
+function ManageAddress() {
     return (
         <div>
             <Navbar />
             <Container>
-                <Profile />
+                <Address />
             </Container>
         <Footer />
         </div>
     );
 }
 
-export default Profilescreen;
+export default ManageAddress;

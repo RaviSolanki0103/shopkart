@@ -1,59 +1,74 @@
-
-  .profile-page-layout {
+.profile-page-layout {
     min-height: 82.3vh;
-  }
+}
 
-  .main-title {
+.main-title {
       text-align:center;
-  }
+}
+
 .profile-sidebar{
   font-weight: bold;
 }
 
-
-  .editbtn{
+.editbtn{
       border: none;
-      color: rgb(117, 117, 200);
+      color: #1890ff;
       font-weight: bold;
       font-size: 15px;
       cursor: pointer;  
+      background-color: white;
   }
-  label{
+
+label{
       font-size:20px;
       font-weight: bold;
-  }
-
-  .form{
+}
+h4{
+  text-align: left;
+  margin-left: 60px;
+}
+.form{
       text-align:left;
       margin-left:50px;
-     
+      border: 1px solid rgba(71, 69, 69, 0.274);
+      border-radius: 5px;
+      width: 50%;
+      height: 45vh;
+      
+}
+label{
+  margin-left:20px;
+}
+  input {
+    border:none;
+    margin-left:20px;
   }
-  
-  input[type=text] {
+  input:focus{
+    outline: none;
+}
+input[type=text] {
     border-radius: 5px;
-    background-color:rgb(250, 248, 245);
+    background-color:rgba(235, 231, 226, 0.671);
         width: 200px;
         padding: 5px;
-       
-
-  }
-  input[type=email] {
+}
+input[type=email] {
     border-radius: 5px;
-    background-color:rgb(250, 248, 245);
+    background-color:rgba(235, 231, 226, 0.671);
         width: 200px;
         padding: 5px;
 
   }
-  input[type=number] {
+input[type=number] {
     border-radius: 5px;
-    background-color:rgb(250, 248, 245);
+    background-color:rgba(235, 231, 226, 0.671);
         width: 200px;
         padding: 5px;
 
-  }
-  .sidebar-nav-link{
+}
+.sidebar-nav-link{
     text-align:left;
-  }
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
