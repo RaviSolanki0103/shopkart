@@ -1,0 +1,49 @@
+
+  .profile-page-layout {
+    min-height: 82.3vh;
+  }
+
+  .main-title {
+      text-align:center;
+  }
+
+  .editbtn{
+      border: none;
+      color: rgb(117, 117, 200);
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;  
+  }
+  label{
+      font-size:20px;
+      font-weight: bold;
+  }
+
+  .form{
+      text-align:left;
+      margin-left:50px;
+     
+  }
+  
+  input[type=text] {
+    border-radius: 5px;
+    background-color:rgb(250, 248, 245);
+        width: 200px;
+        padding: 5px;
+       
+
+  }
+  input[type=email] {
+    border-radius: 5px;
+    background-color:rgb(250, 248, 245);
+        width: 200px;
+        padding: 5px;
+
+  }
+  input[type=number] {
+    border-radius: 5px;
+    background-color:rgb(250, 248, 245);
+        width: 200px;
+        padding: 5px;
+
+  }
