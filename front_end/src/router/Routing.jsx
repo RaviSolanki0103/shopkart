@@ -4,6 +4,7 @@ import Category from "../screens/Category";
 import Homepage from "../screens/Homepage";
 import SpecificProduct from "../screens/SpecificProduct";
 import Order from "../screens/Order";
+import Profilescreen from "../screens/Profilescreen";
 
 function Routing() {
   return (
@@ -13,6 +14,7 @@ function Routing() {
         <Route exact path="/product-category" element={<Category />} />
         <Route exact path="/product" element={<SpecificProduct />} />
         <Route exact path="/order" element={<Order />} />
+        <Route exact path="/profile" element={<Profilescreen />} />
         <Route exact path="*" element={<Homepage />} />
        
       </Routes>

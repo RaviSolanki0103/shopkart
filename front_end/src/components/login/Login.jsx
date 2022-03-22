@@ -25,11 +25,15 @@ function Login() {
   return (
     <div className="main-div">
       <Modal
-        title={title}
+        title={flag === 0 ? "Login":title}
         footer={null}
         visible={myaction.openLogin}
         onOk={() => dispatch(openLogin(false))}
-        onCancel={() => dispatch(openLogin(false))}
+        onCancel={() => 
+          {dispatch(openLogin(false))
+          setFlag(0)
+          }
+        }
       >
         {
           flag === 0 ? <LoginForm changeFlag={changeFlag}  /> : flag === 1 ? <Registration changeFlag={changeFlag} />:  <ForgotPassword changeFlag={changeFlag}  />
