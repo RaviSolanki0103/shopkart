@@ -68,7 +68,7 @@ export default function Navbar() {
             onClick={() => {
               dispatch(openLogin(true));
               // navigate("/login");
-              // setLoginStatus(true);
+              setLoginStatus(true);
             }}
           />
         )}

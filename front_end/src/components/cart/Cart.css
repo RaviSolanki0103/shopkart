@@ -1,0 +1,26 @@
+.cart-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #f0f2f5 
+}
+.cart-right{
+    width: 80%;
+
+}
+.cart-left{
+    width: 20%;
+
+}
+@media only screen and (max-width: 768px) {
+    .cart-right{
+        display: block;
+    }
+    .cart-left{
+       display: block;
+    }
+    .cart-container{
+        display: block;
+    }
+    
+}
