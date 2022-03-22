@@ -15,6 +15,19 @@ const productSchema = mongoos.Schema({
     required: [true, "Please enter product price"],
     maxLength: [5, "Price cannot exceed 8 characters"],
   },
+  warranty: {
+    type: Number,
+    required: [true, "Please enter Warranty Period"],
+    maxLength: [3, "Warranty cannot exceed 3 characters"],
+  },
+  seller: {
+    type: String,
+    required: [true, "Please enter seller"],
+  },
+  category: {
+    type: String,
+    required: [true, "Please enter category"],
+  },
   stock: {
     type: Number,
     required: [true, "Please enter stock"],

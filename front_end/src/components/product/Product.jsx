@@ -2,22 +2,28 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Product = () => {
-  const [newUser, setNewUser] = useState({
+  const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
-    price: 0,
-    stock: 0,
+    price: "",
+    stock: "",
+    warranty: "",
+    seller: "",
+    category: "",
     photo: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("name", newUser.name);
-    formData.append("description", newUser.description);
-    formData.append("price", newUser.price);
-    formData.append("stock", newUser.stock);
-    formData.append("photo", newUser.photo);
+    formData.append("name", newProduct.name);
+    formData.append("description", newProduct.description);
+    formData.append("price", newProduct.price);
+    formData.append("stock", newProduct.stock);
+    formData.append("warranty", newProduct.warranty);
+    formData.append("seller", newProduct.seller);
+    formData.append("category", newProduct.category);
+    formData.append("photo", newProduct.photo);
 
     axios
       .post("/addproduct", formData)
@@ -29,24 +35,31 @@ const Product = () => {
       });
   };
 
-
-
   const handleChange = (e) => {
-    setNewUser({ ...newUser, [e.target.name]: e.target.value });
+    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
   const handlePhoto = (e) => {
-    setNewUser({ ...newUser, photo: e.target.files[0] });
+    setNewProduct({ ...newProduct, photo: e.target.files[0] });
   };
 
+  const handleCategory = (e) => {
+    setNewProduct({ ...newProduct, category: e.target.value });
+  };
+  console.log(newProduct, "IHIH");
   return (
-    <div>
-      <form onSubmit={handleSubmit} encType="multipart/form-data" method="post">
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        method="post"
+        style={{ display: "flex", flexDirection: "column", width: "30rem" }}
+      >
         <input
           type="text"
           placeholder="name"
           name="name"
-          value={newUser.name}
+          value={newProduct.name}
           onChange={handleChange}
         />
 
@@ -54,23 +67,47 @@ const Product = () => {
           placeholder="description"
           type="text"
           name="description"
-          value={newUser.description}
+          value={newProduct.description}
           onChange={handleChange}
         />
         <input
           placeholder="price"
           type="number"
           name="price"
-          value={newUser.price}
+          value={newProduct.price}
           onChange={handleChange}
         />
         <input
           placeholder="stock"
           type="number"
           name="stock"
-          value={newUser.stock}
+          value={newProduct.stock}
           onChange={handleChange}
         />
+        <input
+          placeholder="warranty"
+          type="number"
+          name="warranty"
+          value={newProduct.warranty}
+          onChange={handleChange}
+        />
+        <input
+          placeholder="seller"
+          type="text"
+          name="seller"
+          value={newProduct.seller}
+          onChange={handleChange}
+        />
+        <select
+          name="category"
+          value={newProduct.category}
+          onChange={handleCategory}
+        >
+          <option value="">Select one</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
+          <option value="kids">Kids</option>
+        </select>
 
         <input
           type="file"
@@ -81,11 +118,6 @@ const Product = () => {
 
         <input type="submit" />
       </form>
-
-
-      <div>
-          {/* <img src={`/uploads/${}`} alt="image" /> */}
-      </div>
     </div>
   );
 };

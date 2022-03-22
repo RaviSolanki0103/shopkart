@@ -6,6 +6,7 @@ import SpecificProduct from "../screens/SpecificProduct";
 import Order from "../screens/Order";
 import AddProduct from "../screens/AddProduct";
 import ShowProduct from "../components/product/ShowProduct";
+import OrderTrack from "../screens/OrderTrack";
 
 function Routing() {
   return (
@@ -17,6 +18,7 @@ function Routing() {
         <Route exact path="/order" element={<Order />} />
         <Route exact path="/addproduct" element={<AddProduct />} />
         <Route exact path="/getproduct" element={<ShowProduct />} />
+        <Route exact path="/order-track" element={<OrderTrack />} />
         <Route exact path="*" element={<Homepage />} />
       </Routes>
     </div>

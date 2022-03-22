@@ -139,6 +139,9 @@ router.get("/posts", (req, res) => {
   }
 });
 
+
+
+// 
 const Product = require("../model/product.js");
 const multer = require("multer");
 
@@ -162,6 +165,9 @@ router.post("/addproduct", upload.single("photo"), (req, res) => {
     description: req.body.description,
     price: req.body.price,
     stock: req.body.stock,
+    warranty: req.body.warranty,
+    seller: req.body.seller,
+    category: req.body.category,
     product_img: req.file.originalname,
   });
 
@@ -172,10 +178,10 @@ router.post("/addproduct", upload.single("photo"), (req, res) => {
   res.status(201).json({ message: "Product uploaded successfully" });
 });
 
-router.get("/getproduct", (req, res) => {
+router.get("/addproduct", async(req, res) => {
   console.log(req,"PPP");
   try {
-    let products = Product.find({});
+    let products = await Product.find({});
     console.log(products,"OOOOO");
     res.send(products)
   } catch (error) {

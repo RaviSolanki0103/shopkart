@@ -25,7 +25,7 @@ function ProductPage() {
   const [status, setStatus] = useState(true);
   return (
     <div className="outer-div">
-      <div className="specific-product">
+      {/* <div className="specific-product">
         <div className="left-div">
           <div className="img-div">
             <img
@@ -95,13 +95,24 @@ function ProductPage() {
               );
             })}
           </Descriptions>
-        </div>
+        </div> */}
 
-        {/* <Card
+      <Card
         className="inner-card-sp"
         hoverable
         cover={<img className="img-sp" alt="example" src={img1} />}
       >
+        
+        <div className="action-btn">
+          <Button style={{ backgroundColor: "#ff9f00", color: "#fff", width:"100%", height:"100%" }}>
+            <ShoppingCartOutlined />
+            ADD TO CART
+          </Button>
+          <Button style={{ backgroundColor: "#fb641b", color: "#fff", width:"100%", height:"100%" }}>
+            <ThunderboltFilled />
+            BUY NOW
+          </Button>
+        </div>
         {status ? (
           <button
             className="wishlist-btn-sp"
@@ -117,34 +128,32 @@ function ProductPage() {
             <HeartFilled style={{ color: "hotpink" }} />
           </button>
         )}
-        <div className="action-btn">
-          <Button style={{ backgroundColor: "#ff9f00", color: "#fff" }}>
-            <ShoppingCartOutlined />
-            ADD TO CART
-          </Button>
-          <Button style={{ backgroundColor: "#fb641b", color: "#fff" }}>
-            <ThunderboltFilled />
-            BUY NOW
-          </Button>
-        </div>
       </Card>
       <div className="right-div">
-        <h3>Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)</h3>
-        <h2>₹299</h2>
-        <div>
-          <h2>Product Details</h2>
-          <Descriptions style={{}}>
-            {mydata.map((x, key) => {
-              return (
-                <Descriptions.Item key={key} label={x} span={3}>
-                  data
-                </Descriptions.Item>
-              );
-            })}
-          </Descriptions>
+        <div className="inner-right-div">
+          <h3>Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)</h3>
+          <h2>₹299</h2>
+          <div>
+            <h2>Product Details</h2>
+            <Descriptions style={{}}>
+              {details.map((x, key) => {
+                console.log(x, "x");
+                const fdata = mydata[x.id - 1];
+                return (
+                  <Descriptions.Item
+                    key={key}
+                    label={mydata[x.id - 1]}
+                    span={3}
+                  >
+                    {fdata}
+                  </Descriptions.Item>
+                );
+              })}
+            </Descriptions>
+          </div>
         </div>
-      </div> */}
       </div>
+      {/* </div> */}
     </div>
   );
 }

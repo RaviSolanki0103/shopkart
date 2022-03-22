@@ -1,7 +1,7 @@
 import { Card, Descriptions, Row, Col, Steps, Popover } from "antd";
-import "./ordertrack.css";
+import "./viewordertrack.css";
 const { Step } = Steps;
-const OrderTrack = () => {
+const ViewOrderTrack = () => {
   const data = [
     {
       image: "kid.webp",
@@ -13,11 +13,11 @@ const OrderTrack = () => {
     },
   ];
 
-  const customDot = (dot, { status, index }) => (
+  const customDot = (dot, { description, title }) => (
     <Popover
       content={
         <span>
-          step {index} status: {status}
+          {title} at {description}
         </span>
       }
     >
@@ -62,10 +62,10 @@ const OrderTrack = () => {
         ))}
         <Card.Grid key="Track" className="order-grid">
           <Steps current={2} progressDot={customDot}>
-            <Step title="Finished" description="You can hover on the dot." />
-            <Step title="In Progress" description="You can hover on the dot." />
-            <Step title="Waiting" description="You can hover on the dot." />
-            <Step title="Waiting" description="You can hover on the dot." />
+            <Step title="Ordered" description="Thu, 11th Nov" />
+            <Step title="Shipped" description="Sat, 13th Nov" />
+            <Step title="Out For Delivery" description="Tue, 16th Nov" />
+            <Step title="Delivered" description="Tue, 16th Nov" />
           </Steps>
         </Card.Grid>
       </Card>
@@ -73,4 +73,4 @@ const OrderTrack = () => {
   );
 };
 
-export default OrderTrack;
+export default ViewOrderTrack;
