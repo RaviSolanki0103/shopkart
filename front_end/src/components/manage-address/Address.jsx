@@ -11,61 +11,37 @@ import {
 } from "@ant-design/icons";
 const { Sider, Content } = Layout;
 
-function Profile() {
+function Address() {
 
 
     return (
         <>
             <Layout className="address-page-layout">
-                <Sider theme="light" className="address-sidebar">
-
-                    <Card size="medium" title="My Profile" >
-                        <a class="sidebar-nav-link" href="/profile">
-                            <p><ProfileTwoTone />  Profile Information</p>
-                        </a>
-                    </Card>
-                    <Card size="medium" >
-                        <a class="sidebar-nav-link" href="/address">
-                            <p> <DatabaseFilled /> Manage Address</p>
-                        </a>
-                    </Card>
-                    <Card size="medium" >
-                        <Row>
-                            <Col>
-                                <a className="sidebar-nav-link" href="/order">
-                                    <p> <ShoppingOutlined /> My Orders</p>
-                                </a>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card size="medium" >
-                        <Row>
-                            <Col>
-                                <a class="sidebar-nav-link" href="/wishlist">
-                                    <p> <HeartFilled /> My Wishlist</p>
-                                </a>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card size="medium" >
-                        <Row>
-                            <Col>
-                                <a class="sidebar-nav-link" href="#0">
-                                    <p> <PoweroffOutlined /> Logout</p>
-                                </a>
-                            </Col>
-                        </Row>
-                    </Card>
-                </Sider>
+            <Sider className="sidebar" style={{ background: "white" }} width={270}>
+            <Card  title="My Profile"/>  
+            <Card className="Address-card" >
+            <a className="Address-card-link" href="/profile"><ProfileTwoTone /> Personal Information</a>
+            </Card>
+            <Card className="Address-card">
+            <a className="Address-card-link" href="/address"><DatabaseFilled /> Manage Address</a>
+            </Card>
+            <Card className="Address-card">
+            <a className="Address-card-link" href="/order"><ShoppingOutlined /> My Order</a>
+            </Card>
+            <Card className="Address-card">
+            <a className="Address-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
+            </Card>
+           <Card className="Address-card">
+           <a className="Address-card-link" ><PoweroffOutlined /> Logout</a>
+           </Card>
+            </Sider>
                 <Content>
                     <div className="margin-10-px order-list-of-card">
-                        <Card >
-                            <p className="card-title">Manage Address</p>
+                        <Card  >
+                            <p className="card-title">Manage Addresses</p>
                         </Card>
-                        <Card>
+                        <Card >
                             <button className="add-address" type="button"  ><PlusCircleOutlined />  ADD NEW ADDRESS</button>
-
-
                         </Card>
                         <Card>
                             <div className="address-div">
@@ -122,4 +98,4 @@ function Profile() {
     )
 }
 
-export default Profile
+export default Address
