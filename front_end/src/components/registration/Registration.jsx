@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import validator from 'validator';
 // import isEmail from 'validator/lib/isEmail';
 import {  useNavigate } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./registration.css";
 // import { useSelector, useDispatch } from "react-redux";

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Layout, Row, Col, Card } from "antd";
+import { Layout, Card } from "antd";
 import "./profile.css";
 import {
+    
     PoweroffOutlined,
     ShoppingOutlined,
     DatabaseFilled,
@@ -15,8 +16,9 @@ function Profile() {
     return (
         <>
             <Layout className="profile-page-layout">
+                {/* Sidebar Menu */}
                 <Sider className="sidebar" style={{ background: "white" }} width={270}>
-                <Card  title="My Profile"/>  
+                <Card   title="My Profile" />  
                 <Card className="Profile-card" >
                 <a className="Profile-card-link" href="/profile"><ProfileTwoTone /> Personal Information</a>
                 </Card>
@@ -30,15 +32,18 @@ function Profile() {
                 <a className="Profile-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
                 </Card>
                <Card className="Profile-card">
-               <a className="Profile-card-link" ><PoweroffOutlined /> Logout</a>
+               <a className="Profile-card-link" href="#0"><PoweroffOutlined /> Logout</a>
                </Card>
                 </Sider>
+                 {/* Main Content */}
                 <Content>
                     <div className="margin-10-px order-list-of-card">
                         <Card>
                             <div className="main-content" >
+                            
                                 <div className="main-title">
-                                    <h4 >Personal Information <button className="editbtn">Edit</button></h4>
+                                
+                                    <h4>Personal Information <button className="editbtn">Edit</button></h4>
                                 </div>
                                 <div className="infoform">
                                     <form className="form">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Layout, Row, Col, Card } from "antd";
+import { Layout, Card } from "antd";
+import Form from "../manage-address/Form";
 import "./address.css";
 import {
     PoweroffOutlined,
@@ -12,7 +13,8 @@ import {
 const { Sider, Content } = Layout;
 
 function Address() {
-
+    const [open, setIsOpen] = useState(false);
+    const openForm = () => setIsOpen(true);
 
     return (
         <>
@@ -41,8 +43,10 @@ function Address() {
                             <p className="card-title">Manage Addresses</p>
                         </Card>
                         <Card >
-                            <button className="add-address" type="button"  ><PlusCircleOutlined />  ADD NEW ADDRESS</button>
+                            <button onClick={openForm} className="add-address" type="button"  ><PlusCircleOutlined />  ADD NEW ADDRESS</button>
+                            
                         </Card>
+                        <Form open={open}/>
                         <Card>
                             <div className="address-div">
                                 <div>

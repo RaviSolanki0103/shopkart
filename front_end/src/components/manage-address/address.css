@@ -25,14 +25,15 @@
     font-size: 20px;
 }  
 .add-address{
+  border: none;
    padding: 10px;
-   border:1px solid rgba(129, 126, 126, 0.281);
     font-weight: bold;
     text-align:left;
     font-size:15px;
     cursor: pointer;
     color: #1890ff;
     float: left;
+    
 }
 
 .address-div{
@@ -41,7 +42,9 @@
     width:80vh;
     height: 120px;
     padding:20px;
+    margin-top: 20px;
 }
+
 .three-dots{
    float: right; 
 }

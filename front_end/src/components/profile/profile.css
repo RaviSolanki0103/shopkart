@@ -23,6 +23,7 @@
       text-align: left;
       margin-left: 60px;
 }
+
 .form{
   text-align:left;
   margin-left:50px;
@@ -39,6 +40,7 @@
       font-size: 15px;
       cursor: pointer;  
   }
+
 .form-input{
   border-radius: 5px;
   background-color:rgba(235, 231, 226, 0.671);
@@ -47,23 +49,27 @@
       border:none;
     margin-left:20px;
 }
+
 .form-input:focus{
   outline: none;
 }
+
 .form-input-label{
   font-size:20px;
   font-weight: bold;
   margin-left: 20px;
 }
+
 .form-input-radio{
   font-weight: bold;
   font-size: 15px;
   margin-left: 10px;
-  
 }
+
 .form-input-radio-btn{
   margin-left:20px;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
