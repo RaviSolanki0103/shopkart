@@ -2,12 +2,34 @@
     min-height: 82.3vh;
 }
 
-.main-title {
-      text-align:center;
+.Profile-card{
+  padding: 15px;
 }
 
-.profile-sidebar{
-  font-weight: bold;
+.Profile-card-link{
+  background-color: white;
+  text-align: left;
+  display: block;
+  font-size: 20px;
+}
+
+.Profile-card-link:hover{
+  color:rgb(54, 11, 173);
+}
+
+.main-title {
+      font-weight: bold;
+      font-size:25px;
+      text-align: left;
+      margin-left: 60px;
+}
+.form{
+  text-align:left;
+  margin-left:50px;
+  border: 1px solid rgba(71, 69, 69, 0.274);
+  border-radius: 5px;
+  width: 50%;
+  height: 45vh;
 }
 
 .editbtn{
@@ -16,60 +38,32 @@
       font-weight: bold;
       font-size: 15px;
       cursor: pointer;  
-      background-color: white;
   }
-
-label{
-      font-size:20px;
-      font-weight: bold;
+.form-input{
+  border-radius: 5px;
+  background-color:rgba(235, 231, 226, 0.671);
+      width: 200px;
+      padding: 5px;
+      border:none;
+    margin-left:20px;
 }
-h4{
-  text-align: left;
-  margin-left: 60px;
+.form-input:focus{
+  outline: none;
 }
-.form{
-      text-align:left;
-      margin-left:50px;
-      border: 1px solid rgba(71, 69, 69, 0.274);
-      border-radius: 5px;
-      width: 50%;
-      height: 45vh;
-      
+.form-input-label{
+  font-size:20px;
+  font-weight: bold;
+  margin-left: 20px;
 }
-label{
+.form-input-radio{
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 10px;
+  
+}
+.form-input-radio-btn{
   margin-left:20px;
 }
-  input {
-    border:none;
-    margin-left:20px;
-  }
-  input:focus{
-    outline: none;
-}
-input[type=text] {
-    border-radius: 5px;
-    background-color:rgba(235, 231, 226, 0.671);
-        width: 200px;
-        padding: 5px;
-}
-input[type=email] {
-    border-radius: 5px;
-    background-color:rgba(235, 231, 226, 0.671);
-        width: 200px;
-        padding: 5px;
-
-  }
-input[type=number] {
-    border-radius: 5px;
-    background-color:rgba(235, 231, 226, 0.671);
-        width: 200px;
-        padding: 5px;
-
-}
-.sidebar-nav-link{
-    text-align:left;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
