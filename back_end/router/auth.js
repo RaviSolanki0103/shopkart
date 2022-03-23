@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 require("../db/conn");
 const User = require("../model/userSchema");
 const authenticate = require("../middleware/authenticate");
+const { createProduct } = require("../middleware/productController");
 
 router.get("/", (req, res) => {
   res.send("Hello from router js");
@@ -130,16 +131,62 @@ router.get("/logout", (req, res) => {
   res.status(200).send("User logout");
 });
 
-
-router.get("/posts", (req,res) => {
+router.get("/posts", (req, res) => {
   try {
-    
-let posts = posts.find({});  
-
+    let posts = posts.find({});
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
+
+
+// 
+const Product = require("../model/product.js");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "../front_end/public/uploads/");
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+router.post("/addproduct", upload.single("photo"), (req, res) => {
+  //  photo = the name of input field in Front-end.
+
+  console.log(req.body, "JJJJJIIIIII");
+  const product = new Product({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    stock: req.body.stock,
+    warranty: req.body.warranty,
+    seller: req.body.seller,
+    category: req.body.category,
+    product_img: req.file.originalname,
+  });
+
+  console.log(product, "PRODUCTTTTTTT");
+
+  product.save(); // Save data
+
+  res.status(201).json({ message: "Product uploaded successfully" });
+});
+
+router.get("/addproduct", async(req, res) => {
+  console.log(req,"PPP");
+  try {
+    let products = await Product.find({});
+    console.log(products,"OOOOO");
+    res.send(products)
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 module.exports = router;

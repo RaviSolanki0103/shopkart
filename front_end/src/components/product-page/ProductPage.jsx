@@ -24,77 +24,95 @@ const mydata = Object.keys(details[0]);
 function ProductPage() {
   const [status, setStatus] = useState(true);
   return (
-    <div className="specific-product">
-      <div className="left-div">
-        <div className="img-div">
-          <img className="img-class" preview={false} width={600} src={img1} alt="" />
-        </div>
-        <div className="btn-div">
-          <div className="inner-btn-div">
-            <button className="cart-btn">
-              <ShoppingCartOutlined /> Add to cart
-            </button>
-            <button className="buy-btn">
-              <ThunderboltFilled /> Buy now
-            </button>
+    <div className="outer-div">
+      {/* <div className="specific-product">
+        <div className="left-div">
+          <div className="img-div">
+            <img
+              className="img-class"
+              preview={false}
+              width={600}
+              src={img1}
+              alt=""
+            />
+          </div>
+          <div className="btn-div">
+            <div className="inner-btn-div">
+              <button className="cart-btn">
+                <ShoppingCartOutlined /> Add to cart
+              </button>
+              <button className="buy-btn">
+                <ThunderboltFilled /> Buy now
+              </button>
+            </div>
+          </div>
+          <div>
+            {status ? (
+              <button
+                className="wishlist-btn-sp"
+                onClick={() => setStatus(!status)}
+              >
+                <HeartFilled style={{ color: "#cccccc" }} />
+              </button>
+            ) : (
+              <button
+                className="wishlist-btn-sp"
+                onClick={() => setStatus(!status)}
+              >
+                <HeartFilled style={{ color: "hotpink" }} />
+              </button>
+            )}
           </div>
         </div>
-        <div>
-          {status ? (
-            <button
-              className="wishlist-btn-sp"
-              onClick={() => setStatus(!status)}
-            >
-              <HeartFilled style={{ color: "#cccccc" }} />
-            </button>
-          ) : (
-            <button
-              className="wishlist-btn-sp"
-              onClick={() => setStatus(!status)}
-            >
-              <HeartFilled style={{ color: "hotpink" }} />
-            </button>
-          )}
-        </div>
-      </div>
-      <div className="details">
-        <div>
-          <h4>Slim Boy Grey Jeans</h4>
-        </div>
-        <div>
-          <h3>399</h3>
-        </div>
-        <div className="pro-detail">
-          <h2>PRODUCT DETAILS</h2>
-        </div>
-        <Descriptions style={{}}>
-          {mydata.map((x, key) => {
-            return (
-              <Descriptions.Item key={key} label={x} span={3}>
-                data
-              </Descriptions.Item>
-            );
-          })}
-        </Descriptions>
-        <div className="pro-detail">
-          <h2>Ratings and Reviews</h2>
-        </div>
-        <Descriptions style={{}}>
-          {mydata.map((x, key) => {
-            return (
-              <Descriptions.Item key={key} label={x} span={3}>
-                data
-              </Descriptions.Item>
-            );
-          })}
-        </Descriptions>
-      </div>
+        <div className="details">
+          <div>
+            <h4>Slim Boy Grey Jeans</h4>
+          </div>
+          <div>
+            <h3>399</h3>
+          </div>
+          <div className="pro-detail">
+            <h2>PRODUCT DETAILS</h2>
+          </div>
+          <Descriptions style={{}}>
+            {mydata.map((x, key) => {
+              return (
+                <Descriptions.Item key={key} label={x} span={3}>
+                  data
+                </Descriptions.Item>
+              );
+            })}
+          </Descriptions>
+          <div className="pro-detail">
+            <h2>Ratings and Reviews</h2>
+          </div>
+          <Descriptions style={{}}>
+            {mydata.map((x, key) => {
+              return (
+                <Descriptions.Item key={key} label={x} span={3}>
+                  data
+                </Descriptions.Item>
+              );
+            })}
+          </Descriptions>
+        </div> */}
 
-      {/* <Card
+      <Card
         className="inner-card-sp"
         hoverable
         cover={<img className="img-sp" alt="example" src={img1} />}
       >
+        
+        <div className="action-btn">
+          <Button style={{ backgroundColor: "#ff9f00", color: "#fff", width:"100%", height:"100%" }}>
+            <ShoppingCartOutlined />
+            ADD TO CART
+          </Button>
+          <Button style={{ backgroundColor: "#fb641b", color: "#fff", width:"100%", height:"100%" }}>
+            <ThunderboltFilled />
+            BUY NOW
+          </Button>
+        </div>
         {status ? (
           <button
             className="wishlist-btn-sp"
@@ -110,33 +128,32 @@ function ProductPage() {
             <HeartFilled style={{ color: "hotpink" }} />
           </button>
         )}
-        <div className="action-btn">
-          <Button style={{ backgroundColor: "#ff9f00", color: "#fff" }}>
-            <ShoppingCartOutlined />
-            ADD TO CART
-          </Button>
-          <Button style={{ backgroundColor: "#fb641b", color: "#fff" }}>
-            <ThunderboltFilled />
-            BUY NOW
-          </Button>
-        </div>
       </Card>
       <div className="right-div">
-        <h3>Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)</h3>
-        <h2>₹299</h2>
-        <div>
-          <h2>Product Details</h2>
-          <Descriptions style={{}}>
-            {mydata.map((x, key) => {
-              return (
-                <Descriptions.Item key={key} label={x} span={3}>
-                  data
-                </Descriptions.Item>
-              );
-            })}
-          </Descriptions>
+        <div className="inner-right-div">
+          <h3>Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)</h3>
+          <h2>₹299</h2>
+          <div>
+            <h2>Product Details</h2>
+            <Descriptions style={{}}>
+              {details.map((x, key) => {
+                console.log(x, "x");
+                const fdata = mydata[x.id - 1];
+                return (
+                  <Descriptions.Item
+                    key={key}
+                    label={mydata[x.id - 1]}
+                    span={3}
+                  >
+                    {fdata}
+                  </Descriptions.Item>
+                );
+              })}
+            </Descriptions>
+          </div>
         </div>
-      </div> */}
+      </div>
+      {/* </div> */}
     </div>
   );
 }
