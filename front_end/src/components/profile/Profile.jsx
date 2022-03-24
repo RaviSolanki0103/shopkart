@@ -2,7 +2,6 @@ import React from 'react'
 import { Layout, Card } from "antd";
 import "./profile.css";
 import {
-    
     PoweroffOutlined,
     ShoppingOutlined,
     DatabaseFilled,
@@ -18,35 +17,35 @@ function Profile() {
             <Layout className="profile-page-layout">
                 {/* Sidebar Menu */}
                 <Sider className="sidebar" style={{ background: "white" }} width={270}>
-                <Card   title="My Profile" />  
-                <Card className="Profile-card" >
-                <a className="Profile-card-link" href="/profile"><ProfileTwoTone /> Personal Information</a>
-                </Card>
-                <Card className="Profile-card">
-                <a className="Profile-card-link" href="/address"><DatabaseFilled /> Manage Address</a>
-                </Card>
-                <Card className="Profile-card">
-                <a className="Profile-card-link" href="/order"><ShoppingOutlined /> My Order</a>
-                </Card>
-                <Card className="Profile-card">
-                <a className="Profile-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
-                </Card>
-               <Card className="Profile-card">
-               <a className="Profile-card-link" href="#0"><PoweroffOutlined /> Logout</a>
-               </Card>
+                    <Card   title="My Profile" />
+                    <Card className="Profile-card" >
+                        <a className="Profile-card-link" href="/profile"><ProfileTwoTone /> Personal Information</a>
+                    </Card>
+                    <Card className="Profile-card">
+                        <a className="Profile-card-link" href="/address"><DatabaseFilled /> Manage Address</a>
+                    </Card>
+                    <Card className="Profile-card">
+                        <a className="Profile-card-link" href="/order"><ShoppingOutlined /> My Order</a>
+                    </Card>
+                    <Card className="Profile-card">
+                        <a className="Profile-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
+                    </Card>
+                    <Card className="Profile-card">
+                        <a className="Profile-card-link" href="#0"><PoweroffOutlined /> Logout</a>
+                    </Card>
                 </Sider>
-                 {/* Main Content */}
+                {/* Main Content */}
                 <Content>
                     <div className="margin-10-px order-list-of-card">
                         <Card>
                             <div className="main-content" >
-                            
+
                                 <div className="main-title">
-                                
+
                                     <h4>Personal Information <button className="editbtn">Edit</button></h4>
                                 </div>
                                 <div className="infoform">
-                                    <form className="form">
+                                    <form className="profile-form">
                                         <label className="form-input-label">Name</label><br /><br />
                                         <input className="form-input" type="text" placeholder="Priya" readonly="true" />  <input className="form-input" type="text" placeholder="Patel" readonly="true" /> <br /><br />
                                         <label className="form-input-label">Gender</label><br /><br />

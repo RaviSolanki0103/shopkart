@@ -70,14 +70,15 @@ function LoginForm(props) {
             rules={[
                 {
                     required: true,
-                    message: "This field is required!",
+                    type: "email",
+                    message: "Enter valid email address",
                 },
             ]}
         >
             <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 // onChange={(e) => validator.isEmail(e.target.value)}
-                placeholder="Username"
+                placeholder="Enter Email Address"
                 name="email"
             />
         </Form.Item>
