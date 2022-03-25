@@ -52,7 +52,7 @@ export default function Navbar() {
                 <Menu.Item key="setting:3">wishlist</Menu.Item>
               </Menu.ItemGroup>
               <Menu.ItemGroup title="logout">
-                <Menu.Item key="setting:4">Logout</Menu.Item>
+                <Menu.Item key="setting:4"><Link to ="/">Logout</Link></Menu.Item>
               </Menu.ItemGroup>
             </SubMenu>
             {/* cart button with badge  */}

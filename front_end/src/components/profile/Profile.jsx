@@ -11,7 +11,10 @@ import {
 const { Sider, Content } = Layout;
 
 function Profile() {
-
+     const ClickLogout = () => {
+         console.log("user logged out");
+         alert("Logout Successfully");
+     }
     return (
         <>
             <Layout className="profile-page-layout">
@@ -31,7 +34,7 @@ function Profile() {
                         <a className="Profile-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
                     </Card>
                     <Card className="Profile-card">
-                        <a className="Profile-card-link" href="#0"><PoweroffOutlined /> Logout</a>
+                        <a className="Profile-card-link" onClick={ClickLogout} href="/"><PoweroffOutlined /> Logout</a>
                     </Card>
                 </Sider>
                 {/* Main Content */}
