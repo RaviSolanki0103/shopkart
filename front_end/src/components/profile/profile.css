@@ -1,4 +1,4 @@
-.profile-page-layout {
+/* .profile-page-layout {
     min-height: 82.3vh;
 }
 
@@ -15,8 +15,12 @@
 
 .Profile-card-link:hover{
   color:rgb(54, 11, 173);
+} */
+.main-content{
+  float: center;
+  margin-top:-80vh;
+  margin-left:28vh;
 }
-
 .main-title {
       font-weight: bold;
       font-size:25px;

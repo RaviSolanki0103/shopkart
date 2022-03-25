@@ -1,24 +1,26 @@
-import React from 'react'
+import React from 'react';
+
 import { Layout, Card } from "antd";
 import "./profile.css";
-import {
-    PoweroffOutlined,
-    ShoppingOutlined,
-    DatabaseFilled,
-    HeartFilled,
-    ProfileTwoTone
-} from "@ant-design/icons";
+// import {
+//     PoweroffOutlined,
+//     ShoppingOutlined,
+//     DatabaseFilled,
+//     HeartFilled,
+//     ProfileTwoTone
+// } from "@ant-design/icons";
 const { Sider, Content } = Layout;
 
 function Profile() {
-     const ClickLogout = () => {
-         console.log("user logged out");
-         alert("Logout Successfully");
-     }
+    //  const ClickLogout = () => {
+    //      console.log("user logged out");
+    //      alert("Logout Successfully");
+    //  }
     return (
         <>
             <Layout className="profile-page-layout">
-                {/* Sidebar Menu */}
+            
+                 {/*Sidebar Menu 
                 <Sider className="sidebar" style={{ background: "white" }} width={270}>
                     <Card   title="My Profile" />
                     <Card className="Profile-card" >
@@ -36,10 +38,11 @@ function Profile() {
                     <Card className="Profile-card">
                         <a className="Profile-card-link" onClick={ClickLogout} href="/"><PoweroffOutlined /> Logout</a>
                     </Card>
-                </Sider>
+    </Sider>*/}
                 {/* Main Content */}
-                <Content>
-                    <div className="margin-10-px order-list-of-card">
+                <Content >
+                    {/*<div className="margin-10-px order-list-of-card">*/}
+                    <div>
                         <Card>
                             <div className="main-content" >
 

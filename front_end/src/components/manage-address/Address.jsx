@@ -1,52 +1,27 @@
 import React, { useState } from 'react'
-import { Form, Layout, Card } from "antd";
+import { Layout, Card } from "antd";
 import AddressForm from "../manage-address/AddressForm";
 import "./address.css";
-import {
-    PoweroffOutlined,
-    ShoppingOutlined,
-    DatabaseFilled,
-    HeartFilled,
-    ProfileTwoTone,
-    PlusCircleOutlined
-} from "@ant-design/icons";
-const { Sider, Content } = Layout;
+import {PlusCircleOutlined} from "@ant-design/icons";
+const {  Content } = Layout;
 
 function Address() {
     const [open, setIsOpen] = useState(false);
-    
+
 
     return (
         <>
             <Layout className="address-page-layout">
-                <Sider className="sidebar" style={{ background: "white" }} width={270}>
-                    <Card title="My Profile" />
-                    <Card className="Address-card" >
-                        <a className="Address-card-link" href="/profile"><ProfileTwoTone /> Personal Information</a>
-                    </Card>
-                    <Card className="Address-card">
-                        <a className="Address-card-link" href="/address"><DatabaseFilled /> Manage Address</a>
-                    </Card>
-                    <Card className="Address-card">
-                        <a className="Address-card-link" href="/order"><ShoppingOutlined /> My Order</a>
-                    </Card>
-                    <Card className="Address-card">
-                        <a className="Address-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
-                    </Card>
-                    <Card className="Address-card">
-                        <a className="Address-card-link" ><PoweroffOutlined /> Logout</a>
-                    </Card>
-                </Sider>
                 <Content>
-                    <div className="margin-10-px order-list-of-card">
+                    <div className="address-contentdiv">
                         <Card  >
                             <p className="card-title">Manage Addresses</p>
                         </Card>
                         <Card >
-                            <button onClick={()=>setIsOpen(!open)} className="add-address" type="button"  ><PlusCircleOutlined />  ADD NEW ADDRESS</button>
+                            <button onClick={() => setIsOpen(!open)} className="add-address" type="button"  ><PlusCircleOutlined />  ADD NEW ADDRESS</button>
 
                         </Card>
-                       {open && <AddressForm cancel={()=>setIsOpen(!open)} />} 
+                        {open && <AddressForm cancel={() => setIsOpen(!open)} />}
                         <Card>
                             <div className="address-div">
                                 <div>
