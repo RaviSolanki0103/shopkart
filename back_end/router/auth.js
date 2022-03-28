@@ -130,16 +130,12 @@ router.get("/logout", (req, res) => {
   res.status(200).send("User logout");
 });
 
-
-router.get("/posts", (req,res) => {
+router.get("/posts", (req, res) => {
   try {
-    
-let posts = posts.find({});  
-
+    let posts = posts.find({});
   } catch (error) {
     res.status(500).json(error);
   }
 });
-
 
 module.exports = router;
