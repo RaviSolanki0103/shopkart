@@ -1,5 +1,5 @@
 import React, {  useState } from "react";
-import validator from 'validator';
+// import validator from 'validator';
 // import isEmail from 'validator/lib/isEmail';
 import {  useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from "antd";

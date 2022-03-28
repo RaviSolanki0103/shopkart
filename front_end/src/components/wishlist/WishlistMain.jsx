@@ -4,6 +4,7 @@ import "./Wishlist.css";
 import WishlistCard from "./WishlistCard";
 import { Layout,  Col, Collapse, Card, Checkbox } from "antd";
 import { useSelector } from "react-redux";
+import Sidebar from "../../utils/sidebar/Sidebar";
 
 
 const { Sider, } = Layout;
@@ -15,7 +16,7 @@ function WishlistMain() {
   return (
     <div className="wishlist-sider-body-containner">
       <div className="wishlist-slider">
-        <Sider theme="light" className="order-filter">
+        {/* <Sider theme="light" className="order-filter">
           <Card  size="small" title="My Account">
             <Collapse defaultActiveKey={["1"]}>
               <Panel header="My Profile" key="1">
@@ -47,7 +48,8 @@ function WishlistMain() {
               </Panel>
             </Collapse>
           </Card>
-        </Sider>
+        </Sider> */}
+        <Sidebar />
       </div>
       <div className="wishlist-body">
         <div className="wishlist-header">
