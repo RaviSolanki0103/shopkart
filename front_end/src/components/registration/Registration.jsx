@@ -8,9 +8,13 @@ import "./registration.css";
 
 function Registration(props) {
     const navigate = useNavigate();
+    
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
-    const [mobile, setMobile] = useState("");
+    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmpassword, setConfirmpassword] = useState("");
     // const loginuser = async (e) => {
     //     const form = this.formRef.current;
     //     if (!form.checkValidity()) {
@@ -49,6 +53,7 @@ function Registration(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(fname + " " + lname + " " + phone + " " + email + " " + password + " " + confirmpassword)
     };
 
     return (
@@ -65,12 +70,10 @@ function Registration(props) {
                     }}
                 >
                     <Form.Item
-                        name="username"
-                        id="username"
                         autoComplete="off"
-                        value={email}
+                        value={fname}
                         onSubmit={handleSubmit}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setFname(e.target.value)}
                         rules={[
                             {
                                 required: true,
@@ -80,15 +83,30 @@ function Registration(props) {
                     >
                         <Input
                             prefix={<UserOutlined className="site-form-item-icon" />}
-                            placeholder="Enter username"
-                            name="username"
+                            placeholder="Enter Firstname"
+
                         />
                     </Form.Item>
 
-
                     <Form.Item
-                        name="email"
-                        id="email"
+                        autoComplete="off"
+                        value={lname}
+                        onSubmit={handleSubmit}
+                        onChange={(e) => setLname(e.target.value)}
+                        rules={[
+                            {
+                                required: true,
+                                message: "This field is Required!",
+                            },
+                        ]}
+                    >
+                        <Input
+                            prefix={<UserOutlined className="site-form-item-icon" />}
+                            placeholder="Enter  Lastname"
+
+                        />
+                    </Form.Item>
+                    <Form.Item
                         autoComplete="off"
                         onSubmit={handleSubmit}
                         value={email}
@@ -105,21 +123,21 @@ function Registration(props) {
                         <Input
                             prefix={<UserOutlined className="site-form-item-icon" />}
                             placeholder="Enter Email"
-                            name="email"
+
                         />
                     </Form.Item>
                     <Form.Item
-                        name="mobile"
-                        value={mobile}
-                        id="mobile"
+
+                        value={phone}
                         autoComplete="off"
+                        onChange={(e) => setPhone(e.target.value)} 
                         rules={[
                             {
                                 required: true,
                                 type: "number",
                                 message: "This Field is Required!",
                             },
-                            
+
                         ]}
                     >
                         <Input
@@ -129,11 +147,11 @@ function Registration(props) {
                         />
                     </Form.Item>
                     <Form.Item
-                        name="password"
+
                         value={password}
-                        id="password"
+
                         autoComplete="off"
-                        // onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         rules={[
                             {
                                 required: true,
@@ -150,11 +168,11 @@ function Registration(props) {
                     </Form.Item>
 
                     <Form.Item
-                        name="confirmpassword"
+
                         value={password}
-                        id="password"
+
                         autoComplete="off"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setConfirmpassword(e.target.value)}
                         rules={[
                             {
                                 required: true,
@@ -175,7 +193,7 @@ function Registration(props) {
                             value="login"
                             autoComplete="off"
                             type="primary"
-                            id="login"
+                            id="login"  
                             htmlType="submit"
                             className="registration-form-button"
                         // onClick={loginuser}
@@ -183,7 +201,7 @@ function Registration(props) {
                             Register
                         </Button>
                         Or
-                        <Button className="login-btn" onClick={() => onLogin()}>Existing User? Login</Button>
+                        <Button  className="login-btn" onClick={() => onLogin()}>Existing User? Login</Button>
                     </Form.Item>
                 </Form>
             </div>

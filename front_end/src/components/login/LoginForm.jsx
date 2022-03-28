@@ -10,9 +10,11 @@ import "./login.css";
 
 function LoginForm(props) {
     const navigate = useNavigate();
-    const [email, setemail] = useState("");
-    const [password, setpassword] = useState("");
-    const loginuser = () =>{}
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const loginuser = async(e) =>{
+        e.preventDefault();
+    }
     // const loginuser = async (e) => {
         // const form = this.formRef.current;
         // if (!form.checkValidity()) {
@@ -65,7 +67,7 @@ function LoginForm(props) {
             id="email"
             autoComplete="off"
             value={email}
-            onChange={(e) => setemail(e.target.value)
+            onChange={(e) => setEmail(e.target.value)
             }
             rules={[
                 {
@@ -87,7 +89,7 @@ function LoginForm(props) {
             value={password}
             id="password"
             autoComplete="off"
-            onChange={(e) => setpassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             rules={[
                 {
                     required: true,

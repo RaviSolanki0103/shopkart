@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 // const jwt = require("jsonwebtoken");
 
 require("../db/conn");
-const User = require("../models/userSchema");
+const User = require("../models/user");
 const authenticate = require("../middleware/authenticate");
 const { createProduct } = require("../middleware/productController");
 
@@ -50,9 +50,9 @@ router.get("/", (req, res) => {
  */
 
 router.post("/register", async (req, res) => {
-  const { name, email, phone, work, password, cpassword } = req.body;
+  const { name, email, phone, password, cpassword } = req.body;
 
-  if (!name || !email || !phone || !work || !password || !cpassword) {
+  if (!name || !email || !phone || !password || !cpassword) {
     return res.status(422).json({ error: "PLz enter valid detail" });
   }
 
@@ -63,7 +63,7 @@ router.post("/register", async (req, res) => {
       return res.status(422).json({ error: "Email already exist" });
     }
 
-    const user = new User({ name, email, phone, work, password, cpassword });
+    const user = new User({ name, email, phone, password, cpassword });
 
     await user.save(); // Save data
 

@@ -4,6 +4,11 @@ const controller = require("../controller");
 const middleware = require("../middleware/auth");
 const upload = require("../config/multerconfig");
 
+// registration routes
+router.post("/user", middleware, controller.user.registerUser);
+
+
+
 // order routes
 router.get("/orders", middleware, controller.order.getOrder);
 router.get("/orders/:_id", middleware, controller.order.getSingleOrder);
