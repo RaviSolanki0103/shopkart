@@ -1,8 +1,8 @@
 const { default: mongoose } = require("mongoose");
 const mongoos = require("mongoose");
 
-const productSchema = mongoos.Schema({
 const mongoosePaginate = require("mongoose-paginate-v2");
+
 const productSchema = mongoose.Schema({
   name: {
     type: String,
@@ -27,8 +27,8 @@ const productSchema = mongoose.Schema({
     required: [true, "Please enter seller"],
   },
   category: {
-    type: String,
-    required: [true, "Please enter category"],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
   },
   stock: {
     type: Number,
@@ -38,13 +38,6 @@ const productSchema = mongoose.Schema({
   product_img: {
     type: String,
     required: true,
-  },
-});
-
-module.exports = mongoose.model("PRODUCT", productSchema);
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
   },
 });
 
