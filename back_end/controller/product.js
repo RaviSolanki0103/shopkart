@@ -4,6 +4,7 @@ const {
   DATA_NOT_FOUND,
   DATA_FETCH_MESSAGE,
 } = require("../config/responsemessage");
+const { CREATED, BAD_REQUEST, SUCCESS } = require("../config/statuscode");
 const responseData = require("../helper/response");
 const Category = require("../models/category");
 const Product = require("../models/product");
@@ -28,7 +29,7 @@ exports.addProduct = async (req, res, next) => {
       category.save();
       return responseData({
         res,
-        status: 201,
+        status: CREATED,
         message: DATA_INSERT_MESSAGE,
         result,
       });
@@ -36,7 +37,7 @@ exports.addProduct = async (req, res, next) => {
     .catch((err) => {
       responseData({
         res,
-        status: 400,
+        status: BAD_REQUEST,
         message: DATA_INSERT_FAILD,
         result: err,
       });
@@ -62,21 +63,36 @@ exports.getCategoryProduct = async (req, res, next) => {
   //   _name.trim().length !== 0 ? { "name": _name } : {};
 
   let searchPattern = {};
-  if(_name && _name.trim().length !== 0) {
-    searchPattern["name"] = {$regex: _name, $options: "i"};
+  if (_name && _name.trim().length !== 0) {
+    searchPattern["name"] = { $regex: _name, $options: "i" };
   }
-  if(categoryId && categoryId !== "") {
+  if (categoryId && categoryId !== "") {
     searchPattern["category"] = categoryId;
   }
 
-  await Product.paginate(searchPattern, options, (err, result) => {
-    err
-      ? responseData({ res, status: 400, message: err })
-      : responseData({
+  await Product.paginate(searchPattern, options)
+    .then((result) => {
+      if (result.length !== 0) {
+        responseData({
           res,
-          status: 200,
+          status: SUCCESS,
           message: DATA_FETCH_MESSAGE,
           result,
         });
-  });
+      } else {
+        responseData({
+          res,
+          status: SUCCESS,
+          message: DATA_NOT_FOUND,
+        });
+      }
+    })
+    .catch((err) => {
+      responseData({
+        res,
+        status: BAD_REQUEST,
+        message: DATA_NOT_FOUND,
+        result: err,
+      });
+    });
 };

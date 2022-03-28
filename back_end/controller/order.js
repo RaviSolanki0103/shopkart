@@ -8,6 +8,7 @@ const responseData = require("../helper/response");
 const ORDER_STATUS = require("../helper/reusabledata");
 const mongoose = require("mongoose");
 const Order = require("../models/order");
+const { SUCCESS, BAD_REQUEST, CREATED } = require("../config/statuscode");
 
 // get orders
 exports.getOrder = async (req, res, next) => {
@@ -86,31 +87,47 @@ exports.getOrder = async (req, res, next) => {
   const queryData = Order.aggregate(queryPattern);
   Order.aggregatePaginate(queryData, options)
     .then((result) => {
-      responseData({
-        res,
-        status: 200,
-        message: DATA_FETCH_MESSAGE,
-        result,
-      });
+      if (result.length !== 0) {
+        responseData({
+          res,
+          status: SUCCESS,
+          message: DATA_FETCH_MESSAGE,
+          result,
+        });
+      } else {
+        responseData({
+          res,
+          status: SUCCESS,
+          message: DATA_NOT_FOUND,
+        });
+      }
     })
     .catch((err) => {
-      responseData({ res, status: 400, message: err });
+      responseData({ res, status: BAD_REQUEST, message: err });
     });
 };
 
 // get single order
 exports.getSingleOrder = async (req, res, next) => {
   await Order.find({ _id: req.params._id })
-    .then((result) =>
-      responseData({
-        res,
-        status: 200,
-        message: DATA_FETCH_MESSAGE,
-        result,
-      })
-    )
+    .then((result) => {
+      if (result.length !== 0) {
+        responseData({
+          res,
+          status: SUCCESS,
+          message: DATA_FETCH_MESSAGE,
+          result,
+        });
+      } else {
+        responseData({
+          res,
+          status: SUCCESS,
+          message: DATA_NOT_FOUND,
+        });
+      }
+    })
     .catch((err) =>
-      responseData({ res, status: 400, message: DATA_NOT_FOUND })
+      responseData({ res, status: BAD_REQUEST, message: DATA_NOT_FOUND })
     );
 };
 
@@ -134,7 +151,7 @@ exports.addOrder = async (req, res, next) => {
     .then((result) =>
       responseData({
         res,
-        status: 201,
+        status: CREATED,
         message: DATA_INSERT_MESSAGE,
         result,
       })
@@ -142,7 +159,7 @@ exports.addOrder = async (req, res, next) => {
     .catch((err) => {
       responseData({
         res,
-        status: 400,
+        status: BAD_REQUEST,
         message: DATA_INSERT_FAILD,
         result: err,
       });
