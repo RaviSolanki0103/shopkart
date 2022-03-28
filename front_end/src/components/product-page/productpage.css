@@ -1,19 +1,91 @@
+p {
+    font-size: large;
+    font-size: large;
+    margin-bottom: 0.7rem !important;
+}
+
+.img-sp{
+    object-fit: fill !important;
+}
 .outer-div {
     display: flex;
     justify-content: space-evenly;
 }
-.ant-card-body{
+
+.ant-card-body {
     padding: 0;
     background: #F0F2F5;
 }
-.ant-card:hover{
+
+.ant-card:hover {
     transition: none !important;
 }
+
 .inner-card-sp {
-    width: 40%;
+    width: 30rem;
+    height: 40rem;
+    overflow: hidden;
+}
+
+.col-siz {
+    text-align: left;
+    margin-top: 2rem;
 }
 
 .right-div {
+    width: 50%;
+}
+
+.select-color-btn {
+    width: 6rem;
+    height: 3rem;
+    font-size: large;
+}
+
+.select-color-btn:hover {
+
+    color: #2874F0;
+    border: 2px solid #2874F0;
+}
+
+.select-color-btn2 {
+    width: 6rem;
+    height: 3rem;
+    font-size: large;
+    color: #2874F0;
+    border: 2px solid #2874F0;
+}
+
+.select-size-btn {
+    width: 3rem;
+    height: 3rem;
+    font-weight: bolder;
+}
+
+.select-size-btn:hover {
+    color: #2874F0;
+    border: 2px solid #2874F0;
+}
+
+.select-size-btn2 {
+    width: 3rem;
+    height: 3rem;
+    font-weight: bolder;
+    color: #2874F0;
+    border: 2px solid #2874F0;
+}
+
+.color {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+}
+
+.size {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 50%;
 }
 
@@ -21,11 +93,13 @@
     width: 100%;
 
 }
-.action-btn{
-width: 100%;
-height: 100%;
+
+.action-btn {
+    width: 100%;
+    height: 100%;
 }
-.wishlist-btn-sp{
+
+.wishlist-btn-sp {
     border: none;
     z-index: 10;
     position: relative;
@@ -41,20 +115,20 @@ h3 {
 }
 
 @media only screen and (max-width: 1440px) {
-    .wishlist-btn-sp{
+    .wishlist-btn-sp {
         top: -39rem;
     }
 }
 
 @media only screen and (max-width: 1024px) {
-    .wishlist-btn-sp{
+    .wishlist-btn-sp {
         top: -29rem;
     }
 }
 
 
 @media only screen and (max-width: 768px) {
-    .wishlist-btn-sp{
+    .wishlist-btn-sp {
         top: -23rem;
         transform: scale(2);
     }
@@ -71,23 +145,25 @@ h3 {
     .inner-card-sp {
         width: 80%;
     }
-    .right-div{
+
+    .right-div {
         width: 80%;
     }
-    .wishlist-btn-sp{
+
+    .wishlist-btn-sp {
         top: -30rem;
-        
+
     }
 }
 
 @media only screen and (max-width: 375px) {
-    .wishlist-btn-sp{
+    .wishlist-btn-sp {
         top: -27rem;
     }
 }
 
 @media only screen and (max-width: 320px) {
-    .wishlist-btn-sp{
+    .wishlist-btn-sp {
         top: -23.5rem;
     }
 }

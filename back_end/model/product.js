@@ -24,6 +24,14 @@ const productSchema = mongoos.Schema({
     type: String,
     required: [true, "Please enter seller"],
   },
+  color: {
+    type: Array,
+    required: [true, "Please enter Colors"],
+  },
+  size: {
+    type: Array,
+    required: [true, "Please enter Size"],
+  },
   category: {
     type: String,
     required: [true, "Please enter category"],

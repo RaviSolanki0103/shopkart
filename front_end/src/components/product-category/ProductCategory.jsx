@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "antd";
 import "./productcategory.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
 import axios from "axios";
+import { BASEURL } from "../../utils/config";
 
 function ProductCategory() {
   const [status, setStatus] = useState(true);
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
   const [kidsData, setKidsData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -40,11 +42,9 @@ function ProductCategory() {
         }
       })
       .then((err) => {
-        console.log(err, "SHOW PRODUCT ERROR");
+        err && console.log(err, "SHOW PRODUCT ERROR");
       });
   }, []);
-
-  const { Meta } = Card;
 
   return (
     <div>
@@ -53,7 +53,7 @@ function ProductCategory() {
         type="inner"
         title={<h2 style={{ fontSize: "2rem" }}>Men's Wear</h2>}
         extra={
-          <Link style={{ fontSize: "2rem" }} to="/product-category">
+          <Link style={{ fontSize: "2rem" }} to="/product-category/men">
             More
           </Link>
         }
@@ -69,9 +69,12 @@ function ProductCategory() {
                   <img
                     alt="example"
                     className="img"
-                    src={`uploads/${x.product_img}`}
+                    src={`${BASEURL}/uploads/${x.product_img}`}
                   />
                 }
+                onClick={() => {
+                  navigate(`/product/${x._id}`)
+                }}
               >
                 <div>
                   <p className="title">{x.name}</p>
@@ -103,7 +106,7 @@ function ProductCategory() {
         type="inner"
         title={<h2 style={{ fontSize: "2rem" }}>Women's Wear</h2>}
         extra={
-          <Link style={{ fontSize: "2rem" }} to="#">
+          <Link style={{ fontSize: "2rem" }} to="/product-category/women">
             More
           </Link>
         }
@@ -120,13 +123,16 @@ function ProductCategory() {
                     <img
                       className="img"
                       alt="example"
-                      src={`uploads/${x.product_img}`}
+                      src={`${BASEURL}/uploads/${x.product_img}`}
                     />
                   }
+                  onClick={() => {
+                    navigate(`/product/${x._id}`)
+                  }}
                 >
                   <div>
-                  <p className="title">{x.name}</p>
-                  <p className="price" >₹ {x.price}</p>
+                    <p className="title">{x.name}</p>
+                    <p className="price">₹ {x.price}</p>
                     {status ? (
                       <button
                         className="wishlist-btn-new"
@@ -155,7 +161,7 @@ function ProductCategory() {
         type="inner"
         title={<h2 style={{ fontSize: "2rem" }}>Kid's Wear</h2>}
         extra={
-          <Link style={{ fontSize: "2rem" }} to="#">
+          <Link style={{ fontSize: "2rem" }} to="/product-category/kids">
             More
           </Link>
         }
@@ -172,28 +178,31 @@ function ProductCategory() {
                     <img
                       className="img"
                       alt="example"
-                      src={`uploads/${x.product_img}`}
+                      src={`${BASEURL}/uploads/${x.product_img}`}
                     />
                   }
+                  onClick={() => {
+                    navigate(`/product/${x._id}`)
+                  }}
                 >
                   <div>
-                  <p className="title">{x.name}</p>
-                  <p className="price" >₹ {x.price}</p>
-                  {status ? (
-                    <button
-                      className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
-                    >
-                      <HeartFilled style={{ color: "#cccccc" }} />
-                    </button>
-                  ) : (
-                    <button
-                      className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
-                    >
-                      <HeartFilled style={{ color: "hotpink" }} />
-                    </button>
-                  )}
+                    <p className="title">{x.name}</p>
+                    <p className="price">₹ {x.price}</p>
+                    {status ? (
+                      <button
+                        className="wishlist-btn-new"
+                        onClick={() => setStatus(!status)}
+                      >
+                        <HeartFilled style={{ color: "#cccccc" }} />
+                      </button>
+                    ) : (
+                      <button
+                        className="wishlist-btn-new"
+                        onClick={() => setStatus(!status)}
+                      >
+                        <HeartFilled style={{ color: "hotpink" }} />
+                      </button>
+                    )}
                   </div>
                 </Card>
               )

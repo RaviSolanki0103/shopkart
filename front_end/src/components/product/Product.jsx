@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Select } from "antd";
 
 const Product = () => {
   const [newProduct, setNewProduct] = useState({
@@ -9,9 +10,17 @@ const Product = () => {
     stock: "",
     warranty: "",
     seller: "",
+    color: [],
+    size: [],
     category: "",
     photo: "",
   });
+  const [item, setItem] = useState("");
+  const [data, setData] = useState([]);
+  const [sizeval, setsizeVal] = useState("");
+  const [sizedata, setsizeData] = useState([]);
+
+  console.log(item, data);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +31,8 @@ const Product = () => {
     formData.append("stock", newProduct.stock);
     formData.append("warranty", newProduct.warranty);
     formData.append("seller", newProduct.seller);
+    formData.append("color", newProduct.color);
+    formData.append("size", newProduct.size);
     formData.append("category", newProduct.category);
     formData.append("photo", newProduct.photo);
 
@@ -108,6 +119,74 @@ const Product = () => {
           <option value="women">Women</option>
           <option value="kids">Kids</option>
         </select>
+
+        <div>
+          <input
+            placeholder="Colors"
+            type="text"
+            name="color"
+            value={item}
+            onChange={(e) => setItem(e.target.value)}
+          />
+          <input
+            type="button"
+            value="Add"
+            onClick={() => {
+              setData((old) => {
+                return [...old, item];
+              });
+              setItem("");
+            }}
+          />
+          <p>
+            {data.map((x, key) => {
+              return <li key={key}>{x}</li>;
+            })}
+          </p>
+        </div>
+
+        <div>
+          <input
+            placeholder="Size"
+            type="text"
+            name="size"
+            value={sizeval}
+            onChange={(e) => setsizeVal(e.target.value)}
+          />
+          <input
+            type="button"
+            value="Add"
+            onClick={() => {
+              setsizeData((old) => {
+                return [...old, sizeval];
+              });
+              setsizeVal("");
+            }}
+          />
+          <p>
+            {sizedata.map((x, key) => {
+              return <li key={key}>{x}</li>;
+            })}
+          </p>
+        </div>
+        <div>
+          <button
+          type="button"
+            onClick={() => {
+              setNewProduct({ ...newProduct, color: data });
+            }}
+          >
+            Finalize Colors
+          </button>
+          <button
+          type="button"
+            onClick={() => {
+              setNewProduct({ ...newProduct, size: sizedata });
+            }}
+          >
+            Finalize Sizes
+          </button>
+        </div>
 
         <input
           type="file"

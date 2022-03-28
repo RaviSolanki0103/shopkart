@@ -139,9 +139,7 @@ router.get("/posts", (req, res) => {
   }
 });
 
-
-
-// 
+//
 const Product = require("../model/product.js");
 const multer = require("multer");
 
@@ -159,7 +157,6 @@ const upload = multer({ storage: storage });
 router.post("/addproduct", upload.single("photo"), (req, res) => {
   //  photo = the name of input field in Front-end.
 
-  console.log(req.body, "JJJJJIIIIII");
   const product = new Product({
     name: req.body.name,
     description: req.body.description,
@@ -167,23 +164,23 @@ router.post("/addproduct", upload.single("photo"), (req, res) => {
     stock: req.body.stock,
     warranty: req.body.warranty,
     seller: req.body.seller,
+    color: req.body.color,
+    size: req.body.size,
     category: req.body.category,
     product_img: req.file.originalname,
   });
 
-  console.log(product, "PRODUCTTTTTTT");
+console.log(product,"JOJOJOJJ");
 
   product.save(); // Save data
 
   res.status(201).json({ message: "Product uploaded successfully" });
 });
 
-router.get("/addproduct", async(req, res) => {
-  console.log(req,"PPP");
+router.get("/addproduct", async (req, res) => {
   try {
     let products = await Product.find({});
-    console.log(products,"OOOOO");
-    res.send(products)
+    res.send(products);
   } catch (error) {
     res.status(500).json(error);
   }

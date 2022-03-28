@@ -1,9 +1,12 @@
 import { Button, Card, Checkbox, Collapse, Layout } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Number } from "./data";
 import img1 from "../../assets/men-tshirt.png";
 import "./product-listing.css";
 import { HeartFilled } from "@ant-design/icons";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { BASEURL } from "../../utils/config";
 
 function ProductListing() {
   const { Meta } = Card;
@@ -11,6 +14,45 @@ function ProductListing() {
 
   const [status, setStatus] = useState(true);
 
+  const [menData, setMenData] = useState([]);
+  const [womenData, setWomenData] = useState([]);
+  const [kidsData, setKidsData] = useState([]);
+
+  const param = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("/addproduct")
+      .then((res) => {
+        let menarray = [];
+        let womenarray = [];
+        let kidarray = [];
+        let arrlen = res.data.length;
+        if (arrlen > 0) {
+          for (let name of res.data) {
+            if (name.category === "men") {
+              var c = name;
+              menarray.push(c);
+            }
+            if (name.category === "women") {
+              var d = name;
+              womenarray.push(d);
+            }
+            if (name.category === "kids") {
+              var e = name;
+              kidarray.push(e);
+            }
+          }
+          setMenData(menarray);
+          setWomenData(womenarray);
+          setKidsData(kidarray);
+        }
+      })
+      .then((err) => {
+        err && console.log(err, "SHOW PRODUCT ERROR");
+      });
+  }, []);
   return (
     <Layout className="listing">
       {/* Filter */}
@@ -65,17 +107,32 @@ function ProductListing() {
       {/* Title */}
       <div className="product-div">
         <div>
-          <h2>Men's wear</h2>
+          <h2>{param.id}'s wear</h2>
         </div>
         <div>
           <Card className="new-card" type="inner">
             <div className="space_data">
-              {Number.map((x) => {
+              {(param.id === "men"
+                ? menData
+                : param.id === "women"
+                ? womenData
+                : kidsData
+              ).map((x, key) => {
                 return (
                   <Card
+                    key={key}
                     className="inner-card"
                     hoverable
-                    cover={<img alt="example" className="img" src={img1} />}
+                    cover={
+                      <img
+                        alt="example"
+                        className="img"
+                        src={`${BASEURL}/uploads/${x.product_img}`}
+                      />
+                    }
+                    onClick={() => {
+                      navigate(`/product/${x._id}`)
+                    }}
                   >
                     {status ? (
                       <button
@@ -92,8 +149,8 @@ function ProductListing() {
                         <HeartFilled style={{ color: "hotpink" }} />
                       </button>
                     )}
-                    <Meta title={x.men_title} />
-                    price <Meta title={x.men_price} />
+                    <Meta title={x.name} />
+                    <Meta title={x.price} />
                   </Card>
                 );
               })}
