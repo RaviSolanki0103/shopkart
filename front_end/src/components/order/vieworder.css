@@ -26,6 +26,17 @@ p {
   margin: 10px 0;
 }
 
+.order-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.order-pagination ul li {
+  margin-right: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .order-page-layout {
     display: flex;
@@ -38,60 +49,54 @@ p {
     max-width: 80vw !important;
     flex: 0;
   }
-  .order-search {
-    width: 80vw;
-  }
+  .order-search,
   .order-list-of-card {
     width: 80vw;
   }
   .margin-10-px {
     margin: 10px 0;
   }
+
+  .order-pagination {
+    width: 76vw;
+  }
 }
 
 @media only screen and (max-width: 425px) {
-  .order-page-layout {
-    display: flex;
-    flex-direction: column !important;
-    width: 100%;
-  }
   .order-filter {
     width: 95vw !important;
     max-width: 95vw !important;
     margin: 10px;
     flex: 0 !important;
   }
-  .order-search {
-    width: 95vw;
-  }
+  .order-search,
   .order-list-of-card {
     width: 95vw;
   }
   .order-page-content {
     margin: 10px;
   }
+  .order-pagination {
+    width: 90vw;
+  }
 }
 
 @media only screen and (max-width: 375px) {
-  .order-page-layout {
-    display: flex;
-    flex-direction: column !important;
-    width: 100%;
-  }
   .order-filter {
     width: 94vw !important;
     max-width: 94vw !important;
     margin: 10px;
     flex: 0 !important;
   }
-  .order-search {
-    width: 94vw;
-  }
+  .order-search,
   .order-list-of-card {
     width: 94vw;
   }
   .order-page-content {
     margin: 10px;
+  }
+  .order-pagination {
+    width: 90vw;
   }
 }
 
@@ -102,13 +107,14 @@ p {
     margin: 10px;
     flex: 0 !important;
   }
-  .order-search {
-    width: 94vw;
-  }
+  .order-search,
   .order-list-of-card {
     width: 94vw;
   }
   .order-page-content {
     margin: 10px;
+  }
+  .order-pagination {
+    width: 86vw;
   }
 }

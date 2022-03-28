@@ -1,4 +1,13 @@
-import { Layout, Row, Col, Collapse, Card, Checkbox, Input } from "antd";
+import {
+  Layout,
+  Row,
+  Col,
+  Collapse,
+  Card,
+  Checkbox,
+  Input,
+  Pagination,
+} from "antd";
 import { useState } from "react";
 import "./vieworder.css";
 
@@ -101,6 +110,9 @@ const ViewOrder = () => {
               </Card.Grid>
             ))}
           </Card>
+        </div>
+        <div className="order-pagination">
+          <Pagination defaultCurrent={6} total={1500} />
         </div>
       </Content>
     </Layout>

@@ -6,8 +6,8 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Input, Badge } from "antd";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { openLogin } from "../../redux/actions/index";
 import Login from "../login/Login";
 const { SubMenu } = Menu;
@@ -19,6 +19,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  const myaction = useSelector((state) => state);
 
   const handleClick = (e) => {
     setCurrent(e.key);
@@ -46,12 +47,12 @@ export default function Navbar() {
             {/* account menu with available options */}
             <SubMenu key="account" icon={<UserOutlined />} title="Account">
               <Menu.ItemGroup title="account">
-                <Menu.Item key="setting:1">Profile</Menu.Item>
+                <Menu.Item key="setting:1"><Link to="/profile">Profile</Link></Menu.Item>
                 <Menu.Item key="setting:2">Orders</Menu.Item>
                 <Menu.Item key="setting:3">wishlist</Menu.Item>
               </Menu.ItemGroup>
               <Menu.ItemGroup title="logout">
-                <Menu.Item key="setting:4">Logout</Menu.Item>
+                <Menu.Item key="setting:4"><Link to ="/">Logout</Link></Menu.Item>
               </Menu.ItemGroup>
             </SubMenu>
             {/* cart button with badge  */}
@@ -68,6 +69,7 @@ export default function Navbar() {
             onClick={() => {
               dispatch(openLogin(true));
               // navigate("/login");
+              // setLoginStatus(myaction);
               setLoginStatus(true);
             }}
           />

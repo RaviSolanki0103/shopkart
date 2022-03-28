@@ -2,7 +2,6 @@ import { OPEN_LOGIN, SEND_NUMBER_OF_ITEM } from "./action-types";
 import { SENDDATA_WISHLIST } from "./action-types";
 import {SEND_TOTALAMOUNT} from "./action-types";
 export const openLogin = (data) => {
-  console.log(data, "DATA");
   return {
     type: OPEN_LOGIN,
     payload: data,
