@@ -1,7 +1,6 @@
 const { default: mongoose } = require("mongoose");
-const mongoos = require("mongoose");
-
-const productSchema = mongoos.Schema({
+const mongoosePaginate = require("mongoose-paginate-v2");
+const productSchema = mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please enter product Name"],
@@ -25,8 +24,8 @@ const productSchema = mongoos.Schema({
     required: [true, "Please enter seller"],
   },
   category: {
-    type: String,
-    required: [true, "Please enter category"],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
   },
   stock: {
     type: Number,
@@ -39,4 +38,6 @@ const productSchema = mongoos.Schema({
   },
 });
 
-module.exports = mongoose.model("PRODUCT", productSchema);
+productSchema.plugin(mongoosePaginate);
+
+module.exports = mongoose.model("Product", productSchema);
