@@ -17,17 +17,13 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.4.1",
     "mongoose": "^6.2.1",
-<<<<<<< HEAD
-    "multer": "^1.4.4",
-    "uuid": "^8.3.2"
-=======
     "mongoose-aggregate-paginate-v2": "^1.0.6",
     "mongoose-paginate-v2": "^1.6.3",
     "multer": "^1.4.4",
-    "mongodb": "^4.4.1",
     "nodemon": "^2.0.15",
-    "path": "^0.12.7"
->>>>>>> 9435697929ccc6065957b572238140e359df6875
+    "path": "^0.12.7",
+    "uuid": "^8.3.2"
   }
 }

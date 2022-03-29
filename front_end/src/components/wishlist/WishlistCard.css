@@ -51,12 +51,11 @@
 .card-img-main{
     width: 100px;
     height: 100px;
-    margin:10px;
-    background-image: url(../../assets/Shoes.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    
 
+}
+.card-img-main img{
+   width: 65px;
 }
 
 

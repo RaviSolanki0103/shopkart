@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 
 require("../db/conn");
 const User = require("../model/userSchema");
+const Wishlist =require("../models/wishlist");
+const Cart_item = require("../models/cart");
 const authenticate = require("../middleware/authenticate");
 const { createProduct } = require("../middleware/productController");
 
