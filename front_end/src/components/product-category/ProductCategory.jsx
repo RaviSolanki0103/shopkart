@@ -11,6 +11,7 @@ function ProductCategory() {
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
   const [kidsData, setKidsData] = useState([]);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,7 +46,9 @@ function ProductCategory() {
         console.log(err, "SHOW PRODUCT ERROR");
       });
   }, []);
-
+  addwishlist = () => {
+    axios.post(`/api/wishlist`);
+  };
   return (
     <div>
       <Card
@@ -62,41 +65,43 @@ function ProductCategory() {
           {menData ? (
             menData.map((x, key) => {
               return (
-                <Card
-                  key={key}
-                  className="inner-card"
-                  hoverable
-                  cover={
-                    <img
-                      alt="example"
-                      className="img"
-                      src={`${BASEURL}/uploads/${x.product_img}`}
-                    />
-                  }
-                  onClick={() => {
-                    navigate(`/product/${x._id}`);
-                  }}
-                >
-                  <div>
-                    <p className="title">{x.name}</p>
-                    <p className="price">₹ {x.price}</p>
-                    {status ? (
-                      <button
-                        className="wishlist-btn-new"
-                        onClick={() => setStatus(!status)}
-                      >
-                        <HeartFilled style={{ color: "#cccccc" }} />
-                      </button>
-                    ) : (
-                      <button
-                        className="wishlist-btn-new"
-                        onClick={() => setStatus(!status)}
-                      >
-                        <HeartFilled style={{ color: "hotpink" }} />
-                      </button>
-                    )}
-                  </div>
-                </Card>
+                <div>
+                  <Card
+                    key={key}
+                    className="inner-card"
+                    hoverable
+                    cover={
+                      <img
+                        alt="example"
+                        className="img"
+                        src={`${BASEURL}/uploads/${x.product_img}`}
+                      />
+                    }
+                    onClick={() => {
+                      navigate(`/product/${x._id}`);
+                    }}
+                  >
+                    <div>
+                      <p className="title">{x.name}</p>
+                      <p className="price">₹ {x.price}</p>
+                    </div>
+                  </Card>
+                  {status ? (
+                    <button
+                      className="wishlist-btn-new"
+                      onClick={() => setStatus(!status)}
+                    >
+                      <HeartFilled style={{ color: "#cccccc" }} />
+                    </button>
+                  ) : (
+                    <button
+                      className="wishlist-btn-new"
+                      onClick={() => setStatus(!status)}
+                    >
+                      <HeartFilled style={{ color: "hotpink" }} />
+                    </button>
+                  )}
+                </div>
               );
             })
           ) : (
@@ -118,43 +123,43 @@ function ProductCategory() {
         <div className="div">
           {womenData.map((x, key) => {
             return (
-              <Card
-                key={key}
-                className="inner-card"
-                hoverable
-                cover={
-                  <img
-                    className="img"
-                    alt="example"
-                    src={`${BASEURL}/uploads/${x.product_img}`}
-                  />
-                }
-                onClick={() => {
-                  navigate(`/product/${x._id}`);
-                }}
-              >
-                <div>
-                  <p className="title">{x.name}</p>
-                  <p className="price">₹ {x.price}</p>
-                  {status ? (
-                    <button
-                      className="wishlist-btn-new"
-                      onClick={() => {
-                        setStatus(!status);
-                      }}
-                    >
-                      <HeartFilled style={{ color: "#cccccc" }} />
-                    </button>
-                  ) : (
-                    <button
-                      className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
-                    >
-                      <HeartFilled style={{ color: "hotpink" }} />
-                    </button>
-                  )}
-                </div>
-              </Card>
+              <div>
+                <Card
+                  key={key}
+                  className="inner-card"
+                  hoverable
+                  cover={
+                    <img
+                      className="img"
+                      alt="example"
+                      src={`${BASEURL}/uploads/${x.product_img}`}
+                    />
+                  }
+                  onClick={() => {
+                    navigate(`/product/${x._id}`);
+                  }}
+                >
+                  <div>
+                    <p className="title">{x.name}</p>
+                    <p className="price">₹ {x.price}</p>
+                  </div>
+                </Card>
+                {status ? (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "#cccccc" }} />
+                  </button>
+                ) : (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "hotpink" }} />
+                  </button>
+                )}
+              </div>
             );
           })}
         </div>
@@ -173,41 +178,43 @@ function ProductCategory() {
         <div className="div">
           {kidsData.map((x, key) => {
             return (
-              <Card
-                key={key}
-                className="inner-card"
-                hoverable
-                cover={
-                  <img
-                    className="img"
-                    alt="example"
-                    src={`${BASEURL}/uploads/${x.product_img}`}
-                  />
-                }
-                onClick={() => {
-                  navigate(`/product/${x._id}`);
-                }}
-              >
-                <div>
-                  <p className="title">{x.name}</p>
-                  <p className="price">₹ {x.price}</p>
-                  {status ? (
-                    <button
-                      className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
-                    >
-                      <HeartFilled style={{ color: "#cccccc" }} />
-                    </button>
-                  ) : (
-                    <button
-                      className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
-                    >
-                      <HeartFilled style={{ color: "hotpink" }} />
-                    </button>
-                  )}
-                </div>
-              </Card>
+              <div>
+                <Card
+                  key={key}
+                  className="inner-card"
+                  hoverable
+                  cover={
+                    <img
+                      className="img"
+                      alt="example"
+                      src={`${BASEURL}/uploads/${x.product_img}`}
+                    />
+                  }
+                  onClick={() => {
+                    navigate(`/product/${x._id}`);
+                  }}
+                >
+                  <div>
+                    <p className="title">{x.name}</p>
+                    <p className="price">₹ {x.price}</p>
+                  </div>
+                </Card>
+                {status ? (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "#cccccc" }} />
+                  </button>
+                ) : (
+                  <button
+                    className="wishlist-btn-new"
+                    onClick={() => setStatus(!status)}
+                  >
+                    <HeartFilled style={{ color: "hotpink" }} />
+                  </button>
+                )}
+              </div>
             );
           })}
         </div>

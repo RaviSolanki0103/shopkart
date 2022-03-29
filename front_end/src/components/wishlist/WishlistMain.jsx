@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 // import { useSelector } from "react-redux";
 import "./Wishlist.css";
-import WishlistCard from "./WishlistCard";
-import { Layout, Col, Collapse, Card, Checkbox } from "antd";
 import { useSelector } from "react-redux";
 import Sidebar from "../../utils/sidebar/Sidebar";
 import axios from "axios";
 import "./WishlistCard.css"
 import { DeleteOutlined } from "@ant-design/icons";
 
-const { Sider } = Layout;
-const { Panel } = Collapse;
 
 function WishlistMain() {
   const ronak = useSelector((state) => state.senddataWishlist);

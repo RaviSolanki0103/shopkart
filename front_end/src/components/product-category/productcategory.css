@@ -15,6 +15,7 @@
 .inner-card {
     margin: 2rem auto 0 auto;
     width: 20rem;
+    z-index: 1;
 }
 .ant-card-body{
     padding: 0 !important;
@@ -32,10 +33,10 @@
 
 .wishlist-btn-new {
     border: none;
-    z-index: 10;
+    z-index: 100;
     position: relative;
-    top: -28rem;
-    right: -16.3rem;
+    top: -34rem;
+    right: -84%;
     background: none;
     transform: scale(2);
 }
