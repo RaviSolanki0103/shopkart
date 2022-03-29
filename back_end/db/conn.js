@@ -1,16 +1,10 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
+const { DATABASE } = require("../config/connection");
 
-const DB = process.env.DATABASE;
-
-mongoose.connect(DB, {
+mongoose
+  .connect(DATABASE, {
     useNewUrlParser: true,
-    // useCreateIndes: true,
     useUnifiedTopology: true,
-    // useFindAndModify: false,
   })
-  .then(() => {
-    console.log("Connection Successfull");
-  })
-  .catch((err) => {
-    console.log("No connection");
-  });
+  .then(() => console.log("database connection successfully..."))
+  .catch((err) => console.log("database connection faild due to Error: ", err));
