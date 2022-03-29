@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 // const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-// const cors = require("cors");
+const cors = require("cors");
 
 dotenv.config({ path: "./config.env" });
 
@@ -15,11 +15,11 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//   })
-// )
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+)
 
 // const User = require('./model/userSchema')
 

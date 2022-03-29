@@ -81,3 +81,91 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+@media only screen and (max-width: 768px) {
+  .main-content {
+   margin-top:-30vh;
+   margin-left: -10vh !important;
+  }
+  .main-title{
+    margin-left: 10vh;
+    font-size: 19px;
+  }
+  .profile-form{
+    width: 77vh !important;
+    max-width: 77vh !important;
+    margin-left: 10vh;
+    height: 55vh !important;
+    padding: 8px;
+  }
+  .form-input-label{
+    font-size:15px;
+  font-weight: bold;
+  margin-left: 10px !important;
+  }
+  .form-input{
+    width: 200px !important;
+    max-width: 200px !important;
+    margin-left:10px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .main-content {
+   margin-top:-30vh;
+   margin-left: -10vh !important;
+  }
+  .main-title{
+    margin-left: 10vh;
+    font-size: 18px;
+  }
+  .profile-form{
+    width: 58vh !important;
+    max-width: 58vh !important;
+    margin-left: 10vh;
+    height: 50vh !important;
+    
+  }
+  .form-input-label{
+    font-size:15px;
+  font-weight: bold;
+  margin-left: 10px !important;
+  }
+  .form-input{
+    width: 170px !important;
+    width: 170px !important;
+    margin-left:10px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .main-content {
+    margin-top:-30vh;
+    padding:10px;
+   }
+   .main-title{
+     margin-left: 10vh;
+     font-size: 18px;
+   }
+   .profile-form{
+     width: 50vh !important;
+     width: 50vh !important;
+     margin-left: 10vh;
+     height: 50vh !important;
+     
+   }
+   .form-input-label{
+     font-size:12px;
+   font-weight: bold;
+   margin-left: 10px !important;
+   }
+   .form-input-radio{
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 10px;
+  }
+   .form-input{
+     width: 170px !important;
+     width: 170px !important;
+     margin-left:10px;
+   }
+}

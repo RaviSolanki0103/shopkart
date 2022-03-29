@@ -1,5 +1,4 @@
 import React, {  useState } from "react";
-import validator from 'validator';
 // import isEmail from 'validator/lib/isEmail';
 import {  useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from "antd";
@@ -133,7 +132,8 @@ function LoginForm(props) {
             Or
             <Button className="reg-btn" onClick={()=>onRegister()}> Create an account</Button>
         </Form.Item>
-    </Form>);
+    </Form>
+    );
 }
 
 export default LoginForm;
