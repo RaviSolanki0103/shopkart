@@ -9,7 +9,7 @@ import Cart from "../screens/Cart";
 import Wishlist from "../screens/Wishlist";
 import Profilescreen from "../screens/Profilescreen";
 import ManageAddress from "../screens/ManageAddress";
-
+import AddProduct from "../screens/AddProduct";
 
 function Routing() {
   return (
@@ -23,8 +23,11 @@ function Routing() {
         <Route exact path="/wishlist" element={<Wishlist />} />
         <Route exact path="/order-track" element={<OrderTrack />} />
         <Route exact path="/profile" element={<Profilescreen />} />
+        <Route exact path="/address" element={<ManageAddress />} />
+        <Route exact path="/product-category/:id" element={<Category />} />
+        <Route exact path="/product/:id" element={<SpecificProduct />} />
+        <Route exact path="/addproduct" element={<AddProduct />} />
         <Route exact path="*" element={<Homepage />} />
-       <Route exact path="/address" element={<ManageAddress/>} />
       </Routes>
     </div>
   );

@@ -3,157 +3,138 @@ import {
   ShoppingCartOutlined,
   ThunderboltFilled,
 } from "@ant-design/icons";
-import { Button, Card, Descriptions, Image } from "antd";
-import React, { useState } from "react";
+import { Button, Card } from "antd";
+import React, { useEffect, useState } from "react";
 import "./productpage.css";
-import img1 from "../../assets/kidn.png";
-
-const details = [
-  {
-    id: 1,
-    "pro-name": "Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)",
-    "pro-color": "Red",
-    "pro-size": "M",
-    Type: "Top-Wear",
-    offer: "null",
-  },
-];
-
-const mydata = Object.keys(details[0]);
+import { BASEURL } from "../../utils/config";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function ProductPage() {
+  const param = useParams();
   const [status, setStatus] = useState(true);
+  const [sizeToggle, setsizeToggle] = useState(false);
+  const [sizeValue, setSizeValue] = useState("");
+  const [colorValue, setColorValue] = useState("");
+  const [productData, setproductData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/getallproducts")
+      .then((res) => {
+        setproductData(res.data.data);
+      })
+      .then((err) => {
+        err && console.log(err, "SHOW PRODUCT ERROR");
+      });
+  }, []);
+
   return (
     <div className="outer-div">
-      {/* <div className="specific-product">
-        <div className="left-div">
-          <div className="img-div">
-            <img
-              className="img-class"
-              preview={false}
-              width={600}
-              src={img1}
-              alt=""
-            />
-          </div>
-          <div className="btn-div">
-            <div className="inner-btn-div">
-              <button className="cart-btn">
-                <ShoppingCartOutlined /> Add to cart
-              </button>
-              <button className="buy-btn">
-                <ThunderboltFilled /> Buy now
-              </button>
-            </div>
-          </div>
-          <div>
-            {status ? (
-              <button
-                className="wishlist-btn-sp"
-                onClick={() => setStatus(!status)}
-              >
-                <HeartFilled style={{ color: "#cccccc" }} />
-              </button>
-            ) : (
-              <button
-                className="wishlist-btn-sp"
-                onClick={() => setStatus(!status)}
-              >
-                <HeartFilled style={{ color: "hotpink" }} />
-              </button>
-            )}
-          </div>
-        </div>
-        <div className="details">
-          <div>
-            <h4>Slim Boy Grey Jeans</h4>
-          </div>
-          <div>
-            <h3>399</h3>
-          </div>
-          <div className="pro-detail">
-            <h2>PRODUCT DETAILS</h2>
-          </div>
-          <Descriptions style={{}}>
-            {mydata.map((x, key) => {
-              return (
-                <Descriptions.Item key={key} label={x} span={3}>
-                  data
-                </Descriptions.Item>
-              );
-            })}
-          </Descriptions>
-          <div className="pro-detail">
-            <h2>Ratings and Reviews</h2>
-          </div>
-          <Descriptions style={{}}>
-            {mydata.map((x, key) => {
-              return (
-                <Descriptions.Item key={key} label={x} span={3}>
-                  data
-                </Descriptions.Item>
-              );
-            })}
-          </Descriptions>
-        </div> */}
-
-      <Card
-        className="inner-card-sp"
-        hoverable
-        cover={<img className="img-sp" alt="example" src={img1} />}
-      >
-        
-        <div className="action-btn">
-          <Button style={{ backgroundColor: "#ff9f00", color: "#fff", width:"100%", height:"100%" }}>
-            <ShoppingCartOutlined />
-            ADD TO CART
-          </Button>
-          <Button style={{ backgroundColor: "#fb641b", color: "#fff", width:"100%", height:"100%" }}>
-            <ThunderboltFilled />
-            BUY NOW
-          </Button>
-        </div>
-        {status ? (
-          <button
-            className="wishlist-btn-sp"
-            onClick={() => setStatus(!status)}
-          >
-            <HeartFilled style={{ color: "#cccccc" }} />
-          </button>
-        ) : (
-          <button
-            className="wishlist-btn-sp"
-            onClick={() => setStatus(!status)}
-          >
-            <HeartFilled style={{ color: "hotpink" }} />
-          </button>
-        )}
-      </Card>
+      {productData.map((x, key) => {
+        return (
+          param.id === x._id && (
+            <Card
+              className="inner-card-sp"
+              hoverable
+              key={key}
+              cover={
+                <img
+                  className="img-sp"
+                  alt="example"
+                  src={`${BASEURL}/uploads/${x.product_img}`}
+                />
+              }
+            >
+              <div className="action-btn">
+                <button>
+                  <ShoppingCartOutlined />
+                  ADD TO CART
+                </button>
+                <button>
+                  <ThunderboltFilled />
+                  BUY NOW
+                </button>
+              </div>
+              {status ? (
+                <button
+                  className="wishlist-btn-sp"
+                  onClick={() => setStatus(!status)}
+                >
+                  <HeartFilled style={{ color: "#cccccc" }} />
+                </button>
+              ) : (
+                <button
+                  className="wishlist-btn-sp"
+                  onClick={() => setStatus(!status)}
+                >
+                  <HeartFilled style={{ color: "hotpink" }} />
+                </button>
+              )}
+            </Card>
+          )
+        );
+      })}
       <div className="right-div">
         <div className="inner-right-div">
-          <h3>Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)</h3>
-          <h2>₹299</h2>
-          <div>
-            <h2>Product Details</h2>
-            <Descriptions style={{}}>
-              {details.map((x, key) => {
-                console.log(x, "x");
-                const fdata = mydata[x.id - 1];
-                return (
-                  <Descriptions.Item
-                    key={key}
-                    label={mydata[x.id - 1]}
-                    span={3}
-                  >
-                    {fdata}
-                  </Descriptions.Item>
-                );
-              })}
-            </Descriptions>
-          </div>
+          {productData.map((x, key) => {
+            console.log(x);
+            return (
+              param.id === x._id && (
+                <div key={key} className="full-width">
+                  <h3 style={{ fontSize: "1.5rem" }}>{x.name}</h3>
+                  <h2 style={{ fontSize: "2.5rem" }}>₹{x.price}</h2>
+                  <h2>{x.description}</h2>
+                  <div className="col-siz">
+                    <p>Select Color</p>
+                    <div className="color">
+                      {x.color.map((sel_col) => {
+                        return (
+                          <button
+                            className={
+                              colorValue === sel_col
+                                ? "select-color-btn2"
+                                : "select-color-btn"
+                            }
+                            onClick={() => {
+                              setsizeToggle(!sizeToggle);
+                              setColorValue(sel_col);
+                            }}
+                          >
+                            {sel_col}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="col-siz">
+                    <p>Select Size</p>
+                    <div className="size">
+                      {x.size.map((sel_size) => {
+                        return (
+                          <button
+                            className={
+                              sizeValue === sel_size
+                                ? "select-size-btn2"
+                                : "select-size-btn"
+                            }
+                            onClick={() => {
+                              setsizeToggle(!sizeToggle);
+                              setSizeValue(sel_size);
+                            }}
+                          >
+                            {sel_size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )
+            );
+          })}
         </div>
       </div>
-      {/* </div> */}
     </div>
   );
 }

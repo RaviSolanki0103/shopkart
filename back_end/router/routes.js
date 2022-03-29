@@ -119,4 +119,5 @@ router.delete("/cart", (req, res) => {
   });
 });
 
+router.get("/getallproducts", middleware, controller.product.getAllProduct);
 module.exports = router;

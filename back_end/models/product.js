@@ -26,9 +26,19 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter seller"],
   },
+<<<<<<< HEAD
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
+=======
+  color: {
+    type: Array,
+    required: [true, "Please enter Colors"],
+  },
+  size: {
+    type: Array,
+    required: [true, "Please enter Size"],
+>>>>>>> df1120ac0fa6d469220ca6390067c87e601090e4
   },
   stock: {
     type: Number,
