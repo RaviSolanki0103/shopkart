@@ -12,9 +12,12 @@ function LoginForm(props) {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const loginuser = async(e) =>{
+
+    const loginuser = (e) =>{
         e.preventDefault();
+        console.log(email + " " + password + " " );
     }
+
     // const loginuser = async (e) => {
         // const form = this.formRef.current;
         // if (!form.checkValidity()) {
@@ -89,7 +92,8 @@ function LoginForm(props) {
             value={password}
             id="password"
             autoComplete="off"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)
+            }
             rules={[
                 {
                     required: true,
