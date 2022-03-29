@@ -1,7 +1,5 @@
 import { Button, Card, Checkbox, Collapse, Layout } from "antd";
 import React, { useEffect, useState } from "react";
-import { Number } from "./data";
-import img1 from "../../assets/men-tshirt.png";
 import "./product-listing.css";
 import { HeartFilled } from "@ant-design/icons";
 import axios from "axios";
@@ -23,23 +21,23 @@ function ProductListing() {
 
   useEffect(() => {
     axios
-      .get("/addproduct")
+      .get("/api/getallproducts")
       .then((res) => {
         let menarray = [];
         let womenarray = [];
         let kidarray = [];
-        let arrlen = res.data.length;
+        let arrlen = res.data.data.length;
         if (arrlen > 0) {
-          for (let name of res.data) {
-            if (name.category === "men") {
+          for (let name of res.data.data) {
+            if (name.category.name === "men") {
               var c = name;
               menarray.push(c);
             }
-            if (name.category === "women") {
+            if (name.category.name === "women") {
               var d = name;
               womenarray.push(d);
             }
-            if (name.category === "kids") {
+            if (name.category.name === "kids") {
               var e = name;
               kidarray.push(e);
             }
@@ -131,7 +129,7 @@ function ProductListing() {
                       />
                     }
                     onClick={() => {
-                      navigate(`/product/${x._id}`)
+                      navigate(`/product/${x._id}`);
                     }}
                   >
                     {status ? (

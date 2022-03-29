@@ -4,9 +4,10 @@ p {
     margin-bottom: 0.7rem !important;
 }
 
-.img-sp{
+.img-sp {
     object-fit: fill !important;
 }
+
 .outer-div {
     display: flex;
     justify-content: space-evenly;
@@ -23,7 +24,7 @@ p {
 
 .inner-card-sp {
     width: 30rem;
-    height: 40rem;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -34,6 +35,8 @@ p {
 
 .right-div {
     width: 50%;
+    display: flex;
+    justify-content: center;
 }
 
 .select-color-btn {
@@ -79,24 +82,39 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 50%;
+    width: 80%;
 }
 
 .size {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 50%;
+    width: 80%;
 }
 
 .inner-right-div {
-    width: 100%;
+    width: 90%;
+
 
 }
 
 .action-btn {
+    display: flex;
     width: 100%;
     height: 100%;
+}
+
+.action-btn button {
+    background-color: #ff9f00;
+    color: #fff;
+    width: 100%;
+    height: 4rem;
+    border: none;
+}
+
+.action-btn button:nth-child(2) {
+
+    background-color: rgb(255, 88, 0);
 }
 
 .wishlist-btn-sp {
@@ -124,6 +142,10 @@ h3 {
     .wishlist-btn-sp {
         top: -29rem;
     }
+
+    .size, .color {
+        width: 100%;
+    }
 }
 
 
@@ -131,6 +153,27 @@ h3 {
     .wishlist-btn-sp {
         top: -23rem;
         transform: scale(2);
+    }
+
+    .outer-div {
+        flex-direction: column;
+    }
+
+    .inner-card-sp {
+        width: 100%;
+        height: 100%;
+    }
+
+    .color, .size {
+        width: 100%;
+    }
+
+    .right-div {
+        width: 100%;
+    }
+
+    .col-siz {
+        width: 70%;
     }
 }
 
@@ -152,13 +195,53 @@ h3 {
 
     .wishlist-btn-sp {
         top: -30rem;
+    }
 
+    .action-btn {
+        flex-direction: column;
+    }
+
+    .action-btn button {
+        height: 3rem;
+    }
+
+    .color, .size {
+        width: 100%;
+
+    }
+
+    .select-color-btn {
+        width: 4.5rem;
+
+    }
+
+    .right-div {
+        width: 100%;
+    }
+
+    .col-siz {
+        width: 100%;
+    }
+
+    .inner-right-div {
+        display: flex;
+        justify-content: center;
+    }
+
+    .full-width {
+        width: 80%;
     }
 }
 
 @media only screen and (max-width: 375px) {
     .wishlist-btn-sp {
         top: -27rem;
+    }
+    .select-size-btn{
+        transform: scale(0.9);
+    }
+    .select-color-btn{
+        transform: scale(0.9);
     }
 }
 

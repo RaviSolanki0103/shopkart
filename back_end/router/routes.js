@@ -30,5 +30,5 @@ router.get(
   middleware,
   controller.product.getCategoryProduct
 );
-
+router.get("/getallproducts", middleware, controller.product.getAllProduct);
 module.exports = router;

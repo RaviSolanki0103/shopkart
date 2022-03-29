@@ -20,9 +20,9 @@ function ProductPage() {
 
   useEffect(() => {
     axios
-      .get("/addproduct")
+      .get("/api/getallproducts")
       .then((res) => {
-        setproductData(res.data);
+        setproductData(res.data.data);
       })
       .then((err) => {
         err && console.log(err, "SHOW PRODUCT ERROR");
@@ -47,28 +47,14 @@ function ProductPage() {
               }
             >
               <div className="action-btn">
-                <Button
-                  style={{
-                    backgroundColor: "#ff9f00",
-                    color: "#fff",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                >
+                <button>
                   <ShoppingCartOutlined />
                   ADD TO CART
-                </Button>
-                <Button
-                  style={{
-                    backgroundColor: "#fb641b",
-                    color: "#fff",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                >
+                </button>
+                <button>
                   <ThunderboltFilled />
                   BUY NOW
-                </Button>
+                </button>
               </div>
               {status ? (
                 <button
@@ -95,7 +81,7 @@ function ProductPage() {
             console.log(x);
             return (
               param.id === x._id && (
-                <div key={key}>
+                <div key={key} className="full-width">
                   <h3 style={{ fontSize: "1.5rem" }}>{x.name}</h3>
                   <h2 style={{ fontSize: "2.5rem" }}>₹{x.price}</h2>
                   <h2>{x.description}</h2>

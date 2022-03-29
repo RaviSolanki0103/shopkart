@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Select } from "antd";
 
 const Product = () => {
   const [newProduct, setNewProduct] = useState({
@@ -13,14 +12,32 @@ const Product = () => {
     color: [],
     size: [],
     category: "",
-    photo: "",
+    product_img: "",
   });
   const [item, setItem] = useState("");
   const [data, setData] = useState([]);
   const [sizeval, setsizeVal] = useState("");
   const [sizedata, setsizeData] = useState([]);
+  const [cat, setCat] = useState([]);
+  const [toggle, settoggle] = useState(false);
 
   console.log(item, data);
+
+  setTimeout(function () {
+    settoggle(true);
+  }, 2000);
+
+  useEffect(() => {
+    axios
+      .get("/api/categories")
+      .then((res) => {
+        setCat(res.data.data);
+        console.log(res.data.data, "KOKO");
+      })
+      .catch((err) => {
+        console.log(err, "SHOW PRODUCT ERROR");
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,10 +51,10 @@ const Product = () => {
     formData.append("color", newProduct.color);
     formData.append("size", newProduct.size);
     formData.append("category", newProduct.category);
-    formData.append("photo", newProduct.photo);
-
+    formData.append("product_img", newProduct.product_img);
+    console.log("formData", JSON.stringify(formData));
     axios
-      .post("/addproduct", formData)
+      .post("/api/products", formData)
       .then((res) => {
         console.log(res);
       })
@@ -51,13 +68,13 @@ const Product = () => {
   };
 
   const handlePhoto = (e) => {
-    setNewProduct({ ...newProduct, photo: e.target.files[0] });
+    setNewProduct({ ...newProduct, product_img: e.target.files[0] });
   };
 
   const handleCategory = (e) => {
     setNewProduct({ ...newProduct, category: e.target.value });
   };
-  console.log(newProduct, "IHIH");
+  // console.log(newProduct, "IHIH");
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <form
@@ -115,9 +132,15 @@ const Product = () => {
           onChange={handleCategory}
         >
           <option value="">Select one</option>
-          <option value="men">Men</option>
-          <option value="women">Women</option>
-          <option value="kids">Kids</option>
+          {toggle
+            ? cat.map((x, key) => {
+                return (
+                  <option key={key} value={x._id}>
+                    {x.name}
+                  </option>
+                );
+              })
+            : "Loading..."}
         </select>
 
         <div>
@@ -171,7 +194,7 @@ const Product = () => {
         </div>
         <div>
           <button
-          type="button"
+            type="button"
             onClick={() => {
               setNewProduct({ ...newProduct, color: data });
             }}
@@ -179,7 +202,7 @@ const Product = () => {
             Finalize Colors
           </button>
           <button
-          type="button"
+            type="button"
             onClick={() => {
               setNewProduct({ ...newProduct, size: sizedata });
             }}
@@ -191,7 +214,7 @@ const Product = () => {
         <input
           type="file"
           accept=".png, .jpg, .jpeg"
-          name="photo"
+          name="product_img"
           onChange={handlePhoto}
         />
 
