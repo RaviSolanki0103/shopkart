@@ -16,15 +16,15 @@ exports.getOrder = async (req, res, next) => {
   const _limit = req.query._limit || 5;
   const _status = req.query._status || null;
   const _name = req.query._name || "";
-  // const userId = req.id;
-
+  const user = req.userId;
+  console.log(user);
   const options = {
     page: _page,
     limit: _limit,
   };
 
   let searchPattern = {
-    // userId:mongoose.Schema.Types.ObjectId(userId)
+    user: user,
   };
   queryPattern = [];
 
@@ -142,11 +142,11 @@ exports.addOrder = async (req, res, next) => {
     ORDER_STATUS[
       Math.round(Math.random(0, orderStatusLength) * orderStatusLength)
     ];
-
   Order.create({
     products: req.body,
     total_price: totalPrice,
     status,
+    user: req.userId,
   })
     .then((result) =>
       responseData({

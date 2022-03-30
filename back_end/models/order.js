@@ -36,7 +36,7 @@ const orderSchema = mongoose.Schema(
       enum: ORDER_STATUS,
       default: "Ordered",
     },
-    user_id: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
