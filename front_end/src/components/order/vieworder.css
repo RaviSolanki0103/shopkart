@@ -27,6 +27,10 @@ p {
   margin: 10px 0;
 }
 
+.order-product-name {
+  text-align: unset;
+}
+
 .order-pagination {
   display: flex;
   justify-content: center;
@@ -36,6 +40,11 @@ p {
 
 .order-pagination ul li {
   margin-right: 0;
+}
+
+.order-filter-checkbox-group {
+  display: flex;
+  flex-direction: column;
 }
 
 @media only screen and (max-width: 768px) {

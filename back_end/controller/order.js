@@ -8,28 +8,29 @@ const responseData = require("../helper/response");
 const ORDER_STATUS = require("../helper/reusabledata");
 const mongoose = require("mongoose");
 const Order = require("../models/order");
-const { SUCCESS, BAD_REQUEST, CREATED } = require("../config/statuscode");
+
+const { SUCCESS, BAD_REQUEST, CREATED, NOT_FOUND } = require("../config/statuscode");
 
 // get orders
 exports.getOrder = async (req, res, next) => {
   const _page = req.query._page || 1;
-  const _limit = req.query._limit || 5;
+  const _limit = req.query._limit || 2;
   const _status = req.query._status || null;
   const _name = req.query._name || "";
-  const user = req.userId;
-  console.log(user);
+  const userId = req.userId;
+  // console.log(userId);
   const options = {
     page: _page,
     limit: _limit,
   };
 
   let searchPattern = {
-    user: user,
+    user: mongoose.Types.ObjectId(userId),
   };
   queryPattern = [];
 
   if (_status && _status !== "") {
-    searchPattern["status"] = _status;
+    searchPattern["status"] = {$in: _status};
   }
 
   queryPattern.push({ $match: searchPattern });
@@ -97,7 +98,7 @@ exports.getOrder = async (req, res, next) => {
       } else {
         responseData({
           res,
-          status: SUCCESS,
+          status: NOT_FOUND,
           message: DATA_NOT_FOUND,
         });
       }
