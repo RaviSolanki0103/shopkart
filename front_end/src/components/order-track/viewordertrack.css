@@ -1,1 +1,7 @@
+.order-track-user-info {
+  padding: 20px;
+}
 
+.order-track-user-info .ant-card-body {
+  background-color: #ffffff;
+}

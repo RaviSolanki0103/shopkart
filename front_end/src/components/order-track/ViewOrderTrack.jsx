@@ -27,7 +27,11 @@ const ViewOrderTrack = () => {
 
   return (
     <div className="order-track">
-      <Card title="Delivery Address" bordered={true}>
+      <Card
+        title="Delivery Address"
+        className="order-track-user-info"
+        bordered={true}
+      >
         <Descriptions title="User Info">
           <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
           <Descriptions.Item label="Telephone">1810000000</Descriptions.Item>
