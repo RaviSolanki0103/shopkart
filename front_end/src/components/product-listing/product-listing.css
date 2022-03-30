@@ -39,7 +39,7 @@ h2 {
 
 .space_data {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
@@ -171,6 +171,7 @@ h2 {
   .wishlist-btn-cat {
     top: -20rem !important;
   }
+
   .img {
     height: 20rem !important;
   }

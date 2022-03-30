@@ -1,5 +1,8 @@
 const { default: mongoose } = require("mongoose");
+const mongoos = require("mongoose");
+
 const mongoosePaginate = require("mongoose-paginate-v2");
+
 const productSchema = mongoose.Schema({
   name: {
     type: String,
@@ -25,7 +28,14 @@ const productSchema = mongoose.Schema({
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
+    ref: "Category"},
+  color: {
+    type: Array,
+    required: [true, "Please enter Colors"],
+  },
+  size: {
+    type: Array,
+    required: [true, "Please enter Size"],
   },
   stock: {
     type: Number,

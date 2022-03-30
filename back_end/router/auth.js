@@ -6,7 +6,9 @@ const cookieParser = require("cookie-parser");
 // const jwt = require("jsonwebtoken");
 
 require("../db/conn");
-const User = require("../models/user");
+const User = require("../model/userSchema");
+const Wishlist =require("../models/wishlist");
+const Cart_item = require("../models/cart");
 const authenticate = require("../middleware/authenticate");
 const { createProduct } = require("../middleware/productController");
 
@@ -188,5 +190,81 @@ router.get("/addproduct", async(req, res) => {
     res.status(500).json(error);
   }
 });
+
+
+//  wishlist ------------------------------------------------------
+
+router.post('/wishlist',async (req ,res) => {
+  try {
+           const { user_id,product_id } = req.body;
+           const wishlist_item = new Wishlist({ user_id ,product_id });
+           const add_wishlist= await wishlist_item.save();
+
+           if (add_wishlist) {
+            res.status(201).json({ message: "add wishlist_item successfuly" });
+          } else {
+            res.status(500).json({ message: "faild" });
+          }
+
+  }catch(err){
+      console.log(err);
+  }
+})
+
+
+
+router.get('/wishlist', (req, res) => {
+  Wishlist.find({}, (err, alldata) => {
+  console.log(alldata);
+    res.send(alldata)
+  // const data= db.Wishlist.find();
+  // console.log(data);
+})
+})
+
+
+router.delete("/wishlist", (req, res) => {
+  Wishlist.deleteOne({product_id: '111' }, function (err) {
+    if(err) console.log(err);
+    console.log("Successful deletion");
+  });
+});
+
+// cart -------------------------------------
+
+router.get("/cart",(req,res)=>{
+  Cart_item.find({}, (err, alldata) => {
+     console.log(alldata);
+       res.send(alldata)
+ })
+ })
+ 
+ 
+ router.post("/cart",(req,res)=>{
+   try {
+     const {  products,total_price,user_id } = req.body;
+     const cart_item = new Cart_item({  products,total_price,user_id });
+     const add_to_cart=  cart_item.save();
+ 
+     if (add_to_cart) {
+      res.status(201).json({ message: "add item successfuly" });
+    } else {
+      res.status(500).json({ message: "faild" });
+    }
+ 
+ }catch(err){
+ console.log(err);
+ }
+ })
+ 
+ 
+ 
+ router.delete("/cart", (req, res) => {
+   Cart_item.deleteOne({user_id: '5' }, function (err) {
+     if(err) console.log(err);
+     console.log("Successful deletion");
+   });
+ });
+ 
 
 module.exports = router;
