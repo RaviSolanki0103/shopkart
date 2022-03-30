@@ -15,18 +15,18 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  work: {
-    type: String,
-    required: true,
-  },
+  // work: {
+  //   type: String,
+  //   required: true,
+  // },
   password: {
     type: String,
     required: true,
   },
-  cpassword: {
-    type: String,
-    required: true,
-  },
+  // cpassword: {
+  //   type: String,
+  //   required: true,
+  // },
   tokens: [
     {
       token: {
@@ -65,6 +65,6 @@ userSchema.methods.generateAuthToken = async function() {
    }
 }
 
-const User = mongoose.model("USER", userSchema); // USER is collection name in database
+const User = mongoose.model("USER", userSchema); // User is collection name in database
 
 module.exports = User;

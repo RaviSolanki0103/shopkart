@@ -1,0 +1,190 @@
+.cart-left-side-container {
+  /* border: 1px solid black; */
+  width: 100%;
+  background-color: #f0f2f5;
+}
+.Main-container_left_cart{
+  border: 1px solid black;
+  margin-top: 10px;
+  padding-top: 10px;
+  background-color: #f0f2f5;
+}
+.cart-left-card {
+  width: auto;
+  height: auto;
+  /* border: 2px solid red; */
+}
+.cart-img-detail-container {
+  display: flex;
+  justify-content: space-between;
+}
+.cart-img {
+  height: auto;
+  width: 20%;
+  /* background-image: url(../../assets/Shoes.jpg); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.cart-detail {
+  width: 80%;
+  padding: auto;
+}
+.cart-detail p {
+  color: #212121;
+}
+.cart-price {
+  font-size: larger;
+  font-weight: bold;
+}
+.cart-buttons {
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  height: auto;
+  width: auto;
+  align-items: center;
+}
+.cart-button-inc-dec-group {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-add-remove {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-buttons h2 {
+  border: 1px solid black;
+  height: auto;
+  margin-top: 10px;
+  padding: 0px 25px;
+}
+.cart-minus-button {
+  font-size: 25px;
+  margin: 5px;
+}
+
+.cart-plus-button {
+  font-size: 25px;
+  margin: 5px;
+}
+.add-wishlist-buttton {
+  font-size: small;
+  margin-right: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.remove-button {
+  background-color: red;
+  border: 1px solid black;
+  font-size: larger;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+}
+.cart-placeoreder-button {
+  text-align: right;
+  font-size: 1rem;
+  padding-top: 10px;
+}
+.cart-placeoreder-button button {
+  background-color: #fb641b;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  margin: 15px;
+  font-weight: bold;
+  border: 1px solid black;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+}
+
+.remove-button {
+  height: 45px;
+}
+@media only screen and (max-width: 425px) {
+  .cart-buttons {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .cart-img {
+    height: auto;
+    width: 50%;
+    margin: 5px;
+    background-image: url(../../assets/Shoes.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .cart-button-inc-dec-group {
+    margin: auto;
+    width: auto;
+    height: auto;
+    justify-content: center;
+  }
+  .cart-button-inc-dec-group h2 {
+    padding: 0px 20px;
+  }
+  .cart-add-remove {
+    display: block;
+    margin: auto;
+    width: 200px;
+    height: auto;
+  }
+  .add-wishlist-buttton {
+    margin-bottom: 10px;
+  }
+  .cart-placeoreder-button {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .cart-add-remove {
+    width: 30%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .cart-add-remove {
+    width: 40%;
+  }
+  .cart-buttons {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 225px) {
+  .cart-buttons {
+    display: block;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .cart-button-inc-dec-group {
+    text-align: center;
+  }
+  .cart-img {
+    width: 90%;
+  }
+  .cart-add-remove {
+    text-align: center;
+  }
+  .cart-placeoreder-button {
+    text-align: center;
+  }
+  .add-wishlist-buttton {
+    width: 100%;
+  }
+  .remove-button {
+    width: 100%;
+    padding: 0px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .cart-placeoreder-button {
+    text-align: center;
+  }
+}

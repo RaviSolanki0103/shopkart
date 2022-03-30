@@ -5,13 +5,15 @@
     /* background-color:#2874f0 ; */
     background-color: white;
     color: white;
-    width: 100%;
-    height: auto;
-    margin: 5px;
+    width: 95%;
+    height:auto;
+    /* margin: auto; */
+    margin:10px auto 10px auto;
     padding: 5px;
     border: 1px solid black;
-    box-shadow: 5px 5px 15px black;
-    border-radius: 10px;
+    /* box-shadow: 5px 5px 15px black; */
+    /* border-radius: 10px; */
+    /* border-color: #2874f0; */
 }
 .card-img{
     /* background-image: url(../../assets/Shoes.jpg); */
@@ -35,21 +37,25 @@
 .card-button{
     text-align: end;
     width: auto;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     color: black;
     margin: 10px;
-    border-radius: 5px
+    border-radius: 5px;
+    
 
 }
+.card-button{
+    font-size:2rem;
+}
+
 .card-img-main{
     width: 100px;
     height: 100px;
-    margin:10px;
-    background-image: url(../../assets/Shoes.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    
 
+}
+.card-img-main img{
+   width: 65px;
 }
 
 

@@ -1,13 +1,16 @@
-.main-div {
-    background-color: rgb(230, 230, 223);
-    border-radius: 2%;
-    width: 50vh;
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .login-form-button {
     width: 100%;
+}
+.reg-btn{
+    border: none;
+    color: #1890ff;
+    cursor: pointer;
+   
+}
+
+.forgot-btn{
+    border: none;
+    color: #1890ff;
+    cursor: pointer;
 }

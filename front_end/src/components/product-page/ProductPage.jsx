@@ -3,105 +3,136 @@ import {
   ShoppingCartOutlined,
   ThunderboltFilled,
 } from "@ant-design/icons";
-import { Button, Card, Descriptions } from "antd";
-import React, { useState } from "react";
+import { Button, Card } from "antd";
+import React, { useEffect, useState } from "react";
 import "./productpage.css";
-import img1 from "../../assets/kidn.png";
-
-const details = [
-  {
-    id: 1,
-    "pro-name": "Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)",
-    "pro-color": "Red",
-    "pro-size": "M",
-    Type: "Top-Wear",
-    offer: "null",
-  },
-  {
-    id: 2,
-    "pro-name": "Girl New Dress (RED Pack of 1)",
-    "pro-color": "Green",
-    "pro-size": "L",
-    Type: "Top-Wear",
-  },
-  {
-    id: 3,
-    "pro-name": "Men New Jeans (Black Pack of 1)",
-    "pro-color": "Black",
-    "pro-size": "N",
-    Type: "Bottom-Wear",
-  },
-  {
-    id: 4,
-    "pro-name": "Men New Jeans (Black Pack of 1)",
-    "pro-color": "Black",
-    "pro-size": "S",
-    Type: "Bottom-Wear-o",
-  },
-  {
-    id: 5,
-    "pro-name": "Men New Jeans (Black Pack of 1)",
-    "pro-color": "Black",
-    "pro-size": "S",
-    Type: "Bottom-Wear-p",
-  },
-];
-const mydata = Object.keys(details[0]);
+import { BASEURL } from "../../utils/config";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function ProductPage() {
+  const param = useParams();
   const [status, setStatus] = useState(true);
+  const [sizeToggle, setsizeToggle] = useState(false);
+  const [sizeValue, setSizeValue] = useState("");
+  const [colorValue, setColorValue] = useState("");
+  const [productData, setproductData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/getallproducts")
+      .then((res) => {
+        setproductData(res.data.data);
+      })
+      .then((err) => {
+        err && console.log(err, "SHOW PRODUCT ERROR");
+      });
+  }, []);
+
   return (
-    <div className="specific-product">
-      <Card
-        className="inner-card-sp"
-        hoverable
-        style={{ minWidth: 320, height: "100%" }}
-        cover={<img className="img-sp" alt="example" src={img1} />}
-      >
-        {status ? (
-          <button
-            className="wishlist-btn-sp"
-            onClick={() => setStatus(!status)}
-          >
-            <HeartFilled style={{ color: "#cccccc" }} />
-          </button>
-        ) : (
-          <button
-            className="wishlist-btn-sp"
-            onClick={() => setStatus(!status)}
-          >
-            <HeartFilled style={{ color: "hotpink" }} />
-          </button>
-        )}
-        <div className="action-btn">
-          <Button style={{ backgroundColor: "#ff9f00", color: "#fff" }}>
-            <ShoppingCartOutlined />
-            ADD TO CART
-          </Button>
-          <Button style={{ backgroundColor: "#fb641b", color: "#fff" }}>
-            <ThunderboltFilled />
-            BUY NOW
-          </Button>
-        </div>
-      </Card>
-
+    <div className="outer-div">
+      {productData.map((x, key) => {
+        return (
+          param.id === x._id && (
+            <Card
+              className="inner-card-sp"
+              hoverable
+              key={key}
+              cover={
+                <img
+                  className="img-sp"
+                  alt="example"
+                  src={`${BASEURL}/uploads/${x.product_img}`}
+                />
+              }
+            >
+              <div className="action-btn">
+                <button>
+                  <ShoppingCartOutlined />
+                  ADD TO CART
+                </button>
+                <button>
+                  <ThunderboltFilled />
+                  BUY NOW
+                </button>
+              </div>
+              {status ? (
+                <button
+                  className="wishlist-btn-sp"
+                  onClick={() => setStatus(!status)}
+                >
+                  <HeartFilled style={{ color: "#cccccc" }} />
+                </button>
+              ) : (
+                <button
+                  className="wishlist-btn-sp"
+                  onClick={() => setStatus(!status)}
+                >
+                  <HeartFilled style={{ color: "hotpink" }} />
+                </button>
+              )}
+            </Card>
+          )
+        );
+      })}
       <div className="right-div">
-        <h3>Boys Festive & Party Shirt & Waistcoat Set (Green Pack of 1)</h3>
-        <h2>₹299</h2>
-
-        <div>
-          <h2>Product Details</h2>
-          <Descriptions style={{}}>
-            {details.map((x, key) => {
-              console.log(x, "x");
-              const fdata = mydata[x.id - 1];
-              return (
-                <Descriptions.Item key={key} label={mydata[x.id - 1]} span={3}>
-                  {fdata}
-                </Descriptions.Item>
-              );
-            })}
-          </Descriptions>
+        <div className="inner-right-div">
+          {productData.map((x, key) => {
+            console.log(x);
+            return (
+              param.id === x._id && (
+                <div key={key} className="full-width">
+                  <h3 style={{ fontSize: "1.5rem" }}>{x.name}</h3>
+                  <h2 style={{ fontSize: "2.5rem" }}>₹{x.price}</h2>
+                  <h2>{x.description}</h2>
+                  <div className="col-siz">
+                    <p>Select Color</p>
+                    <div className="color">
+                      {x.color.map((sel_col) => {
+                        return (
+                          <button
+                            className={
+                              colorValue === sel_col
+                                ? "select-color-btn2"
+                                : "select-color-btn"
+                            }
+                            onClick={() => {
+                              setsizeToggle(!sizeToggle);
+                              setColorValue(sel_col);
+                            }}
+                          >
+                            {sel_col}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="col-siz">
+                    <p>Select Size</p>
+                    <div className="size">
+                      {x.size.map((sel_size) => {
+                        return (
+                          <button
+                            className={
+                              sizeValue === sel_size
+                                ? "select-size-btn2"
+                                : "select-size-btn"
+                            }
+                            onClick={() => {
+                              setsizeToggle(!sizeToggle);
+                              setSizeValue(sel_size);
+                            }}
+                          >
+                            {sel_size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )
+            );
+          })}
         </div>
       </div>
     </div>

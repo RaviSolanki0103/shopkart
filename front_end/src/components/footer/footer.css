@@ -4,8 +4,6 @@
   width: 100%;
   height: auto;
   color: white;
-  /* position: absolute; */
-  /* bottom: auto; */
 }
 .footer-text-container {
   display: flex;
@@ -22,11 +20,14 @@
 }
 .footer-2 {
   border-left-style: solid;
-  /*  */
   width: 50%;
   height: auto;
   margin: auto;
-  padding: auto;
+  padding-left: 10px;
+  
+}
+.copy-right{
+  text-align: center;
 }
 @media only screen and (max-width: 450px) {
   .footer-container {

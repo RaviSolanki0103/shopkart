@@ -1,59 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "antd";
 import "./productcategory.css";
-import img1 from "../../assets/men-tshirt.png";
-import img2 from "../../assets/women-were.png";
-import img3 from "../../assets/kidn.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
+import axios from "axios";
+import { BASEURL } from "../../utils/config";
 
 function ProductCategory() {
   const [status, setStatus] = useState(true);
+  const [menData, setMenData] = useState([]);
+  const [womenData, setWomenData] = useState([]);
+  const [kidsData, setKidsData] = useState([]);
+  
+  const navigate = useNavigate();
 
-  const { Meta } = Card;
-  const number = [
-    {
-      men_title: "T-shirt",
-      men_price: "599",
-      women_title: "Dress-1",
-      women_price: "599",
-      kid_title: "Kurta-1",
-      kid_price: "699",
-    },
-    {
-      men_title: "T-shirt-2",
-      men_price: "549",
-      women_title: "Dress-2",
-      women_price: "599",
-      kid_title: "Kurta-2",
-      kid_price: "699",
-    },
-    {
-      men_title: "T-shirt-3",
-      men_price: "199",
-      women_title: "Dress-3",
-      women_price: "599",
-      kid_title: "Kurta-3",
-      kid_price: "699",
-    },
-    {
-      men_title: "T-shirt-4",
-      men_price: "399",
-      women_title: "Dress-4",
-      women_price: "599",
-      kid_title: "Kurta-4",
-      kid_price: "699",
-    },
-    {
-      men_title: "T-shirt-5",
-      men_price: "299",
-      women_title: "Dress-5",
-      women_price: "599",
-      kid_title: "Kurta-5",
-      kid_price: "699",
-    },
-  ];
-
+  useEffect(() => {
+    axios
+      .get("/api/getallproducts")
+      .then((res) => {
+        let menarray = [];
+        let womenarray = [];
+        let kidarray = [];
+        let arrlen = res.data.data.length;
+        if (arrlen > 0) {
+          for (let cat of res.data.data) {
+            if (cat.category.name === "men") {
+              var c = cat;
+              menarray.push(c);
+            }
+            if (cat.category.name === "women") {
+              var d = cat;
+              womenarray.push(d);
+            }
+            if (cat.category.name === "kids") {
+              var e = cat;
+              kidarray.push(e);
+            }
+          }
+          setMenData(menarray.slice(0, 5));
+          setWomenData(womenarray.slice(0, 5));
+          setKidsData(kidarray.slice(0, 5));
+        }
+      })
+      .catch((err) => {
+        console.log(err, "SHOW PRODUCT ERROR");
+      });
+  }, []);
+  addwishlist = () => {
+    axios.post(`/api/wishlist`);
+  };
   return (
     <div>
       <Card
@@ -61,22 +56,36 @@ function ProductCategory() {
         type="inner"
         title={<h2 style={{ fontSize: "2rem" }}>Men's Wear</h2>}
         extra={
-          <Link style={{ fontSize: "2rem" }} to="/product-category">
+          <Link style={{ fontSize: "2rem" }} to="/product-category/men">
             More
           </Link>
         }
       >
         <div className="div">
-          {number.map((x, key) => {
-            return (
-              <Card
-                key={key}
-                className="inner-card"
-                hoverable
-                style={{ width: 320, height: "100%" }}
-                cover={<img alt="example" className="img" src={img1} />}
-              >
+          {menData ? (
+            menData.map((x, key) => {
+              return (
                 <div>
+                  <Card
+                    key={key}
+                    className="inner-card"
+                    hoverable
+                    cover={
+                      <img
+                        alt="example"
+                        className="img"
+                        src={`${BASEURL}/uploads/${x.product_img}`}
+                      />
+                    }
+                    onClick={() => {
+                      navigate(`/product/${x._id}`);
+                    }}
+                  >
+                    <div>
+                      <p className="title">{x.name}</p>
+                      <p className="price">₹ {x.price}</p>
+                    </div>
+                  </Card>
                   {status ? (
                     <button
                       className="wishlist-btn-new"
@@ -92,12 +101,12 @@ function ProductCategory() {
                       <HeartFilled style={{ color: "hotpink" }} />
                     </button>
                   )}
-                  <Meta title={x.men_title} />
-                  price <Meta title={x.men_price} />
                 </div>
-              </Card>
-            );
-          })}
+              );
+            })
+          ) : (
+            <h2>Loading...</h2>
+          )}
         </div>
       </Card>
 
@@ -106,21 +115,35 @@ function ProductCategory() {
         type="inner"
         title={<h2 style={{ fontSize: "2rem" }}>Women's Wear</h2>}
         extra={
-          <Link style={{ fontSize: "2rem" }} to="#">
+          <Link style={{ fontSize: "2rem" }} to="/product-category/women">
             More
           </Link>
         }
       >
         <div className="div">
-          {number.map((x, key) => {
+          {womenData.map((x, key) => {
             return (
-              <Card
-                key={key}
-                className="inner-card"
-                hoverable
-                style={{ width: 320, height: "100%" }}
-                cover={<img className="img" alt="example" src={img2} />}
-              >
+              <div>
+                <Card
+                  key={key}
+                  className="inner-card"
+                  hoverable
+                  cover={
+                    <img
+                      className="img"
+                      alt="example"
+                      src={`${BASEURL}/uploads/${x.product_img}`}
+                    />
+                  }
+                  onClick={() => {
+                    navigate(`/product/${x._id}`);
+                  }}
+                >
+                  <div>
+                    <p className="title">{x.name}</p>
+                    <p className="price">₹ {x.price}</p>
+                  </div>
+                </Card>
                 {status ? (
                   <button
                     className="wishlist-btn-new"
@@ -136,10 +159,7 @@ function ProductCategory() {
                     <HeartFilled style={{ color: "hotpink" }} />
                   </button>
                 )}
-                <Meta title={x.women_title} />
-                price
-                <Meta title={x.women_price} />
-              </Card>
+              </div>
             );
           })}
         </div>
@@ -150,21 +170,35 @@ function ProductCategory() {
         type="inner"
         title={<h2 style={{ fontSize: "2rem" }}>Kid's Wear</h2>}
         extra={
-          <Link style={{ fontSize: "2rem" }} to="#">
+          <Link style={{ fontSize: "2rem" }} to="/product-category/kids">
             More
           </Link>
         }
       >
         <div className="div">
-          {number.map((x, key) => {
+          {kidsData.map((x, key) => {
             return (
-              <Card
-                key={key}
-                className="inner-card"
-                hoverable
-                style={{ width: 320, height: "100%" }}
-                cover={<img className="img" alt="example" src={img3} />}
-              >
+              <div>
+                <Card
+                  key={key}
+                  className="inner-card"
+                  hoverable
+                  cover={
+                    <img
+                      className="img"
+                      alt="example"
+                      src={`${BASEURL}/uploads/${x.product_img}`}
+                    />
+                  }
+                  onClick={() => {
+                    navigate(`/product/${x._id}`);
+                  }}
+                >
+                  <div>
+                    <p className="title">{x.name}</p>
+                    <p className="price">₹ {x.price}</p>
+                  </div>
+                </Card>
                 {status ? (
                   <button
                     className="wishlist-btn-new"
@@ -180,10 +214,7 @@ function ProductCategory() {
                     <HeartFilled style={{ color: "hotpink" }} />
                   </button>
                 )}
-                <Meta title={x.kid_title} />
-                Price
-                <Meta title={x.kid_price} />
-              </Card>
+              </div>
             );
           })}
         </div>
