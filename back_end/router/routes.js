@@ -9,7 +9,7 @@ const User = require("../models/userSchema");
 
 
 // registration routes
-router.post("/user", middleware, controller.user.registerUser);
+router.post("/user", controller.user.registerUser);
 router.get("/user", middleware, controller.user.getUserById);
 router.get("/loginUser", controller.user.loginUser);
 

@@ -46,7 +46,7 @@ function ProductCategory() {
         console.log(err, "SHOW PRODUCT ERROR");
       });
   }, []);
-  addwishlist = () => {
+  const addwishlist = () => {
     axios.post(`/api/wishlist`);
   };
   return (

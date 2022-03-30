@@ -28,7 +28,7 @@ function LoginForm(props) {
             dispatch(loginStatus(true))
         }).catch((error) => {
             console.log(error.message, error);
-            Toast({msg: error.message, success: false})
+            Toast({msg: "invalid login credentials", success: false})
         })
     }
 
