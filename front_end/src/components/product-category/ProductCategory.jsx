@@ -7,14 +7,41 @@ import axios from "axios";
 import { BASEURL } from "../../utils/config";
 
 function ProductCategory() {
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState("");
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
   const [kidsData, setKidsData] = useState([]);
-  
+  const [colorValue, setColorValue] = useState([]);
+  const [first, setfirst] = useState(false);
   const navigate = useNavigate();
+  const getwishlistdata = () => {
+    axios.get("/api/wishlist").then((res) => {
+      setColorValue(res.data);
+    });
+  };
+
+  const addwishlist = (item) => {
+    console.log("wishlist caleddddd");
+
+    axios({
+      method: "post",
+      url: "/api/wishlist",
+      data: {
+        product_id: `${item}`,
+        user_id: "6241b1880cbdba7cd682d941",
+      },
+    });
+  };
+  // delet
+  const delet = (item) => {
+    console.log("deledt caleddddd");
+
+    axios.delete(`/api/wishlist/${item}`).then((res) => {});
+  };
 
   useEffect(() => {
+    getwishlistdata();
+
     axios
       .get("/api/getallproducts")
       .then((res) => {
@@ -45,10 +72,24 @@ function ProductCategory() {
       .catch((err) => {
         console.log(err, "SHOW PRODUCT ERROR");
       });
-  }, []);
-  addwishlist = () => {
-    axios.post(`/api/wishlist`);
+  }, [first]);
+
+  const checker = (x) => {
+    if (colorValue.length == 0) {
+      addwishlist(x);
+    } else {
+      for (let i = 0; i < colorValue.length; i++) {
+        if (colorValue[i].product_id._id === x) {
+          delet(x);
+          break;
+        } else if (i == colorValue.length - 1) {
+          addwishlist(x);
+        } else {
+        }
+      }
+    }
   };
+
   return (
     <div>
       <Card
@@ -64,6 +105,7 @@ function ProductCategory() {
         <div className="div">
           {menData ? (
             menData.map((x, key) => {
+              console.log(x, "PPPPPPPPPPPPP");
               return (
                 <div>
                   <Card
@@ -86,21 +128,28 @@ function ProductCategory() {
                       <p className="price">₹ {x.price}</p>
                     </div>
                   </Card>
-                  {status ? (
+                  {
                     <button
                       className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
+                      onClick={() => {
+                        checker(x._id);
+
+                        setfirst(!first);
+                      }}
                     >
-                      <HeartFilled style={{ color: "#cccccc" }} />
+                      <HeartFilled
+                        className={
+                          colorValue.length == 0
+                            ? "redcolor"
+                            : colorValue.map((item) =>
+                                item.product_id._id == x._id
+                                  ? "greycolor"
+                                  : "redcolor"
+                              )
+                        }
+                      />
                     </button>
-                  ) : (
-                    <button
-                      className="wishlist-btn-new"
-                      onClick={() => setStatus(!status)}
-                    >
-                      <HeartFilled style={{ color: "hotpink" }} />
-                    </button>
-                  )}
+                  }
                 </div>
               );
             })
@@ -144,21 +193,28 @@ function ProductCategory() {
                     <p className="price">₹ {x.price}</p>
                   </div>
                 </Card>
-                {status ? (
+                {
                   <button
                     className="wishlist-btn-new"
-                    onClick={() => setStatus(!status)}
+                    onClick={() => {
+                      checker(x._id);
+
+                      setfirst(!first);
+                    }}
                   >
-                    <HeartFilled style={{ color: "#cccccc" }} />
+                    <HeartFilled
+                      className={
+                        colorValue.length == 0
+                          ? "redcolor"
+                          : colorValue.map((item) =>
+                              item.product_id._id == x._id
+                                ? "greycolor"
+                                : "redcolor"
+                            )
+                      }
+                    />
                   </button>
-                ) : (
-                  <button
-                    className="wishlist-btn-new"
-                    onClick={() => setStatus(!status)}
-                  >
-                    <HeartFilled style={{ color: "hotpink" }} />
-                  </button>
-                )}
+                }
               </div>
             );
           })}
@@ -199,21 +255,28 @@ function ProductCategory() {
                     <p className="price">₹ {x.price}</p>
                   </div>
                 </Card>
-                {status ? (
+                {
                   <button
                     className="wishlist-btn-new"
-                    onClick={() => setStatus(!status)}
+                    onClick={() => {
+                      checker(x._id);
+
+                      setfirst(!first);
+                    }}
                   >
-                    <HeartFilled style={{ color: "#cccccc" }} />
+                    <HeartFilled
+                      className={
+                        colorValue.length == 0
+                          ? "redcolor"
+                          : colorValue.map((item) =>
+                              item.product_id._id == x._id
+                                ? "greycolor"
+                                : "redcolor"
+                            )
+                      }
+                    />
                   </button>
-                ) : (
-                  <button
-                    className="wishlist-btn-new"
-                    onClick={() => setStatus(!status)}
-                  >
-                    <HeartFilled style={{ color: "hotpink" }} />
-                  </button>
-                )}
+                }
               </div>
             );
           })}

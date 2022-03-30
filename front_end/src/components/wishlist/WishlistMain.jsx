@@ -17,7 +17,7 @@ function WishlistMain() {
 
   const delet = (item) => {
 
-    console.log(item,"9r3/ab");
+    // console.log(item,"9r3/ab");
     axios.delete(`/api/wishlist/${item}`).then((res) => {
     
    });

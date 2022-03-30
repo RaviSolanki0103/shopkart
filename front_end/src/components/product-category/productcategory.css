@@ -40,7 +40,12 @@
     background: none;
     transform: scale(2);
 }
-
+.redcolor{
+    color: #cccccc !important;
+}
+.greycolor{
+    color: red !important;
+}
 
 @media only screen and (max-width: 1440px) {}
 
