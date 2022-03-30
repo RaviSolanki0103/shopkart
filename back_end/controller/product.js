@@ -25,8 +25,6 @@ exports.addProduct = async (req, res, next) => {
   await product
     .save()
     .then((result) => {
-      category.products.push(product);
-      category.save();
       return responseData({
         res,
         status: CREATED,

@@ -6,7 +6,8 @@ const upload = require("../config/multerconfig");
 
 // registration routes
 router.post("/user", middleware, controller.user.registerUser);
-
+router.get("/user", middleware, controller.user.getUserById);
+router.get("/loginUser", controller.user.loginUser);
 
 
 // order routes

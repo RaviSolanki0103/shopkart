@@ -16,25 +16,37 @@
 .Profile-card-link:hover{
   color:rgb(54, 11, 173);
 } */
+
+
+.profile-page-layout {
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
+}
+
+
+
 .main-content{
   float: center;
-  margin-top:-80vh;
-  margin-left:28vh;
+  /* margin-top:-80vh;
+  margin-left:28vh; */
 }
 .main-title {
       font-weight: bold;
       font-size:25px;
-      text-align: left;
-      margin-left: 60px;
+      /* text-align: left; */
+      display: flex;
+      justify-content: flex-start;
+      /* margin-left: 60px; */
 }
 
 .profile-form{
   text-align:left;
-  margin-left:50px;
+  /* margin-left:50px; */
   border: 1px solid rgba(71, 69, 69, 0.274);
   border-radius: 5px;
-  height: 50vh;
-  width:80vh;
+  
+  /* width:80vh; */
   padding: 15px;
   background-color:white;
 }
@@ -50,10 +62,10 @@
 .form-input{
   border-radius: 5px;
   background-color:rgba(235, 231, 226, 0.671);
-      width: 200px;
-      padding: 5px;
-      border:none;
-    margin-left:20px;
+  margin-left: 20px;
+  padding: 5px;
+  border:none;
+   
 }
 
 .form-input:focus{
@@ -83,19 +95,13 @@ input::-webkit-inner-spin-button {
 }
 
 @media only screen and (max-width: 768px) {
-  .main-content {
-   margin-top:-30vh;
-   margin-left: -10vh !important;
-  }
+ 
   .main-title{
-    margin-left: 10vh;
+    
     font-size: 19px;
   }
   .profile-form{
-    width: 77vh !important;
-    max-width: 77vh !important;
-    margin-left: 10vh;
-    height: 55vh !important;
+   
     padding: 8px;
   }
   .form-input-label{
@@ -108,23 +114,21 @@ input::-webkit-inner-spin-button {
     max-width: 200px !important;
     margin-left:10px;
   }
+
+  .profile-page-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-page-content {
+    width: 100% !important;
+  }
 }
 
 @media only screen and (max-width: 575px) {
-  .main-content {
-   margin-top:-30vh;
-   margin-left: -10vh !important;
-  }
+
   .main-title{
-    margin-left: 10vh;
     font-size: 18px;
-  }
-  .profile-form{
-    width: 58vh !important;
-    max-width: 58vh !important;
-    margin-left: 10vh;
-    height: 50vh !important;
-    
   }
   .form-input-label{
     font-size:15px;
@@ -133,25 +137,15 @@ input::-webkit-inner-spin-button {
   }
   .form-input{
     width: 170px !important;
-    width: 170px !important;
     margin-left:10px;
   }
 }
 @media only screen and (max-width: 425px) {
   .main-content {
-    margin-top:-30vh;
     padding:10px;
    }
    .main-title{
-     margin-left: 10vh;
      font-size: 18px;
-   }
-   .profile-form{
-     width: 50vh !important;
-     width: 50vh !important;
-     margin-left: 10vh;
-     height: 50vh !important;
-     
    }
    .form-input-label{
      font-size:12px;
@@ -165,7 +159,13 @@ input::-webkit-inner-spin-button {
   }
    .form-input{
      width: 170px !important;
-     width: 170px !important;
      margin-left:10px;
    }
+}
+
+
+@media only screen and (max-width: 375px) {
+  .form-input{
+    margin-bottom: 3%;
+  }
 }

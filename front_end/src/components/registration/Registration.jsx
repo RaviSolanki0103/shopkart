@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { Form, Input, Button } from "antd";
 import { UserOutlined, MobileOutlined, LockOutlined } from "@ant-design/icons";
 import axios from "../../utils/axios-default-baseurl";
 import "./registration.css";
 import { useDispatch } from "react-redux";
 import { openLogin } from "../../redux/actions";
+import Toast from "../../utils/Toast";
 // import { useSelector, useDispatch } from "react-redux";
 // import { openLogin } from "../../redux/actions";
 
 function Registration(props) {
-    const formRef = React.createRef();
     const navigate = useNavigate();
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
@@ -21,103 +20,45 @@ function Registration(props) {
     const [password, setPassword] = useState("");
     const [confirmpassword, setConfirmpassword] = useState("");
     const dispatch = useDispatch();
-    // const loginuser = async (e) => {
-    //     const form = this.formRef.current;
-    //     if (!form.checkValidity()) {
-    //         form.reportValidity()
-    //         return
-    //     }
-    //     e.preventDefault();
-    //     console.log("User responce", e);
-    //     const res = await fetch("/signin", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({ email, password }),
-    //     });
-    //     console.log("login Working", res);
-
-    //     const data = await res.json();
-    //     console.log("login data", data);
-
-    //     if (res.status === 400 || !data) {
-    //         window.alert("Invalid Details");
-    //         console.log("INHUSBCB");
-    //     } else {
-    //         window.alert("Login Successfull");
-
-    //         console.log("VALID");
-
-    //         navigate("/");
-    //     }
-    // };
 
     const onLogin = () => {
         props.changeFlag(0, "Login");
     }
 
     const createUser = async () => {
-        await axios.post('/user',{
+        await axios.post('/user', {
             fname, lname, email, phone, password
         }).then((res) => {
-            setFname(" ");
-            setLname(" ");
-            setEmail(" ");
-            setPhone(" ");
-            setPassword(" ");
-            setConfirmpassword(" ");
-            console.log(res);
+            Toast({msg: "User Registration Successfull", success: true})
+            // toast.success('', { autoClose: 3000 });
+            onLogin();
         }).catch((error) => {
             console.log(error);
         })
     }
-    
-    const onFinish = (values,e) => {
-        e.preventDefault();
-        console.log("Success:", values);
-        createUser();
-      };
-    
-      const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
-      };
 
-      toast.configure()
-      const registerUser = (e) =>{
-          console.log("Registering user");
-        e.preventDefault();
-        setFname(" ");
-        setLname(" ");
-        setEmail(" ");
-        setPhone(" ");
-        setPassword(" ");
-        setConfirmpassword(" ");
-        
-        toast.success('User Registration Successful', {autoClose:3000});
-        formRef.current.resetFields();
-        dispatch(openLogin(false))
-      }
-     
+    
+    const onFinish = (values) => {
+        createUser();
+    };
+
     return (
         <div>
             <div>
                 <Form
-                ref={formRef}
-                    id="registartionform"
                     method="post"
                     name="normal_registration"
                     className="registration-form"
-                    // onSubmit={registerUser}
-                    onFinishFailed={onFinishFailed}
+                    onFinish={onFinish}
                     initialValues={{
                         remember: true,
                     }}
                 >
-        
+
                     <Form.Item
                         name="fname"
                         autoComplete="off"
+                        // required
                         value={fname}
                         onChange={(e) => setFname(e.target.value)}
                         rules={[
@@ -130,11 +71,12 @@ function Registration(props) {
                         <Input
                             prefix={<UserOutlined className="site-form-item-icon" />}
                             placeholder="Enter Firstname"
+                        // required
                         />
                     </Form.Item>
 
                     <Form.Item
-                    
+
                         name="lname"
                         autoComplete="off"
                         value={lname}
@@ -186,7 +128,7 @@ function Registration(props) {
                         ]}
                     >
                         <Input
-                            prefix={<MobileOutlined  className="site-form-item-icon" />}
+                            prefix={<MobileOutlined className="site-form-item-icon" />}
                             type="number"
                             placeholder="Enter Mobile Number"
                         />
@@ -212,7 +154,7 @@ function Registration(props) {
 
                     <Form.Item
                         name="confirmpassword"
-                        value={password}
+                        value={confirmpassword}
                         autoComplete="off"
                         onChange={(e) => setConfirmpassword(e.target.value)}
                         rules={[
@@ -238,7 +180,7 @@ function Registration(props) {
                             id="login"
                             htmlType="submit"
                             className="registration-form-button"
-                            onClick={registerUser}
+                        // onClick={registerUser}
                         >
                             Register
                         </Button>

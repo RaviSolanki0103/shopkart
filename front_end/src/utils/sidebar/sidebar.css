@@ -1,5 +1,6 @@
 .Sidebar-page-layout {
-    min-height: 82.3vh;
+    min-height: 82.3vh;    
+    flex: unset;
 }
 
 .Sidebar-card{
@@ -22,6 +23,7 @@
     display: flex;
     flex-direction: column !important;
     width: 100%;
+    min-height: 0;
   }
   .Sidebar {
     margin: 10px 0;
@@ -31,6 +33,10 @@
   }
 }
 @media only screen and (max-width: 425px) {
+  .Sidebar-page-layout {
+    
+    min-height: 0;
+}
   .Sidebar {
     width: 95vw !important;
     max-width: 95vw !important;
@@ -40,6 +46,10 @@
 }
 
 @media only screen and (max-width: 375px) {
+  .Sidebar-page-layout {
+   
+    min-height: 0;
+}
   .Sidebar {
     width: 94vw !important;
     max-width: 94vw !important;
@@ -49,6 +59,10 @@
 }
 
 @media only screen and (max-width: 320px) {
+  .Sidebar-page-layout {
+    
+    min-height: 0;
+}
   .Sidebar {
     width: 94vw !important;
     max-width: 94vw !important;
