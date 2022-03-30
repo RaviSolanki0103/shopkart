@@ -10,7 +10,6 @@ function Profilescreen() {
     <div>
       <Navbar />
       <Container>
-        <Sidebar />
         <Profile />
       </Container>
       <Footer />

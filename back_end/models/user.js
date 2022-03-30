@@ -81,13 +81,15 @@ userSchema.pre("save", async function (next) {
 });
 
 // We are generating token
-userSchema.methods.generateAuthToken = async function () {
-  try {
-    let mytoken = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
-    localStorage.setItem("token", mytoken);
-  } catch (error) {
-    console.log(error);
-  }
-}
+// userSchema.methods.generateAuthToken = async function () {
+//   try {
+//     let mytoken = jwt.sign({ _id: this._id }, process.env.SECRET_KEY, {
+//       expiresIn: process.env.EXPIRE_TIME,
+//     });
+//     return mytoken;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 module.exports = mongoose.model("User", userSchema);

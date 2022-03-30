@@ -1,6 +1,5 @@
-import { OPEN_LOGIN, SEND_NUMBER_OF_ITEM } from "./action-types";
-import { SENDDATA_WISHLIST } from "./action-types";
-import {SEND_TOTALAMOUNT} from "./action-types";
+import { OPEN_LOGIN, LOGIN_TOKEN, LOGIN_STATUS, SEND_NUMBER_OF_ITEM, SENDDATA_WISHLIST, SEND_TOTALAMOUNT } from "./action-types";
+
 export const openLogin = (data) => {
   return {
     type: OPEN_LOGIN,
@@ -8,6 +7,19 @@ export const openLogin = (data) => {
   };
 };
 
+export const loginToken = (data) => {
+  return {
+    type: LOGIN_TOKEN,
+    payload: data,
+  }
+}
+
+export const loginStatus = (data) => {
+  return {
+    type: LOGIN_STATUS,
+    payload: data,
+  }
+}
 
 
 // ronak-------------------------------------
