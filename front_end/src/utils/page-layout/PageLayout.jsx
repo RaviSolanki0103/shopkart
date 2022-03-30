@@ -1,6 +1,6 @@
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/footer";
-import Container from "../Container/Container";
+import Container from "../container/Container";
 
 const PageLayout = (props) => {
   return (

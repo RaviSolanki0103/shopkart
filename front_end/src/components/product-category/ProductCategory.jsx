@@ -11,7 +11,7 @@ function ProductCategory() {
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
   const [kidsData, setKidsData] = useState([]);
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function ProductCategory() {
         console.log(err, "SHOW PRODUCT ERROR");
       });
   }, []);
-  addwishlist = () => {
+  const addwishlist = () => {
     axios.post(`/api/wishlist`);
   };
   return (
