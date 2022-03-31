@@ -1,5 +1,7 @@
 import React from 'react'
 import { Layout, Card } from "antd";
+import { useDispatch } from "react-redux";
+import { loginStatus, loginToken } from "../../redux/actions/index";
 import "./sidebar.css";
 import {
     PoweroffOutlined,
@@ -11,10 +13,8 @@ import {
 const { Sider } = Layout;
 
 function Sidebar() {
-     const ClickLogout = () => {
-         console.log("user logged out");
-         alert("Logout Successfully");
-     }
+    const dispatch = useDispatch();
+    
     return (
         <>
             <Layout className="Sidebar-page-layout">
@@ -34,7 +34,8 @@ function Sidebar() {
                         <a className="Sidebar-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
                     </Card>
                     <Card className="Sidebar-card">
-                        <a className="Sidebar-card-link" onClick={ClickLogout} href="/"><PoweroffOutlined /> Logout</a>
+                        <a className="Sidebar-card-link" href="/" onClick={() => {dispatch(loginStatus(false)); dispatch(loginToken(null))} }><PoweroffOutlined /> Logout</a>
+
                     </Card>
                 </Sider>
             </Layout>

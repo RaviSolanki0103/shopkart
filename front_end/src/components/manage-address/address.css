@@ -1,28 +1,18 @@
-.addresss-page-layout {
-  min-height: 82.3vh;
+.address-page-layout {
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
 }
 
-/* .sidebar{
-  height: 80vh
-} */
-.Address-card{
-  padding: 15px;
+.address-contentdiv{
+  float: center;
 }
 
-.Address-card-link{
-  color: #1890ff;
-  text-align: left;
-  display: block;
-  font-size: 20px;
-  background-color:white;
-}
-
-.Address-card-link:hover{
-  color:rgb(54, 11, 173);
-} 
 .card-title{
-    font-weight: bold;
-    font-size: 20px;
+  font-weight: bold;
+  font-size:20px;
+  display: flex;
+  justify-content: flex-start;
 }  
 .add-address{
   border: none;
@@ -34,21 +24,12 @@
     color: #1890ff;
     float: left;  
 }
-.address-contentdiv{
-  float: center;
-  margin-top:-80vh;
-  margin-left:32vh;
-}
 
 .address-div{
     border: 1px solid rgba(102, 98, 98, 0.294);
     text-align:left;
-    width:80vh;
-    height: 120px;
     padding:20px;
-    margin-top: 20px;
     background-color:white;
-   
 }
 
 .three-dots{
@@ -63,7 +44,7 @@
 
   .user-name{
     font-weight: bold;
-} 
+  } 
 
    .dropdown {
     background-color: rgb(183, 183, 207);
@@ -83,3 +64,43 @@
   }
  
   
+  @media only screen and (max-width: 768px) {
+ 
+    .card-title{
+      font-size: 20px;
+    }
+  
+    .address-page-layout {
+      display: flex;
+      flex-direction: column;
+    }
+    .address-div{
+      border: 1px solid rgba(102, 98, 98, 0.294);
+      text-align:left;
+      padding:15px;
+      background-color:white;
+  }
+    .address-contentdiv {
+      width: 100% !important;
+    }
+    .user-name{
+      font-size: 15px;
+    }
+
+    .user-details{
+      font-size:15px;
+    }
+  }
+  
+  @media only screen and (max-width: 425px) {
+     .card-title{
+       font-size: 18px;
+     }
+     .add-address{
+       font-size:13px;
+     }
+     .address-contentdiv {
+      width: 100% !important;
+      padding:10px
+    }
+    }

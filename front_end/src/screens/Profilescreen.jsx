@@ -9,8 +9,7 @@ function Profilescreen() {
     return (
         <div>
             <Navbar />
-            <Container>
-            <Sidebar />  
+            <Container> 
             <Profile />
             </Container>
         <Footer />

@@ -1,0 +1,75 @@
+const { DATA_INSERT_MESSAGE, DATA_INSERT_FAILD, INVALID_LOGIN, LOGIN_SUCCESS, INVALID_LOGIN_CREDENTIAL, DATA_FETCH_MESSAGE } = require("../config/responsemessage");
+const { CREATED, BAD_REQUEST, SUCCESS, NOT_FOUND } = require("../config/statuscode");
+const responseData = require("../helper/response");
+const User = require("../models/user");
+const jwt = require("jsonwebtoken")
+
+const bcrypt = require("bcryptjs");
+
+//registration user
+exports.registerUser = async (req, res, next) => {
+    await User.create(req.body).then((result) =>
+    responseData({
+      res,
+      status: CREATED,
+      message: DATA_INSERT_MESSAGE,
+      result,
+    })
+  )
+  .catch((err) => {
+    responseData({
+      res,
+      status: BAD_REQUEST,
+      message: DATA_INSERT_FAILD,
+      result: err,
+    });
+  });
+};
+
+//login user
+exports.loginUser = async (req, res, next) => {
+    const email = req.query.email;
+    const password = req.query.password;
+
+    const user = await User.findOne({email});
+    if(user) {
+      const isMatch = await bcrypt.compare(password, user.password);
+      if(isMatch) {
+        const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, {
+          expiresIn: process.env.EXPIRE_TIME,
+        });
+        responseData({
+          res,
+          status: SUCCESS,
+          message: LOGIN_SUCCESS,
+          result: {token},
+        });
+      } else {
+        responseData({
+          res,
+          status: BAD_REQUEST,
+          message: INVALID_LOGIN,
+        });
+      }
+    } else {
+      responseData({
+        res,
+        status: NOT_FOUND,
+        message: INVALID_LOGIN_CREDENTIAL,
+      });
+    }
+};
+
+exports.getUserById = async (req, res, next) => {
+  // console.log("user id: ",req.userId);
+  await User.findById(req.userId).then(result=>responseData({
+    res,
+    status: SUCCESS,
+    message: DATA_FETCH_MESSAGE,
+    result
+  })).catch(err=>  responseData({
+    res,
+    status: NOT_FOUND,
+    message: err.message,
+  }));
+}

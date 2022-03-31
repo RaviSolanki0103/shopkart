@@ -1,7 +1,6 @@
 .address-form{
     text-align:left;
     border: 1px solid rgba(71, 69, 69, 0.274);
-    width:80vh;
     padding: 20px;
     background-color:white;
   }
@@ -60,4 +59,31 @@
     background-color:#2d2ae996;
     border: 1px solid #4330a1;
     
+  }
+
+  @media only screen and (max-width: 768px) {
+    .address-form{
+      padding: 10px;
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    .address-form{
+      padding: 10px;
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    .address-form{
+      padding: 5px;
+    }
+  }
+
+  @media only screen and (max-width: 320px) {
+    .address-form{
+      padding: 2px;
+    }
+    .addform-input{
+     width: 60%;
+    }
   }

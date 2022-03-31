@@ -8,6 +8,12 @@ const Cart_item = require("../models/cart");
 const User = require("../models/userSchema");
 
 
+// registration routes
+router.post("/user", controller.user.registerUser);
+router.get("/user", middleware, controller.user.getUserById);
+router.get("/loginUser", controller.user.loginUser);
+
+
 // order routes
 router.get("/orders", middleware, controller.order.getOrder);
 router.get("/orders/:_id", middleware, controller.order.getSingleOrder);
