@@ -1,252 +1,254 @@
 p {
-    font-size: large;
-    font-size: large;
-    margin-bottom: 0.7rem !important;
+  font-size: large;
+  font-size: large;
+  margin-bottom: 0.7rem !important;
 }
 
 .img-sp {
-    object-fit: fill !important;
+  object-fit: fill !important;
 }
 
 .outer-div {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .ant-card-body {
-    padding: 0;
-    background: #F0F2F5;
+  padding: 0;
+  background: #f0f2f5;
 }
 
 .ant-card:hover {
-    transition: none !important;
+  transition: none !important;
 }
 
 .inner-card-sp {
-    width: 30rem;
-    height: 100%;
-    overflow: hidden;
+  width: 30rem;
+  height: 100%;
+  overflow: hidden;
 }
 
 .col-siz {
-    text-align: left;
-    margin-top: 2rem;
+  text-align: left;
+  margin-top: 2rem;
 }
 
 .right-div {
-    width: 50%;
-    display: flex;
-    justify-content: center;
+  width: 50%;
+  display: flex;
+  justify-content: center;
 }
 
 .select-color-btn {
-    width: 6rem;
-    height: 3rem;
-    font-size: large;
+  width: 6rem;
+  height: 3rem;
+  font-size: large;
 }
 
 .select-color-btn:hover {
-
-    color: #2874F0;
-    border: 2px solid #2874F0;
+  color: #2874f0;
+  border: 2px solid #2874f0;
 }
 
 .select-color-btn2 {
-    width: 6rem;
-    height: 3rem;
-    font-size: large;
-    color: #2874F0;
-    border: 2px solid #2874F0;
+  width: 6rem;
+  height: 3rem;
+  font-size: large;
+  color: #2874f0;
+  border: 2px solid #2874f0;
 }
 
 .select-size-btn {
-    width: 3rem;
-    height: 3rem;
-    font-weight: bolder;
+  width: 3rem;
+  height: 3rem;
+  font-weight: bolder;
 }
 
 .select-size-btn:hover {
-    color: #2874F0;
-    border: 2px solid #2874F0;
+  color: #2874f0;
+  border: 2px solid #2874f0;
 }
 
 .select-size-btn2 {
-    width: 3rem;
-    height: 3rem;
-    font-weight: bolder;
-    color: #2874F0;
-    border: 2px solid #2874F0;
+  width: 3rem;
+  height: 3rem;
+  font-weight: bolder;
+  color: #2874f0;
+  border: 2px solid #2874f0;
 }
 
 .color {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 80%;
 }
 
 .size {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 80%;
 }
 
 .inner-right-div {
-    width: 90%;
-
-
+  width: 90%;
 }
 
 .action-btn {
-    display: flex;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 .action-btn button {
-    background-color: #ff9f00;
-    color: #fff;
-    width: 100%;
-    height: 4rem;
-    border: none;
+  background-color: #ff9f00;
+  color: #fff;
+  width: 100%;
+  height: 4rem;
+  border: none;
 }
 
 .action-btn button:nth-child(2) {
-
-    background-color: rgb(255, 88, 0);
+  background-color: rgb(255, 88, 0);
 }
 
-.wishlist-btn-sp {
-    border: none;
-    z-index: 10;
-    position: relative;
-    top: -50rem;
-    right: -42%;
-    background: none;
-    transform: scale(2.5);
+.wishlist-btn-special {
+  border: none;
+  z-index: 10;
+  position: relative;
+  top: -45rem;
+  right: -42%;
+  background: none;
+  transform: scale(3) !important;
 }
 
 h3 {
-    font-size: 2rem;
-    text-align: left;
+  font-size: 2rem;
+  text-align: left;
+}
+.redcolor {
+  color: #cccccc !important;
+}
+.greycolor {
+  color: red !important;
 }
 
 @media only screen and (max-width: 1440px) {
-    .wishlist-btn-sp {
-        top: -39rem;
-    }
+  .wishlist-btn-sp {
+    top: -39rem;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
-    .wishlist-btn-sp {
-        top: -29rem;
-    }
+  .wishlist-btn-sp {
+    top: -29rem;
+  }
 
-    .size, .color {
-        width: 100%;
-    }
+  .size,
+  .color {
+    width: 100%;
+  }
 }
 
-
 @media only screen and (max-width: 768px) {
-    .wishlist-btn-sp {
-        top: -23rem;
-        transform: scale(2);
-    }
+  .wishlist-btn-sp {
+    top: -23rem;
+    transform: scale(2);
+  }
 
-    .outer-div {
-        flex-direction: column;
-    }
+  .outer-div {
+    flex-direction: column;
+  }
 
-    .inner-card-sp {
-        width: 100%;
-        height: 100%;
-    }
+  .inner-card-sp {
+    width: 100%;
+    height: 100%;
+  }
 
-    .color, .size {
-        width: 100%;
-    }
+  .color,
+  .size {
+    width: 100%;
+  }
 
-    .right-div {
-        width: 100%;
-    }
+  .right-div {
+    width: 100%;
+  }
 
-    .col-siz {
-        width: 70%;
-    }
+  .col-siz {
+    width: 70%;
+  }
 }
 
 @media only screen and (max-width: 425px) {
-    .outer-div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  .outer-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .inner-card-sp {
-        width: 80%;
-    }
+  .inner-card-sp {
+    width: 80%;
+  }
 
-    .right-div {
-        width: 80%;
-    }
+  .right-div {
+    width: 80%;
+  }
 
-    .wishlist-btn-sp {
-        top: -30rem;
-    }
+  .wishlist-btn-sp {
+    top: -30rem;
+  }
 
-    .action-btn {
-        flex-direction: column;
-    }
+  .action-btn {
+    flex-direction: column;
+  }
 
-    .action-btn button {
-        height: 3rem;
-    }
+  .action-btn button {
+    height: 3rem;
+  }
 
-    .color, .size {
-        width: 100%;
+  .color,
+  .size {
+    width: 100%;
+  }
 
-    }
+  .select-color-btn {
+    width: 4.5rem;
+  }
 
-    .select-color-btn {
-        width: 4.5rem;
+  .right-div {
+    width: 100%;
+  }
 
-    }
+  .col-siz {
+    width: 100%;
+  }
 
-    .right-div {
-        width: 100%;
-    }
+  .inner-right-div {
+    display: flex;
+    justify-content: center;
+  }
 
-    .col-siz {
-        width: 100%;
-    }
-
-    .inner-right-div {
-        display: flex;
-        justify-content: center;
-    }
-
-    .full-width {
-        width: 80%;
-    }
+  .full-width {
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 375px) {
-    .wishlist-btn-sp {
-        top: -27rem;
-    }
-    .select-size-btn{
-        transform: scale(0.9);
-    }
-    .select-color-btn{
-        transform: scale(0.9);
-    }
+  .wishlist-btn-sp {
+    top: -27rem;
+  }
+  .select-size-btn {
+    transform: scale(0.9);
+  }
+  .select-color-btn {
+    transform: scale(0.9);
+  }
 }
 
 @media only screen and (max-width: 320px) {
-    .wishlist-btn-sp {
-        top: -23.5rem;
-    }
+  .wishlist-btn-sp {
+    top: -23.5rem;
+  }
 }

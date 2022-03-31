@@ -27,12 +27,12 @@ h2 {
   height: 28rem;
 }
 
-.wishlist-btn-cat {
+.wishlist-btn-sp {
   border: none;
   z-index: 10;
   position: relative;
-  top: -28rem;
-  right: -50%;
+  top: -37.5rem;
+  right: -38%;
   background: none;
   transform: scale(2);
 }
@@ -47,6 +47,13 @@ h2 {
   margin: 1rem !important;
   width: 320px;
   height: 100%
+}
+
+.redcolor{
+  color: #cccccc !important;
+}
+.greycolor{
+  color: red !important;
 }
 
 
