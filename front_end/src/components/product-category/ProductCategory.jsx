@@ -11,12 +11,8 @@ function ProductCategory() {
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
   const [kidsData, setKidsData] = useState([]);
-<<<<<<< HEAD
-
-=======
   const [colorValue, setColorValue] = useState([]);
   const [first, setfirst] = useState(false);
->>>>>>> cb719725dd460c9602265b1980a5a14beec2b483
   const navigate = useNavigate();
   const getwishlistdata = () => {
     axios.get("/api/wishlist").then((res) => {
@@ -76,11 +72,6 @@ function ProductCategory() {
       .catch((err) => {
         console.log(err, "SHOW PRODUCT ERROR");
       });
-<<<<<<< HEAD
-  }, []);
-  const addwishlist = () => {
-    axios.post(`/api/wishlist`);
-=======
   }, [first]);
 
   const checker = (x) => {
@@ -97,7 +88,6 @@ function ProductCategory() {
         }
       }
     }
->>>>>>> cb719725dd460c9602265b1980a5a14beec2b483
   };
 
   return (
