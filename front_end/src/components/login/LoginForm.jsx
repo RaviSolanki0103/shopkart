@@ -6,9 +6,8 @@ import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.css";
 import axios from "../../utils/axios-default-baseurl";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginStatus, loginToken, openLogin } from "../../redux/actions";
-import { toast } from "react-toastify";
 import Toast from "../../utils/Toast";
 // import { openLogin } from "../../redux/actions";
 
