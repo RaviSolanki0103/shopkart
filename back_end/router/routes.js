@@ -14,7 +14,6 @@ router.get("/loginUser", controller.user.loginUser);
 
 // order routes
 router.get("/orders", middleware, controller.order.getOrder);
-router.get("/orders/:_id", middleware, controller.order.getSingleOrder);
 router.post("/orders", middleware, controller.order.addOrder);
 
 // category routes

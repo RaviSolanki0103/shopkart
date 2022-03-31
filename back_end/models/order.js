@@ -40,6 +40,33 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    delivery_info: {
+      type: {
+        _id: false,
+        name: {
+          type: "String",
+          required: true,
+        },
+        email: {
+          type: "String",
+          required: true,
+        },
+        mobile: {
+          type: Number,
+          required: true,
+          min: 10,
+        },
+        address: {
+          type: "String",
+          required: true,
+        },
+        pincode: {
+          type: "Number",
+          required: true,
+        },
+      },
+      required: true,
+    },
   },
   TIME_STAMP
 );

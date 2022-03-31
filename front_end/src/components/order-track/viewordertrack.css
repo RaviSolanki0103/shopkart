@@ -5,3 +5,45 @@
 .order-track-user-info .ant-card-body {
   background-color: #ffffff;
 }
+
+.order-track p {
+  font-size: 14px;
+}
+
+.order-track h2 {
+  text-align: unset;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+  .order-track p {
+    font-size: 14px;
+  }
+
+  .order-track h2 {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .order-track p {
+    font-size: 12px;
+  }
+
+  .order-track h2 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .order-track {
+    font-size: 10px;
+  }
+  .order-track p {
+    font-size: 10px;
+  }
+
+  .order-track h2 {
+    font-size: 12px;
+  }
+}
