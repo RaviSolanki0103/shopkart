@@ -40,9 +40,9 @@ router.get(
 
 //  wishlist ------------------------------------------------------
 
-router.post("/wishlist", async (req, res) => {
-  try {
-    const { user_id, product_id } = req.body;
+router.post("/wishlist", middleware, async (req, res) => {
+    const { product_id } = req.body;
+    const user_id = req.userId;
     const wishlist_item = new Wishlist({ user_id, product_id });
     const add_wishlist = await wishlist_item.save();
 
@@ -51,20 +51,17 @@ router.post("/wishlist", async (req, res) => {
     } else {
       res.status(500).json({ message: "faild" });
     }
-  } catch (err) {
-    console.log(err);
-  }
 });
 
-router.get("/wishlist", (req, res) => {
-  Wishlist.find({ user_id: "6241b1880cbdba7cd682d941" })
+router.get("/wishlist", middleware, (req, res) => {
+  Wishlist.find({ user_id: req.userId })
     .populate(["product_id"])
     .then((res1) => {
       console.log(res1, "----------------------------------");
       res.send(res1);
-    })
-
-    .catch((err) => console.log(err));
+    }).catch(err => {
+      res.status(400).send(err)
+    });
   // console.log();
 });
 
@@ -119,5 +116,5 @@ router.delete("/cart", (req, res) => {
   });
 });
 
-router.get("/getallproducts", middleware, controller.product.getAllProduct);
+router.get("/getallproducts", controller.product.getAllProduct);
 module.exports = router;

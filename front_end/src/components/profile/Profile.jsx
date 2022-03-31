@@ -36,7 +36,6 @@ function Profile() {
       <Layout className="profile-page-layout">
         <Sidebar />
         <Content className="profile-page-content">
-          {/*<div className="margin-10-px order-list-of-card">*/}
           <div>
             <Card>
               <div className="main-content">
@@ -54,8 +53,7 @@ function Profile() {
                       <button className="editbtn" onClick={() => cancelEvent()}>
                         Cancel
                       </button>
-                    )
-                  }
+                    )}
                   </h4>
                 </div>
                 <div className="infoform">
@@ -82,7 +80,7 @@ function Profile() {
                         setUserData({ ...userData, lname: e.target.value })
                       }
                       readOnly={isReadOnly}
-                    />{" "}
+                    />
                     <br />
                     <br />
                     <label className="form-input-label">Gender</label>
