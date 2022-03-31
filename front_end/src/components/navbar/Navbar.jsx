@@ -53,7 +53,9 @@ export default function Navbar() {
                 <Menu.Item key="setting:1">
                   <Link to="/profile">Profile</Link>
                 </Menu.Item>
-                <Menu.Item key="setting:2">Orders</Menu.Item>
+                <Menu.Item key="setting:2">
+                  <Link to="/order">Orders</Link>
+                </Menu.Item>
                 <Menu.Item key="setting:3">wishlist</Menu.Item>
               </Menu.ItemGroup>
               <Menu.ItemGroup title="logout">
