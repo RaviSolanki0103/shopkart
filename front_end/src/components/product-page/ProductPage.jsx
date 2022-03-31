@@ -17,6 +17,7 @@ function ProductPage() {
   const [sizeValue, setSizeValue] = useState("");
   const [productData, setproductData] = useState([]);
   const [colorValue, setColorValue] = useState([]);
+  const [color, setColor] = useState([]);
   const [first, setfirst] = useState(false);
   const getwishlistdata = () => {
     axios.get("/api/wishlist").then((res) => {
@@ -36,7 +37,7 @@ function ProductPage() {
       },
     });
   };
-  // delet
+  // delete
   const delet = (item) => {
     console.log("deledt caleddddd");
 
@@ -56,10 +57,9 @@ function ProductPage() {
   }, [first]);
 
   const checker = (x) => {
-    if(colorValue.length==0){
+    if (colorValue.length === 0) {
       addwishlist(x);
-    }
-    else{
+    } else {
       for (let i = 0; i < colorValue.length; i++) {
         if (colorValue[i].product_id._id === x) {
           delet(x);
@@ -77,7 +77,7 @@ function ProductPage() {
       {productData.map((x, key) => {
         return (
           param.id === x._id && (
-            <div>
+            <div className="img-div">
               <Card
                 className="inner-card-sp"
                 hoverable
@@ -112,11 +112,15 @@ function ProductPage() {
                   }}
                 >
                   <HeartFilled
-                    
-                    className={colorValue.length==0 ? "redcolor" :
-                      colorValue.map((item) =>
-                      item.product_id._id == x._id ? "greycolor" : "redcolor"
-                    )}
+                    className={
+                      colorValue.length === 0
+                        ? "redcolor"
+                        : colorValue.map((item) =>
+                            item.product_id._id === x._id
+                              ? "greycolor"
+                              : "redcolor"
+                          )
+                    }
                   />
                 </button>
               }
@@ -141,13 +145,13 @@ function ProductPage() {
                         return (
                           <button
                             className={
-                              colorValue === sel_col
+                              color === sel_col
                                 ? "select-color-btn2"
                                 : "select-color-btn"
                             }
                             onClick={() => {
                               setsizeToggle(!sizeToggle);
-                              setColorValue(sel_col);
+                              setColor(sel_col);
                             }}
                           >
                             {sel_col}

@@ -12,6 +12,10 @@ p {
   display: flex;
   justify-content: space-evenly;
 }
+.img-div{
+  display: flex;
+  justify-content: center;
+}
 
 .ant-card-body {
   padding: 0;
@@ -26,6 +30,9 @@ p {
   width: 30rem;
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .col-siz {
@@ -117,8 +124,8 @@ p {
   border: none;
   z-index: 10;
   position: relative;
-  top: -45rem;
-  right: -42%;
+  top: -20rem;
+  right: 10%;
   background: none;
   transform: scale(3) !important;
 }
@@ -196,8 +203,8 @@ h3 {
     width: 80%;
   }
 
-  .wishlist-btn-sp {
-    top: -30rem;
+  .wishlist-btn-special {
+    top: -15.5rem;
   }
 
   .action-btn {
@@ -236,8 +243,8 @@ h3 {
 }
 
 @media only screen and (max-width: 375px) {
-  .wishlist-btn-sp {
-    top: -27rem;
+  .wishlist-btn-special {
+    top: -14rem;
   }
   .select-size-btn {
     transform: scale(0.9);
@@ -248,7 +255,10 @@ h3 {
 }
 
 @media only screen and (max-width: 320px) {
-  .wishlist-btn-sp {
-    top: -23.5rem;
+  .wishlist-btn-special {
+    top: -12rem;
+    right: 13%;
+    transform: scale(1.7);
   }
+
 }
