@@ -1,21 +1,13 @@
 import { Card, Descriptions, Row, Col, Steps, Popover } from "antd";
 import "./viewordertrack.css";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import Moment from "react-moment";
 
 const { Step } = Steps;
 const ViewOrderTrack = () => {
   const productDetails = useSelector((state) => state.orderTrackData);
   const orderStatus = ["Ordered", "Shipped", "Out For Delivery", "Delivered"];
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (productDetails.length === 0) {
-      navigate("order");
-    }
-  }, [productDetails]);
 
   const customDot = (dot, { description, title }) => (
     <Popover
@@ -31,33 +23,33 @@ const ViewOrderTrack = () => {
 
   return (
     <div className="order-track">
-      <Card
-        title="Delivery Address"
-        className="order-track-user-info"
-        bordered={true}
-      >
-        <Descriptions title="User Info">
-          <Descriptions.Item label="Name">
-            {productDetails.delivery_info.name}
-          </Descriptions.Item>
-          <Descriptions.Item label="Phone">
-            {productDetails.delivery_info.mobile}
-          </Descriptions.Item>
-          <Descriptions.Item label="Email">
-            {productDetails.delivery_info.email}
-          </Descriptions.Item>
-          <Descriptions.Item label="Pin Code">
-            {productDetails.delivery_info.pincode}
-          </Descriptions.Item>
-          <Descriptions.Item label="Address">
-            {productDetails.delivery_info.address}
-          </Descriptions.Item>
-        </Descriptions>
-      </Card>
+      {productDetails ? (
+        <>
+          <Card
+            title="Delivery Address"
+            className="order-track-user-info"
+            bordered={true}
+          >
+            <Descriptions title="User Info">
+              <Descriptions.Item label="Name">
+                {productDetails.delivery_info.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="Phone">
+                {productDetails.delivery_info.mobile}
+              </Descriptions.Item>
+              <Descriptions.Item label="Email">
+                {productDetails.delivery_info.email}
+              </Descriptions.Item>
+              <Descriptions.Item label="Pin Code">
+                {productDetails.delivery_info.pincode}
+              </Descriptions.Item>
+              <Descriptions.Item label="Address">
+                {productDetails.delivery_info.address}
+              </Descriptions.Item>
+            </Descriptions>
+          </Card>
 
-      <Card title="Order Tracking" bordered={true}>
-        {productDetails ? (
-          <>
+          <Card title="Order Tracking" bordered={true}>
             <Card.Grid className="order-grid">
               <Row gutter={[16, 16]} align="middle">
                 <Col span={6}>
@@ -119,12 +111,12 @@ const ViewOrderTrack = () => {
                   }
                 />
               </Steps>
-            </Card.Grid>{" "}
-          </>
-        ) : (
-          <></>
-        )}
-      </Card>
+            </Card.Grid>
+          </Card>
+        </>
+      ) : (
+        <Navigate to="/order" />
+      )}
     </div>
   );
 };
