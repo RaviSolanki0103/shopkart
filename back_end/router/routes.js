@@ -5,18 +5,15 @@ const middleware = require("../middleware/auth");
 const upload = require("../config/multerconfig");
 const Wishlist = require("../models/wishlist");
 const Cart_item = require("../models/cart");
-const User = require("../models/userSchema");
-
+const User = require("../models/user");
 
 // registration routes
 router.post("/user", controller.user.registerUser);
 router.get("/user", middleware, controller.user.getUserById);
 router.get("/loginUser", controller.user.loginUser);
 
-
 // order routes
 router.get("/orders", middleware, controller.order.getOrder);
-router.get("/orders/:_id", middleware, controller.order.getSingleOrder);
 router.post("/orders", middleware, controller.order.addOrder);
 
 // category routes
@@ -56,36 +53,33 @@ router.post("/wishlist", async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-  
   }
 });
 
 router.get("/wishlist", (req, res) => {
-  Wishlist.find({ user_id:"6241b1880cbdba7cd682d941" })
+  Wishlist.find({ user_id: "6241b1880cbdba7cd682d941" })
     .populate(["product_id"])
     .then((res1) => {
-      console.log(res1,"----------------------------------") 
-      res.send(res1)
-     })
-    
+      console.log(res1, "----------------------------------");
+      res.send(res1);
+    })
+
     .catch((err) => console.log(err));
-    // console.log();
+  // console.log();
 });
 
-//get userdetail only 
+//get userdetail only
 router.get("/userdetail", (req, res) => {
   User.find({})
     .then((res) => {
-     
-      console.log(res)} )
+      console.log(res);
+    })
     .catch((err) => console.log(err));
 });
 
-
-
 router.delete("/wishlist/:id", (req, res) => {
   const pro_id = req.params.id;
-  console.log(req.params.id,"----------123--------");
+  console.log(req.params.id, "----------123--------");
   Wishlist.deleteOne({ product_id: pro_id }, function (err) {
     if (err) console.log(err);
     console.log("Successful deletion");
