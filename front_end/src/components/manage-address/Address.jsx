@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Layout, Card } from "antd";
 import AddressForm from "../manage-address/AddressForm";
+import Sidebar from "../../utils/sidebar/Sidebar";
 import "./address.css";
 import {PlusCircleOutlined} from "@ant-design/icons";
 const {  Content } = Layout;
@@ -8,10 +9,10 @@ const {  Content } = Layout;
 function Address() {
     const [open, setIsOpen] = useState(false);
 
-
     return (
         <>
             <Layout className="address-page-layout">
+            <Sidebar /> 
                 <Content>
                     <div className="address-contentdiv">
                         <Card  >
@@ -34,7 +35,7 @@ function Address() {
                                     </div>
                                     <p className="user-name">Patel Priya </p>
                                 </div>
-                                <p>IT Path Solutions PVT. LTD. <br />Abc@gmail.com </p>
+                                <p className="user-details">IT Path Solutions PVT. LTD. <br />Abc@gmail.com </p>
                             </div>
                         </Card>
                     </div>

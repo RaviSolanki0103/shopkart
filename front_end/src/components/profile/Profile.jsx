@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { Layout, Card } from "antd";
 import "./profile.css";
 import axios from "../../utils/axios-default-baseurl";
@@ -17,7 +16,8 @@ function Profile() {
       .get("/user", {
         headers: {
           "Content-Type": "application/json",
-          "authorization": `Bearer ${token}`,
+          authorization : token,
+        //   "authorization": `Bearer ${token}`,
         },
       })
       .then((res) => setUserData(res.data.data))
@@ -55,7 +55,8 @@ function Profile() {
                       <button className="editbtn" onClick={() => cancelEvent()}>
                         Cancel
                       </button>
-                    )}
+                    )
+                  }
                   </h4>
                 </div>
                 <div className="infoform">
