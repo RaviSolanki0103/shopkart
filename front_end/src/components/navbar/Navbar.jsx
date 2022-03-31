@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <nav className="main-navbar">
-      <div className="navbar-icon"></div>
+      <Link to="/" className="navbar-icon" />
       <div className="navbar-search">
         <Input
           placeholder="input with clear icon"
