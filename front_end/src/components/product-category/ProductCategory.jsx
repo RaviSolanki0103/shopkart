@@ -35,8 +35,7 @@ function ProductCategory() {
   // delet
   const delet = (item) => {
     console.log("deledt caleddddd");
-
-    axios.delete(`/api/wishlist/${item}`).then((res) => {});
+     axios.delete(`/api/wishlist/${item}`).then((res) => {});
   };
 
   useEffect(() => {

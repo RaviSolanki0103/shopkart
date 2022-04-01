@@ -18,9 +18,16 @@ function ProductPage() {
   const [productData, setproductData] = useState([]);
   const [colorValue, setColorValue] = useState([]);
   const [first, setfirst] = useState(false);
+  const [cartdata, setcartdata] = useState([]);
   const getwishlistdata = () => {
     axios.get("/api/wishlist").then((res) => {
       setColorValue(res.data);
+    });
+  };
+  const getcartdata = () => {
+    axios.get("/api/cart").then((res) => {
+      setcartdata(res.data);
+      // console.log(res.data,"cart dataaaaaa");
     });
   };
 
@@ -44,6 +51,7 @@ function ProductPage() {
   };
 
   useEffect(() => {
+    getcartdata();
     getwishlistdata();
     axios
       .get("/api/getallproducts")
@@ -56,10 +64,9 @@ function ProductPage() {
   }, [first]);
 
   const checker = (x) => {
-    if(colorValue.length==0){
+    if (colorValue.length == 0) {
       addwishlist(x);
-    }
-    else{
+    } else {
       for (let i = 0; i < colorValue.length; i++) {
         if (colorValue[i].product_id._id === x) {
           delet(x);
@@ -72,16 +79,37 @@ function ProductPage() {
     }
   };
 
+  const addToCart = (item) => {
+    console.log(item, "dssssssvsdv");
+    axios.get("/api/cart").then((res) => {
+      const result = res.data.filter((x) => item === x.product_id._id);
+      {
+        result.length
+          ? console.log("PRODUCT ALREADY EXIST")
+          : addToCart_data(item);
+      }
+    });
+  };
+  const addToCart_data = (item) => {
+    axios({
+      method: "post",
+      url: "/api/cart",
+      data: {
+        product_id: `${item}`,
+        user_id: "6241b1880cbdba7cd682d941",
+        quantity:1
+      },
+    });
+  };
   return (
     <div className="outer-div">
       {productData.map((x, key) => {
         return (
           param.id === x._id && (
-            <div>
+            <div key={key}>
               <Card
                 className="inner-card-sp"
                 hoverable
-                key={key}
                 cover={
                   <img
                     className="img-sp"
@@ -91,7 +119,7 @@ function ProductPage() {
                 }
               >
                 <div className="action-btn">
-                  <button>
+                  <button onClick={() => addToCart(x._id)}>
                     <ShoppingCartOutlined />
                     ADD TO CART
                   </button>
@@ -112,11 +140,15 @@ function ProductPage() {
                   }}
                 >
                   <HeartFilled
-                    
-                    className={colorValue.length==0 ? "redcolor" :
-                      colorValue.map((item) =>
-                      item.product_id._id == x._id ? "greycolor" : "redcolor"
-                    )}
+                    className={
+                      colorValue.length == 0
+                        ? "redcolor"
+                        : colorValue.map((item, key) =>
+                            item.product_id._id == x._id
+                              ? "greycolor"
+                              : "redcolor"
+                          )
+                    }
                   />
                 </button>
               }
@@ -137,9 +169,10 @@ function ProductPage() {
                   <div className="col-siz">
                     <p>Select Color</p>
                     <div className="color">
-                      {x.color.map((sel_col) => {
+                      {x.color.map((sel_col, key) => {
                         return (
                           <button
+                            key={key}
                             className={
                               colorValue === sel_col
                                 ? "select-color-btn2"
@@ -159,9 +192,10 @@ function ProductPage() {
                   <div className="col-siz">
                     <p>Select Size</p>
                     <div className="size">
-                      {x.size.map((sel_size) => {
+                      {x.size.map((sel_size, key) => {
                         return (
                           <button
+                            key={key}
                             className={
                               sizeValue === sel_size
                                 ? "select-size-btn2"

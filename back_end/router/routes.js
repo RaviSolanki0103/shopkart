@@ -90,16 +90,17 @@ router.delete("/wishlist/:id", (req, res) => {
 // cart -------------------------------------
 
 router.get("/cart", (req, res) => {
-  Cart_item.find({}, (err, alldata) => {
-    console.log(alldata);
-    res.send(alldata);
-  });
-});
-
+  Cart_item.find({user_id:"6241b1880cbdba7cd682d941"})
+       .populate(["product_id"])
+      .then((data) => {
+         res.send(data)
+       })
+       .catch((err) => console.log(err)); 
+      });
 router.post("/cart", (req, res) => {
   try {
-    const { products, total_price, user_id } = req.body;
-    const cart_item = new Cart_item({ products, total_price, user_id });
+    const { product_id,  quantity, user_id } = req.body;
+    const cart_item = new Cart_item({ product_id,  quantity, user_id });
     const add_to_cart = cart_item.save();
 
     if (add_to_cart) {
@@ -112,12 +113,29 @@ router.post("/cart", (req, res) => {
   }
 });
 
-router.delete("/cart", (req, res) => {
-  Cart_item.deleteOne({ user_id: "5" }, function (err) {
+router.delete("/cart/:id", (req, res) => {
+  const pro_id = req.params.id;
+  Cart_item.deleteOne({ product_id: pro_id }, function (err) {
     if (err) console.log(err);
     console.log("Successful deletion");
   });
 });
 
+router.patch("/cart/:id" ,(req,res)=> {
+  const id = req.params.id;
+  Cart_item.findByIdAndUpdate(id, req.body).then(result => res.send(result)).catch(err => res.status(400).send(err))
+})
+
 router.get("/getallproducts", middleware, controller.product.getAllProduct);
 module.exports = router;
+
+
+// router.delete("/wishlist/:id", (req, res) => {
+//   const pro_id = req.params.id;
+//   console.log(req.params.id,"----------123--------");
+//   Wishlist.deleteOne({ product_id: pro_id }, function (err) {
+//     if (err) console.log(err);
+//     console.log("Successful deletion");
+//   });
+//   // res.send("succes delet")
+// });
