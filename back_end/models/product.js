@@ -28,7 +28,8 @@ const productSchema = mongoose.Schema({
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Category"},
+    ref: "Category",
+  },
   color: {
     type: Array,
     required: [true, "Please enter Colors"],

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { send_totalamount } from "../../redux/actions";
 import { send_number_of_item } from "../../redux/actions";
 import { senddataWishlist } from "../../redux/actions";
+import axios from "axios";
 const Element = [
   {
     id: 1,
@@ -46,82 +47,107 @@ const Element = [
 
 function CartLeft() {
   const arr = Element;
-  const total_item_in_cart = arr.length;
+  const [cartdata, setcartdata] = useState([]);
   const [quantity, setquantity] = useState(Element);
   const [total_amount, settotal_amount] = useState("");
+  const [status, setstatus] = useState(true);
+  const [first, setfirst] = useState();
+  const total_item_in_cart = cartdata.length;
   const dispatch = useDispatch();
-  // send number of item with increment
-  // const number_of_item = quantity.map((item) => item.value).reduce((prev, curr) => prev + curr, 0);
+  const getcarttdata = () => {
+    axios.get("/api/cart").then((res) => {
+      setcartdata(res.data);
+      const price =
+        res.data.length &&
+        res.data
+          .map((item) => item.product_id.price * item.quantity)
+          .reduce((prev, curr) => prev + curr, 0);
+      setfirst(price);
+      dispatch(send_totalamount(price));
+      dispatch(send_number_of_item(res.data.length));
+    });
+  };
 
   // incremnet quantity--------------------------------
   const Increment = (value) => {
-    let x = quantity.findIndex((item) => item.id == value.id);
-    console.log(x);
-    const temp = [...quantity];
-    temp[x].value = value.value + 1;
-    setquantity(temp);
-    dispatch(send_totalamount(total_amount));
-    dispatch(send_number_of_item(total_item_in_cart));
+    incrementQuantity(value);
+    setstatus(!status);
+  };
+  const incrementQuantity = (value) => {
+    axios({
+      method: "patch",
+      url: `/api/cart/${value._id}`,
+      data: {
+        quantity: value.quantity + 1,
+      },
+    });
   };
   // decremnet quantity--------------------------------
   const Decrement = (value) => {
-    let x = quantity.findIndex((item) => item.id == value.id);
-    const temp = [...quantity];
-    if (temp[x].value > 1) {
-      temp[x].value = value.value - 1;
-      //  console.log("Before update: ", quantity[x])
-      //  quantity[x].value=value.value + 1
-
-      //  quantity[x].value=value.value+1
-      //  x.value+=1
-      // console.log("rewtrtr",quantity[x].value);
-      //  console.log("Hello",quantity[x]);
-
-      setquantity(temp);
-      dispatch(send_totalamount(total_amount));
-      dispatch(send_number_of_item(total_item_in_cart));
-    }
+    if (value.quantity !== 1) decrementQuantity(value);
+    setstatus(!status);
   };
 
-  const total = () => {
-    const sumall = quantity
-      .map((item) => item.price * item.value)
-      .reduce((prev, curr) => prev + curr, 0);
-    settotal_amount(sumall);
+  const decrementQuantity = (value) => {
+    axios({
+      method: "patch",
+      url: `/api/cart/${value._id}`,
+      data: {
+        quantity: value.quantity - 1,
+      },
+    });
   };
 
   useEffect(() => {
-    total();
-    dispatch(send_totalamount(total_amount));
-    dispatch(send_number_of_item(total_item_in_cart));
-  }, [Increment, Decrement]);
-  // console.log(total_amount);
+    getcarttdata();
+  }, [status]);
 
   const removeItem = (id) => {
-    // console.log("item-removw",id);
-    setquantity(quantity.filter(item => item.id !== id.id));
-    console.log("removed id ",id.id);
-}
-const AddtoWishlist  = (item) => {
-     const wishlist_data = [{id:item.id,title:item.name,price:item.price,img:item.img}]
-     console.log(wishlist_data);
-     dispatch(senddataWishlist(wishlist_data));
-}
+    axios.delete(`/api/cart/${id}`).then((res) => {});
+    setstatus(!status);
+  };
+
+  const AddtoWishlist = (item) => {
+    axios.get("/api/wishlist").then((res) => {
+      const result = res.data.filter((x) => item === x.product_id._id);
+      { 
+        result.length
+          ? console.log("PRODUCT ALREADY EXIST")
+          : addDataToWishlist(item);
+      }
+    });
+  };
+
+  const addDataToWishlist = (item) => {
+    axios({
+      method: "post",
+      url: "/api/wishlist",
+      data: {
+        product_id: `${item}`,
+        user_id: "6241b1880cbdba7cd682d941",
+      },
+    });
+  };
 
   return (
     <div className="cart-left-side-container">
       <Card title={`My Cart(${total_item_in_cart})`} className="cart-left-card">
-        {quantity.map((item) => {
-          // console.log("item",item);
+        {cartdata.map((item, key) => {
           return (
-            <div className="Main-container_left_cart">
-              <div key={item.id} className="cart-img-detail-container">
+            <div key={key} className="Main-container_left_cart">
+              <div className="cart-img-detail-container">
                 <div>
-                  <img src={item.img} alt="" className="cart-img" />
+                  <img
+                    src={`uploads/${item.product_id.product_img}`}
+                    alt=""
+                    className="cart-img"
+                  />
                 </div>
                 <div className="cart-detail">
-                  <p>{item.name}-{item.id}</p>
-                  <p className="cart-price">{item.price * item.value}</p>
+                  <p className="productname">{item.product_id.name}</p>
+                  <p className="cart-price">
+                    ₹{item.product_id.price * item.quantity}
+                  </p>
                 </div>
               </div>
               <div className="cart-buttons">
@@ -130,63 +156,43 @@ const AddtoWishlist  = (item) => {
                     className="cart-minus-button"
                     onClick={() => Decrement(item)}
                   />
-                  <h2>{item.value}</h2>
+                  <h2>{item.quantity}</h2>
                   <PlusCircleOutlined
                     className="cart-plus-button"
                     onClick={() => Increment(item)}
                   />
                 </div>
                 <div className="cart-add-remove">
-                  <button className="add-wishlist-buttton" onClick={()=>AddtoWishlist(item)}>
+                  <button
+                    className="button-28 "
+                    onClick={() => AddtoWishlist(item.product_id._id)}
+                  >
                     Add to wishlist
                   </button>
-                  <button className="remove-button" onClick={()=>removeItem(item)}>Remove</button>
+                  <button
+                    className="remove_button"
+                    onClick={() => removeItem(item.product_id._id)}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
-              {/* <hr /> */}
-              <div className="cart-placeoreder-button">
-                <button className="cart-placeoreder-button_">
-                  Place Order
-                </button>
-              </div>
+
+             
             </div>
           );
         })}
-        {/* <div className="cart-img-detail-container">
-              <div className="cart-img"></div>
-              <div className="cart-detail">
-                  <p>Medellin MED-BLK-C Acoustic Guitar Linden Wood R</p>
-                  <p className="cart-price">₹2,399</p>
-              </div>
-          </div>
-          <div className="cart-buttons">
-              <div className="cart-button-inc-dec-group">
-              <MinusCircleOutlined className="cart-minus-button" onClick={()=>{
-                if(quantity >1)
-                setquantity(quantity -1)
-                }} />
-              <h2>{quantity}</h2>
-              <PlusCircleOutlined  className="cart-plus-button"  onClick={()=>{setquantity(quantity +1)}} />
-              </div>
-              <div className="cart-add-remove">
-              <button className="add-wishlist-buttton">Add to wishlist</button>
-              <button className="remove-button">Remove</button>
-              </div>
-          </div>
-          <hr />
-          <div className="cart-placeoreder-button">
-                <button className="cart-placeoreder-button_">Place Order</button>
-          </div> */}
       </Card>
+
+      <div className="">
+                <button className="cart-placeoreder-button_5 ">
+                  Place Order
+                </button>
+              </div>
     </div>
   );
 }
 
 export default CartLeft;
-
-
-// removeTodo(name){
-//   this.setState({
-//       todo: this.state.todo.filter(el => el !== name)
-//   })
-// }
+// cart-placeoreder-button
+// cart-placeoreder-button_

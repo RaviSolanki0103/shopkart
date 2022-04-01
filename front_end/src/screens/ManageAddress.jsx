@@ -5,15 +5,15 @@ import Container from "../utils/Container/Container";
 import Address from "../components/manage-address/Address";
 
 function ManageAddress() {
-    return (
-        <div>
-            <Navbar />
-            <Container> 
-                <Address />
-            </Container>
-        <Footer />
-        </div>
-    );
+  return (
+    <div>
+      <Navbar />
+      <Container>
+        <Address />
+      </Container>
+      <Footer />
+    </div>
+  );
 }
 
 export default ManageAddress;

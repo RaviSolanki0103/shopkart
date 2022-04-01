@@ -9,7 +9,7 @@ function Category() {
     <div>
       <Navbar />
       <Container>
-      <ProductListing />
+        <ProductListing />
       </Container>
       <Footer />
     </div>

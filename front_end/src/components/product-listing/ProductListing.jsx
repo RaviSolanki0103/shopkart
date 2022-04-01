@@ -7,19 +7,37 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BASEURL } from "../../utils/config";
 
 function ProductListing() {
-  const { Meta } = Card;
   const { Panel } = Collapse;
-
-  const [status, setStatus] = useState(true);
 
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
   const [kidsData, setKidsData] = useState([]);
+  const [colorValue, setColorValue] = useState([]);
+  const [first, setfirst] = useState(false);
 
   const param = useParams();
   const navigate = useNavigate();
 
+  const getwishlistdata = () => {
+    axios.get("/api/wishlist").then((res) => {
+      setColorValue(res.data);
+    });
+  };
+  const addwishlist = (item) => {
+    axios({
+      method: "post",
+      url: "/api/wishlist",
+      data: {
+        product_id: `${item}`,
+        user_id: "6241b1880cbdba7cd682d941",
+      },
+    });
+  };
+  const deleteWishlist = async (item) => {
+    await axios.delete(`/api/wishlist/${item}`).then((res) => {});
+  };
   useEffect(() => {
+    getwishlistdata();
     axios
       .get("/api/getallproducts")
       .then((res) => {
@@ -50,7 +68,23 @@ function ProductListing() {
       .then((err) => {
         err && console.log(err, "SHOW PRODUCT ERROR");
       });
-  }, []);
+  }, [first]);
+  const checker = (item) => {
+    if (colorValue.length === 0) {
+      addwishlist(item);
+    } else {
+      for (let i = 0; i < colorValue.length; i++) {
+        if (colorValue[i].product_id._id === item) {
+          deleteWishlist(item);
+          break;
+        } else if (i === colorValue.length - 1) {
+          addwishlist(item);
+        } else {
+        }
+      }
+    }
+  };
+
   return (
     <Layout className="listing">
       {/* Filter */}
@@ -115,41 +149,52 @@ function ProductListing() {
                 : param.id === "women"
                 ? womenData
                 : kidsData
-              ).map((x, key) => {
+              ).map((product, key) => {
                 return (
-                  <Card
-                    key={key}
-                    className="inner-card"
-                    hoverable
-                    cover={
-                      <img
-                        alt="example"
-                        className="img"
-                        src={`${BASEURL}/uploads/${x.product_img}`}
-                      />
+                  <div>
+                    <Card
+                      key={key}
+                      className="inner-card"
+                      hoverable
+                      cover={
+                        <img
+                          alt="example"
+                          className="img"
+                          src={`${BASEURL}/uploads/${product.product_img}`}
+                        />
+                      }
+                      onClick={() => {
+                        navigate(`/product/${product._id}`);
+                      }}
+                    >
+                      <div>
+                        <p className="title">{product.name}</p>
+                        <p className="price">₹ {product.price}</p>
+                      </div>
+                    </Card>
+                    {
+                      <button
+                        className="wishlist-btn-sp"
+                        onClick={() => {
+                          checker(product._id);
+
+                          setfirst(!first);
+                        }}
+                      >
+                        <HeartFilled
+                          className={
+                            colorValue.length === 0
+                              ? "redcolor"
+                              : colorValue.map((item) =>
+                                  item.product_id._id === product._id
+                                    ? "greycolor"
+                                    : "redcolor"
+                                )
+                          }
+                        />
+                      </button>
                     }
-                    onClick={() => {
-                      navigate(`/product/${x._id}`);
-                    }}
-                  >
-                    {status ? (
-                      <button
-                        className="wishlist-btn-cat"
-                        onClick={() => setStatus(!status)}
-                      >
-                        <HeartFilled style={{ color: "#cccccc" }} />
-                      </button>
-                    ) : (
-                      <button
-                        className="wishlist-btn-cat"
-                        onClick={() => setStatus(!status)}
-                      >
-                        <HeartFilled style={{ color: "hotpink" }} />
-                      </button>
-                    )}
-                    <Meta title={x.name} />
-                    <Meta title={x.price} />
-                  </Card>
+                  </div>
                 );
               })}
             </div>

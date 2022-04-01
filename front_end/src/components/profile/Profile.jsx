@@ -19,12 +19,11 @@ function Profile() {
       .get("/user", {
         headers: {
           "Content-Type": "application/json",
-          authorization : token,
-        //   "authorization": `Bearer ${token}`,
+          authorization: token,
         },
       })
       .then((res) => setUserData(res.data.data))
-      .catch((err) => console.log("error: ",err));
+      .catch((err) => console.log("error: ", err));
   };
 
   const updateUserData = async (e) => {
@@ -85,8 +84,7 @@ function Profile() {
                       <button className="editbtn"  onClick={() => cancelEvent()}>
                         Cancel
                       </button>
-                    )
-                  }
+                    )}
                   </h4>
                 </div>
                 <div className="infoform">
@@ -98,7 +96,9 @@ function Profile() {
                       className="form-input"
                       type="text"
                       value={userData.fname}
-                      onChange={(e) =>setUserData({...userData, fname: e.target.value})}
+                      onChange={(e) =>
+                        setUserData({ ...userData, fname: e.target.value })
+                      }
                       placeholder="First Name"
                       readOnly={isReadOnly}
                     />
@@ -107,9 +107,11 @@ function Profile() {
                       type="text"
                       value={userData.lname}
                       placeholder="Last Name"
-                      onChange={(e) =>setUserData({...userData, lname: e.target.value})}
+                      onChange={(e) =>
+                        setUserData({ ...userData, lname: e.target.value })
+                      }
                       readOnly={isReadOnly}
-                    />{" "}
+                    />
                     <br />
                     <br />
                   
@@ -143,7 +145,9 @@ function Profile() {
                       type="email"
                       name="email"
                       value={userData.email}
-                      onChange={(e) =>setUserData({...userData, email: e.target.value})}
+                      onChange={(e) =>
+                        setUserData({ ...userData, email: e.target.value })
+                      }
                       placeholder="email address"
                       readOnly={isReadOnly}
                     />
@@ -156,7 +160,9 @@ function Profile() {
                       className="form-input"
                       type="number"
                       name="phone"
-                      onChange={(e) =>setUserData({...userData, phone: e.target.value})}
+                      onChange={(e) =>
+                        setUserData({ ...userData, phone: e.target.value })
+                      }
                       value={userData.phone}
                       placeholder="mobile number"
                       readOnly={isReadOnly}
