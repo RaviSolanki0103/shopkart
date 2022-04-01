@@ -5,12 +5,16 @@ const middleware = require("../middleware/auth");
 const upload = require("../config/multerconfig");
 const Wishlist = require("../models/wishlist");
 const Cart_item = require("../models/cart");
-const User = require("../models/user");
+const User = require("../models/userSchema");
+const otp = require("../models/otp");
+
 
 // registration routes
 router.post("/user", controller.user.registerUser);
 router.get("/user", middleware, controller.user.getUserById);
 router.get("/loginUser", controller.user.loginUser);
+router.post("/emailSend", controller.user.emailSend );
+router.post("/changePassword", controller.user.changePassword);
 
 // order routes
 router.get("/orders", middleware, controller.order.getOrder);

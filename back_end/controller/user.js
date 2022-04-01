@@ -2,6 +2,7 @@ const { DATA_INSERT_MESSAGE, DATA_INSERT_FAILD, INVALID_LOGIN, LOGIN_SUCCESS, IN
 const { CREATED, BAD_REQUEST, SUCCESS, NOT_FOUND } = require("../config/statuscode");
 const responseData = require("../helper/response");
 const User = require("../models/user");
+const Otp = require("../models/otp");
 const jwt = require("jsonwebtoken")
 
 const bcrypt = require("bcryptjs");
@@ -73,3 +74,28 @@ exports.getUserById = async (req, res, next) => {
     message: err.message,
   }));
 }
+
+//forgot password
+exports.emailSend = async (req, res, next) => {
+  const data =  await User.findOne({email});
+  const response = {};
+  if(data){
+    const otpcode = Math.floor((Math.random()*10000)+1);
+    const otpData = new Otp({
+      email:req.body.email,
+      code: otpcode,
+      expireIn: new Date(). getTime() + 300*1000
+    })
+    const otpResponse = await otpData.save();
+    response.statusText = "success"
+    response.message= "Please check your Email ID";
+  }else{
+    response.statusText = "error"
+    response.message= "Email ID does not exist";
+  }
+  
+};
+
+exports.changePassword = async (req, res, next) => {
+  res.status(200).json("okay");
+};

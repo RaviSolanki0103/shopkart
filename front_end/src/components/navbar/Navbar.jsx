@@ -56,7 +56,9 @@ export default function Navbar() {
                 <Menu.Item key="setting:2">
                   <Link to="/order">Orders</Link>
                 </Menu.Item>
-                <Menu.Item key="setting:3">wishlist</Menu.Item>
+                <Menu.Item key="setting:3">
+                  <Link to="/wishlist">Wishlist</Link>
+                </Menu.Item>
               </Menu.ItemGroup>
               <Menu.ItemGroup title="logout">
                 <Menu.Item key="setting:4">
@@ -65,7 +67,6 @@ export default function Navbar() {
                     onClick={() => {
                       dispatch(loginStatus(false));
                       dispatch(loginToken(null));
-                      dispatch(sendOrderDataToTrack(null));
                     }}
                   >
                     Logout
@@ -86,9 +87,6 @@ export default function Navbar() {
             className="login-btn"
             onClick={() => {
               dispatch(openLogin(true));
-              // navigate("/login");
-              // setLoginStatus(myaction);
-              // setLoginStatus(true);
             }}
           />
         )}
