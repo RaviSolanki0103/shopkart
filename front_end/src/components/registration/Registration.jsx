@@ -106,6 +106,7 @@ function Registration(props) {
                                 type: "email",
                                 message: "Enter Valid Email Address!",
                             },
+                            
                         ]}
                     >
                         <Input
