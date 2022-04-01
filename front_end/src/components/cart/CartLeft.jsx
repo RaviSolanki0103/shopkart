@@ -170,7 +170,7 @@ function CartLeft() {
                     Add to wishlist
                   </button>
                   <button
-                    className="button-24"
+                    className="remove_button"
                     onClick={() => removeItem(item.product_id._id)}
                   >
                     Remove
@@ -185,7 +185,7 @@ function CartLeft() {
       </Card>
 
       <div className="">
-                <button className=" button-5 ">
+                <button className="cart-placeoreder-button_5 ">
                   Place Order
                 </button>
               </div>
