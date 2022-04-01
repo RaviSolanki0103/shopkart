@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout, Card } from "antd";
+import {Link} from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { loginStatus, loginToken } from "../../redux/actions/index";
 import "./sidebar.css";
@@ -22,19 +23,19 @@ function Sidebar() {
                 <Sider className="Sidebar" style={{ background: "white" }} width={270}>
                     <Card   title="My Profile" />
                     <Card className="Sidebar-card" >
-                        <a className="Sidebar-card-link" href="/profile"><ProfileTwoTone /> Personal Information</a>
+                        <Link className="Sidebar-card-link" to="/profile"><ProfileTwoTone /> Personal Information</Link>
                     </Card>
                     <Card className="Sidebar-card">
-                        <a className="Sidebar-card-link" href="/address"><DatabaseFilled /> Manage Address</a>
+                        <Link className="Sidebar-card-link" to="/address"><DatabaseFilled /> Manage Address</Link>
                     </Card>
                     <Card className="Sidebar-card">
-                        <a className="Sidebar-card-link" href="/order"><ShoppingOutlined /> My Order</a>
+                        <Link className="Sidebar-card-link" to="/order"><ShoppingOutlined /> My Order</Link>
                     </Card>
                     <Card className="Sidebar-card">
-                        <a className="Sidebar-card-link" href="/wishlist"><HeartFilled /> My Wishlist</a>
+                        <Link className="Sidebar-card-link" to="/wishlist"><HeartFilled /> My Wishlist</Link>
                     </Card>
                     <Card className="Sidebar-card">
-                        <a className="Sidebar-card-link" href="/" onClick={() => {dispatch(loginStatus(false)); dispatch(loginToken(null))} }><PoweroffOutlined /> Logout</a>
+                        <Link className="Sidebar-card-link" to="/" onClick={() => {dispatch(loginStatus(false)); dispatch(loginToken(null))} }><PoweroffOutlined /> Logout</Link>
 
                     </Card>
                 </Sider>

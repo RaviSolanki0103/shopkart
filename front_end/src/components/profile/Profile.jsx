@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Card } from "antd";
 import "./profile.css";
+import Toast from "../../utils/Toast";
 import axios from "../../utils/axios-default-baseurl";
 import { useSelector } from "react-redux";
 import Sidebar from "../../utils/sidebar/Sidebar";
@@ -10,6 +11,8 @@ function Profile() {
   const token = useSelector((state) => state.loginToken);
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [userData, setUserData] = useState({});
+  const [editBtnVisiblity, setEditBtnVisiblity] = useState("btn-display-none");
+  
 
   const fetchUserData = async () => {
     await axios
@@ -24,20 +27,46 @@ function Profile() {
       .catch((err) => console.log("error: ",err));
   };
 
+  const updateUserData = async (e) => {
+    e.preventDefault();
+    console.log("user data updated....", JSON.stringify(userData));
+    await axios
+      .patch("/user",{fname: userData.fname, lname: userData.lname, email: userData.email, phone: userData.phone},{
+        headers: {
+          "Content-Type": "application/json",
+          authorization : token,
+        //   "authorization": `Bearer ${token}`,
+        },
+      }).then((res) => console.log("response from update data", res))
+      .catch((err) => console.log("error: ",err));
+  };
+
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  const cancelEvent = () => {
+  const cancelEvent = () =>{
     fetchUserData();
+    setIsReadOnly(!isReadOnly);
+    setEditBtnVisiblity("btn-display-none")
+  }
+  const saveEvent = () => {
+    Toast({msg: "Add Details Successfully", success: true})
+    // fetchUserData();
   };
+
+  // const checkboxChange = (e) => {
+  //   if(!e.checked) {
+  //     console.log("name: ", e.target.value);
+  //   }
+  //   e.target.checked = !e.checked;
+  // }
 
   return (
     <>
       <Layout className="profile-page-layout">
         <Sidebar />
         <Content className="profile-page-content">
-          {/*<div className="margin-10-px order-list-of-card">*/}
           <div>
             <Card>
               <div className="main-content">
@@ -47,12 +76,13 @@ function Profile() {
                     {isReadOnly ? (
                       <button
                         className="editbtn"
-                        onClick={() => setIsReadOnly(!isReadOnly)}
+                        onClick={() => {setIsReadOnly(!isReadOnly); setEditBtnVisiblity("btn-display-block")}}
                       >
                         Edit
                       </button>
                     ) : (
-                      <button className="editbtn" onClick={() => cancelEvent()}>
+                      
+                      <button className="editbtn"  onClick={() => cancelEvent()}>
                         Cancel
                       </button>
                     )
@@ -82,14 +112,16 @@ function Profile() {
                     />{" "}
                     <br />
                     <br />
-                    <label className="form-input-label">Gender</label>
-                    <br />
-                    <br />
+                  
+                    {/*
+                    <div onChange={checkboxChange}>
                     <input
                       className="form-input-radio-btn"
                       type="radio"
                       name="gender"
                       value="male"
+                      // onChange={(e)=>e.target.checked}
+                      // checked={userData.gender === "male"}
                     />
                     <label className="form-input-radio"> Male </label>
                     <input
@@ -97,11 +129,12 @@ function Profile() {
                       type="radio"
                       name="gender"
                       value="female"
-                      defaultChecked={isReadOnly}
+                      // onChange={(e)=>e.target.checked}
+                      // checked={userData.gender === "female"}
                     />
                     <label className="form-input-radio"> Female</label>
-                    <br />
-                    <br />
+                    </div>*/}
+                    
                     <label className="form-input-label">Email Address</label>
                     <br />
                     <br />
@@ -127,7 +160,8 @@ function Profile() {
                       value={userData.phone}
                       placeholder="mobile number"
                       readOnly={isReadOnly}
-                    />
+                    /><br/>
+                    <button className={editBtnVisiblity} onClick={updateUserData}>Save</button>
                   </form>
                 </div>
               </div>
