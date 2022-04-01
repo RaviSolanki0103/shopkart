@@ -1,59 +1,42 @@
-/* .profile-page-layout {
-    min-height: 82.3vh;
+.profile-page-layout {
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
 }
 
-.Profile-card{
-  padding: 15px;
-}
-
-.Profile-card-link{
-  background-color: white;
-  text-align: left;
-  display: block;
-  font-size: 20px;
-}
-
-.Profile-card-link:hover{
-  color:rgb(54, 11, 173);
-} */
 .main-content{
   float: center;
-  margin-top:-80vh;
-  margin-left:28vh;
 }
 .main-title {
-      font-weight: bold;
-      font-size:25px;
-      text-align: left;
-      margin-left: 60px;
+  font-weight: bold;
+  font-size:25px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .profile-form{
   text-align:left;
-  margin-left:50px;
   border: 1px solid rgba(71, 69, 69, 0.274);
   border-radius: 5px;
-  height: 50vh;
-  width:80vh;
   padding: 15px;
   background-color:white;
 }
 
 .editbtn{
-      border: none;
-      color: #1890ff;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;  
-  }
+  border: none;
+  color: #1890ff;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;  
+}
 
 .form-input{
   border-radius: 5px;
   background-color:rgba(235, 231, 226, 0.671);
-      width: 200px;
-      padding: 5px;
-      border:none;
-    margin-left:20px;
+  margin-left: 20px;
+  padding: 5px;
+  border:none;
+   
 }
 
 .form-input:focus{
@@ -80,4 +63,80 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+ 
+  .main-title{
+    
+    font-size: 19px;
+  }
+  .profile-form{
+   
+    padding: 8px;
+  }
+  .form-input-label{
+    font-size:15px;
+  font-weight: bold;
+  margin-left: 10px !important;
+  }
+  .form-input{
+    width: 200px !important;
+    max-width: 200px !important;
+    margin-left:10px;
+  }
+
+  .profile-page-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-page-content {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+
+  .main-title{
+    font-size: 18px;
+  }
+  .form-input-label{
+    font-size:15px;
+  font-weight: bold;
+  margin-left: 10px !important;
+  }
+  .form-input{
+    width: 170px !important;
+    margin-left:10px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .main-content {
+    padding:10px;
+   }
+   .main-title{
+     font-size: 18px;
+   }
+   .form-input-label{
+     font-size:12px;
+   font-weight: bold;
+   margin-left: 10px !important;
+   }
+   .form-input-radio{
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 10px;
+  }
+   .form-input{
+     width: 170px !important;
+     margin-left:10px;
+   }
+}
+
+
+@media only screen and (max-width: 375px) {
+  .form-input{
+    margin-bottom: 3%;
+  }
 }

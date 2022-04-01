@@ -6,20 +6,23 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Input, Badge } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { openLogin } from "../../redux/actions/index";
+import {
+  openLogin,
+  loginStatus,
+  loginToken,
+  sendOrderDataToTrack,
+} from "../../redux/actions/index";
 import Login from "../login/Login";
 const { SubMenu } = Menu;
 
 export default function Navbar() {
   const [current, setCurrent] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [loginStatus, setLoginStatus] = useState(false);
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const myaction = useSelector((state) => state);
+  const loginCurrentStatus = useSelector((state) => state.loginStatus);
 
   const handleClick = (e) => {
     setCurrent(e.key);
@@ -42,17 +45,33 @@ export default function Navbar() {
           if login then show account and cart options else
           show login option
         */}
-        {loginStatus ? (
+        {loginCurrentStatus ? (
           <Menu onClick={handleClick} selectedKeys={current} mode="horizontal">
             {/* account menu with available options */}
             <SubMenu key="account" icon={<UserOutlined />} title="Account">
               <Menu.ItemGroup title="account">
-                <Menu.Item key="setting:1"><Link to="/profile">Profile</Link></Menu.Item>
-                <Menu.Item key="setting:2">Orders</Menu.Item>
-                <Menu.Item key="setting:3">wishlist</Menu.Item>
+                <Menu.Item key="setting:1">
+                  <Link to="/profile">Profile</Link>
+                </Menu.Item>
+                <Menu.Item key="setting:2">
+                  <Link to="/order">Orders</Link>
+                </Menu.Item>
+                <Menu.Item key="setting:3">
+                  <Link to="/wishlist">Wishlist</Link>
+                </Menu.Item>
               </Menu.ItemGroup>
               <Menu.ItemGroup title="logout">
-                <Menu.Item key="setting:4"><Link to ="/">Logout</Link></Menu.Item>
+                <Menu.Item key="setting:4">
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      dispatch(loginStatus(false));
+                      dispatch(loginToken(null));
+                    }}
+                  >
+                    Logout
+                  </Link>
+                </Menu.Item>
               </Menu.ItemGroup>
             </SubMenu>
             {/* cart button with badge  */}
@@ -68,14 +87,11 @@ export default function Navbar() {
             className="login-btn"
             onClick={() => {
               dispatch(openLogin(true));
-              // navigate("/login");
-              // setLoginStatus(myaction);
-              setLoginStatus(true);
             }}
           />
         )}
       </div>
-      <div style={{display:"none"}} >
+      <div style={{ display: "none" }}>
         <Login />
       </div>
     </nav>

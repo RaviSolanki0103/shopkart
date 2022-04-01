@@ -17,6 +17,7 @@ function ProductPage() {
   const [sizeValue, setSizeValue] = useState("");
   const [productData, setproductData] = useState([]);
   const [colorValue, setColorValue] = useState([]);
+  const [color, setColor] = useState([]);
   const [first, setfirst] = useState(false);
   const [cartdata, setcartdata] = useState([]);
   const getwishlistdata = () => {
@@ -43,7 +44,7 @@ function ProductPage() {
       },
     });
   };
-  // delet
+  // delete
   const delet = (item) => {
     console.log("deledt caleddddd");
 
@@ -64,7 +65,7 @@ function ProductPage() {
   }, [first]);
 
   const checker = (x) => {
-    if (colorValue.length == 0) {
+    if (colorValue.length === 0) {
       addwishlist(x);
     } else {
       for (let i = 0; i < colorValue.length; i++) {
@@ -141,10 +142,10 @@ function ProductPage() {
                 >
                   <HeartFilled
                     className={
-                      colorValue.length == 0
+                      colorValue.length === 0
                         ? "redcolor"
-                        : colorValue.map((item, key) =>
-                            item.product_id._id == x._id
+                        : colorValue.map((item) =>
+                            item.product_id._id === x._id
                               ? "greycolor"
                               : "redcolor"
                           )
@@ -174,13 +175,13 @@ function ProductPage() {
                           <button
                             key={key}
                             className={
-                              colorValue === sel_col
+                              color === sel_col
                                 ? "select-color-btn2"
                                 : "select-color-btn"
                             }
                             onClick={() => {
                               setsizeToggle(!sizeToggle);
-                              setColorValue(sel_col);
+                              setColor(sel_col);
                             }}
                           >
                             {sel_col}

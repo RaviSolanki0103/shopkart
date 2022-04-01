@@ -7,10 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BASEURL } from "../../utils/config";
 
 function ProductListing() {
-  const { Meta } = Card;
   const { Panel } = Collapse;
-
-  const [status, setStatus] = useState(true);
 
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
@@ -24,16 +21,9 @@ function ProductListing() {
   const getwishlistdata = () => {
     axios.get("/api/wishlist").then((res) => {
       setColorValue(res.data);
-      console.log(
-        res.data.map((x) => console.log(x.product_id._id, "KOKOK")),
-        "dddddddddddddddddddddddddd"
-      );
     });
   };
   const addwishlist = (item) => {
-    // axios.post(`/api/wishlist`);
-    console.log("wishlist caleddddd");
-
     axios({
       method: "post",
       url: "/api/wishlist",
@@ -43,10 +33,8 @@ function ProductListing() {
       },
     });
   };
-  const delet = (item) => {
-    console.log("deledt caleddddd");
-    // console.log(item,"9r3/ab");
-    axios.delete(`/api/wishlist/${item}`).then((res) => {});
+  const deleteWishlist = async (item) => {
+    await axios.delete(`/api/wishlist/${item}`).then((res) => {});
   };
   useEffect(() => {
     getwishlistdata();
@@ -81,16 +69,16 @@ function ProductListing() {
         err && console.log(err, "SHOW PRODUCT ERROR");
       });
   }, [first]);
-  const checker = (x) => {
-    if (colorValue.length == 0) {
-      addwishlist(x);
+  const checker = (item) => {
+    if (colorValue.length === 0) {
+      addwishlist(item);
     } else {
       for (let i = 0; i < colorValue.length; i++) {
-        if (colorValue[i].product_id._id === x) {
-          delet(x);
+        if (colorValue[i].product_id._id === item) {
+          deleteWishlist(item);
           break;
-        } else if (i == colorValue.length - 1) {
-          addwishlist(x);
+        } else if (i === colorValue.length - 1) {
+          addwishlist(item);
         } else {
         }
       }
@@ -161,7 +149,7 @@ function ProductListing() {
                 : param.id === "women"
                 ? womenData
                 : kidsData
-              ).map((x, key) => {
+              ).map((product, key) => {
                 return (
                   <div>
                     <Card
@@ -172,33 +160,33 @@ function ProductListing() {
                         <img
                           alt="example"
                           className="img"
-                          src={`${BASEURL}/uploads/${x.product_img}`}
+                          src={`${BASEURL}/uploads/${product.product_img}`}
                         />
                       }
                       onClick={() => {
-                        navigate(`/product/${x._id}`);
+                        navigate(`/product/${product._id}`);
                       }}
                     >
                       <div>
-                        <p className="title">{x.name}</p>
-                        <p className="price">₹ {x.price}</p>
+                        <p className="title">{product.name}</p>
+                        <p className="price">₹ {product.price}</p>
                       </div>
                     </Card>
                     {
                       <button
                         className="wishlist-btn-sp"
                         onClick={() => {
-                          checker(x._id);
+                          checker(product._id);
 
                           setfirst(!first);
                         }}
                       >
                         <HeartFilled
                           className={
-                            colorValue.length == 0
+                            colorValue.length === 0
                               ? "redcolor"
                               : colorValue.map((item) =>
-                                  item.product_id._id == x._id
+                                  item.product_id._id === product._id
                                     ? "greycolor"
                                     : "redcolor"
                                 )

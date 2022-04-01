@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Toast from "../../utils/Toast";
 import "./addressform.css";
 
 function AddressForm(props) {
@@ -8,7 +9,7 @@ function AddressForm(props) {
        props.cancel()
     }
 
-    const [records, setRecords] = useState(false);
+    const [records, setRecords] = useState([]);
     const [useraddress, setUseraddress] = useState({
         name: "",
         email: "",
@@ -33,11 +34,11 @@ function AddressForm(props) {
             useraddress.address &&
             useraddress.pincode
         ) {
-            alert(`Your data is saved`);
+            Toast({msg: "Add Address Successfully", success: true})
             console.log(useraddress);
             setRecords(true);
         } else {
-            alert("Please Fill All The Details Given Below");
+            Toast({msg: "Fill all Details", success: false})
             setRecords(false);
         }
         setUseraddress(
@@ -72,22 +73,22 @@ function AddressForm(props) {
                     <button className="addform-cancel" onClick={closeForm}>Cancel</button>
                 </form>
             </div>
-           { /*<div>
+           <div>
             {
                 records.map((currElem)=>{
                     const {id,name,email,mobile,address,pincode} = currElem;
                     return(
                         <div>
-                        <p>{currElem.name}</p>
-                        <p>{currElem.email}</p>
-                        <p>{currElem.mobile}</p>
-                        <p>{currElem.address}</p>
-                        <p>{currElem.pincode}</p>
+                        <p>{name}</p>
+                        <p>{email}</p>
+                        <p>{mobile}</p>
+                        <p>{address}</p>
+                        <p>{pincode}</p>
                         </div>
                     )
                 })
             }
-        </div>*/}
+        </div>
         </>
     )
 }

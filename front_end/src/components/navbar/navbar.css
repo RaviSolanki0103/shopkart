@@ -8,6 +8,7 @@
   display: flex;
   height: var(--header-size);
   justify-content: space-around;
+  align-items: center;
 }
 
 .navbar-menu {
@@ -26,11 +27,12 @@
 }
 
 .navbar-icon {
-  background-image: url("../../logo.svg");
+  background-image: url("../../kart.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   width: 10%;
+  height: 85%;
 }
 
 .navbar-search {
