@@ -1,4 +1,4 @@
-const { DATA_INSERT_MESSAGE, DATA_INSERT_FAILD, INVALID_LOGIN, LOGIN_SUCCESS, INVALID_LOGIN_CREDENTIAL, DATA_FETCH_MESSAGE } = require("../config/responsemessage");
+const { DATA_INSERT_MESSAGE, DATA_INSERT_FAILD, INVALID_LOGIN, LOGIN_SUCCESS, INVALID_LOGIN_CREDENTIAL, DATA_FETCH_MESSAGE, DATA_UPDATE_MESSAGE, DATA_UPDATE_FAILED } = require("../config/responsemessage");
 const { CREATED, BAD_REQUEST, SUCCESS, NOT_FOUND } = require("../config/statuscode");
 const responseData = require("../helper/response");
 const User = require("../models/user");
@@ -75,6 +75,21 @@ exports.getUserById = async (req, res, next) => {
   }));
 }
 
+//update user 
+exports.updateUser= async (req, res, next) => {
+  await User.findByIdAndUpdate(req.userId,req.body,{returnNewDocument : true}).then(result=>responseData({
+    res,
+    status: SUCCESS,
+    message: DATA_UPDATE_MESSAGE,
+    result
+  })).catch(err=>  responseData({
+    res,
+    status: DATA_UPDATE_FAILED,
+    message: err.message,
+  }));
+
+}
+
 //forgot password
 exports.emailSend = async (req, res, next) => {
   const data =  await User.findOne({email});
@@ -93,7 +108,6 @@ exports.emailSend = async (req, res, next) => {
     response.statusText = "error"
     response.message= "Email ID does not exist";
   }
-  
 };
 
 exports.changePassword = async (req, res, next) => {

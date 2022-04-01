@@ -1,5 +1,7 @@
 const DATA_FETCH_MESSAGE = "Data Fetched Successfully...";
 const DATA_INSERT_MESSAGE = "Data Inserted Successfully...";
+const DATA_UPDATE_MESSAGE = "Data Updated Successfully...";
+const DATA_UPDATE_FAILED = "Data Updation Failed...";
 const DATA_NOT_FOUND = "Data Not Found...";
 const DATA_INSERT_FAILD = "Something went wrong!...";
 const INVALID_LOGIN = "Invalid Login Details";
@@ -13,5 +15,7 @@ module.exports = {
   DATA_INSERT_FAILD,
   INVALID_LOGIN,
   LOGIN_SUCCESS,
-  INVALID_LOGIN_CREDENTIAL
+  INVALID_LOGIN_CREDENTIAL,
+  DATA_UPDATE_MESSAGE,
+  DATA_UPDATE_FAILED
 };
