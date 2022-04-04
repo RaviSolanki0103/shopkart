@@ -41,6 +41,7 @@ exports.addWishlist = async (req, res) => {
   const { product_id } = req.body;
   const user_id = req.userId;
   const wishlist_item = new Wishlist({ user_id, product_id });
+  console.log(wishlist_item,"9090909090909");
   await wishlist_item
     .save()
     .then((result) => {

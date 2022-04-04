@@ -37,8 +37,6 @@ router.delete("/wishlist/:id", middleware, controller.wishlist.deleteWishlist);
 router.get("/cart", middleware, controller.cart.getCart);
 router.post("/cart", middleware, controller.cart.addCart);
 
-
-
 // product routes
 router.post(
   "/products",
@@ -52,9 +50,6 @@ router.get(
   controller.product.getCategoryProduct
 );
 
-
-
-
 //get userdetail only
 router.get("/userdetail", (req, res) => {
   User.find({})
@@ -63,35 +58,6 @@ router.get("/userdetail", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
-
-
-// cart -------------------------------------
-
-// router.get("/cart", (req, res) => {
-//   Cart_item.find({ user_id: "6241b1880cbdba7cd682d941" })
-//     .populate(["product_id"])
-//     .then((data) => {
-//       res.send(data);
-//     })
-//     .catch((err) => console.log(err));
-// });
-
-
-// router.post("/cart", (req, res) => {
-//   try {
-//     const { product_id, quantity, user_id } = req.body;
-//     const cart_item = new Cart_item({ product_id, quantity, user_id });
-//     const add_to_cart = cart_item.save();
-
-//     if (add_to_cart) {
-//       res.status(201).json({ message: "add item successfuly" });
-//     } else {
-//       res.status(500).json({ message: "faild" });
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
 router.delete("/cart/:id", (req, res) => {
   const pro_id = req.params.id;
@@ -103,4 +69,3 @@ router.delete("/cart/:id", (req, res) => {
 
 router.get("/getallproducts", controller.product.getAllProduct);
 module.exports = router;
-

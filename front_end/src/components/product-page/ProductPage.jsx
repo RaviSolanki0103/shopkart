@@ -30,8 +30,8 @@ function ProductPage() {
           authorization: token,
         },
       })
-      .then((res) => {
-        setColorValue(res.data);
+      .then(async (res) => {
+        setColorValue(res.data.data);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -118,13 +118,9 @@ function ProductPage() {
       .then((res) => {
         typeof res.data.data === "undefined"
           ? addToCart_data(item)
-          : // res.data.status === 200
-          // res.data.data.filter((x) => item === x.product_id._id);
-          // {
-          res.data.data.filter((x) => item === x.product_id._id).length
+          : res.data.data.filter((x) => item === x.product_id._id).length
           ? console.log("PRODUCT ALREADY EXIST")
           : addToCart_data(item);
-        // }
       });
   };
   const addToCart_data = (item) => {
@@ -142,7 +138,7 @@ function ProductPage() {
     });
   };
 
-  console.log(colorValue);
+  console.log(colorValue, "OKIOKJIOOIUGY");
 
   return (
     <div className="outer-div">
@@ -183,9 +179,7 @@ function ProductPage() {
                 >
                   <HeartFilled
                     className={
-                      colorValue.length === 0 ||
-                      typeof colorValue === "undefined" ||
-                      console.log(typeof colorValue, "LLLLLPPPP")
+                      typeof colorValue === "undefined"
                         ? "redcolor"
                         : colorValue.map((item) =>
                             item.product_id._id === x._id
