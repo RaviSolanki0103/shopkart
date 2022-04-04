@@ -1,56 +1,86 @@
 import React, { useState } from "react";
+import axios from "../../utils/axios-default-baseurl";
+import { useSelector } from "react-redux";
 import Toast from "../../utils/Toast";
 import "./addressform.css";
 
 function AddressForm(props) {
+  const token = useSelector((state) => state.loginToken);
+  const [userAddress, setUserAddress] = useState({});
   const closeForm = (e) => {
     e.preventDefault();
     props.cancel();
   };
 
-  const [records, setRecords] = useState([]);
-  const [useraddress, setUseraddress] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    address: "",
-    pincode: "",
-  });
-
-  const handleInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUseraddress({ ...useraddress, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
+  const updateUserAddress = async (e) => {
     e.preventDefault();
-    if (
-      useraddress.name &&
-      useraddress.email &&
-      useraddress.mobile &&
-      useraddress.address &&
-      useraddress.pincode
-    ) {
-      Toast({ msg: "Add Address Successfully", success: true });
-      console.log(useraddress);
-      setRecords(true);
-    } else {
-      Toast({ msg: "Fill all Details", success: false });
-      setRecords(false);
-    }
-    setUseraddress({
-      name: "",
-      email: "",
-      mobile: "",
-      address: "",
-      pincode: "",
-    });
-
-    const newRecords = { ...useraddress, id: new Date().getTime().toString() };
-    console.log(setRecords);
-    setRecords([...records, newRecords]);
+    console.log("user address updated....", JSON.stringify(userAddress));
+    await axios
+      .patch(
+        "/user",
+        {
+          $push: {
+            addresses: {
+              address: userAddress.address,
+              pincode: userAddress.pincode,
+            },
+          },          
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+        }
+      )
+      .then((res) => console.log("response from update data", res))
+      .catch((err) => console.log("error: ", err));
+    // Toast({ msg: "Add Address Successfully", success: true })
   };
+
+  const [records, setRecords] = useState([]);
+  // const [useraddress, setUseraddress] = useState({
+  //   name: "",
+  //   email: "",
+  //   mobile: "",
+  //   address: "",
+  //   pincode: "",
+  // });
+
+  // const handleInput = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   setUseraddress({ ...useraddress, [name]: value });
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     useraddress.name &&
+  //     useraddress.email &&
+  //     useraddress.mobile &&
+  //     useraddress.address &&
+  //     useraddress.pincode
+  //   ) {
+  //     Toast({ msg: "Add Address Successfully", success: true });
+  //     console.log(useraddress);
+  //     setRecords(true);
+  //   } else {
+  //     Toast({ msg: "Fill all Details", success: false });
+  //     setRecords(false);
+  //   }
+  //   setUseraddress({
+  //     name: "",
+  //     email: "",
+  //     mobile: "",
+  //     address: "",
+  //     pincode: "",
+  //   });
+
+  //   const newRecords = { ...useraddress, id: new Date().getTime().toString() };
+  //   console.log(setRecords);
+  //   setRecords([...records, newRecords]);
+  // };
 
   return (
     <>
@@ -61,11 +91,13 @@ function AddressForm(props) {
           <br />
           <input
             className="addform-input"
-            onChange={handleInput}
+            value={userAddress.fname}
+            onChange={(e) =>
+              setUserAddress({ ...userAddress, fname: e.target.value })
+            }
             name="name"
             type="text"
             placeholder="Enter Your Name"
-            value={useraddress.name}
             required
           />{" "}
           <br />
@@ -75,11 +107,13 @@ function AddressForm(props) {
           <br />
           <input
             className="addform-input"
-            onChange={handleInput}
             type="email"
             name="email"
             placeholder="Enter Your Email Address"
-            value={useraddress.email}
+            value={userAddress.email}
+            onChange={(e) =>
+              setUserAddress({ ...userAddress, email: e.target.value })
+            }
           />
           <br />
           <br />
@@ -88,22 +122,26 @@ function AddressForm(props) {
           <br />
           <input
             className="addform-input"
-            onChange={handleInput}
             type="number"
             name="mobile"
             placeholder="Enter Your Mobile Number"
-            value={useraddress.mobile}
+            value={userAddress.mobile}
+            onChange={(e) =>
+              setUserAddress({ ...userAddress, mobile: e.target.value })
+            }
           />
           <br /> <br />
           <label className="addform-input-label"> Address</label> <br />
           <br />
           <input
             className="addform-input"
-            onChange={handleInput}
             type="text"
             name="address"
             placeholder="Enter Your Address"
-            value={useraddress.address}
+            value={userAddress.address}
+            onChange={(e) =>
+              setUserAddress({ ...userAddress, address: e.target.value })
+            }
           />
           <br />
           <br />
@@ -112,15 +150,17 @@ function AddressForm(props) {
           <br />
           <input
             className="addform-input"
-            onChange={handleInput}
             type="number"
             name="pincode"
             placeholder="Enter pincode"
-            value={useraddress.pincode}
+            value={userAddress.pincode}
+            onChange={(e) =>
+              setUserAddress({ ...userAddress, pincode: e.target.value })
+            }
           />
           <br />
           <br />
-          <button className="addform-save" onClick={handleSubmit}>
+          <button className="addform-save" onClick={updateUserAddress}>
             Save
           </button>
           <button className="addform-cancel" onClick={closeForm}>
@@ -130,7 +170,7 @@ function AddressForm(props) {
       </div>
       <div className="user-add-details">
         {records.map((currElem) => {
-          const { id, name, address, pincode } = currElem;
+          const { name, address, pincode } = currElem;
           return (
             <div>
               <div className="dropdown-container" tabIndex="-1">

@@ -49,10 +49,10 @@ function Profile() {
     setIsReadOnly(!isReadOnly);
     setEditBtnVisiblity("btn-display-none")
   }
-  const saveEvent = () => {
-    Toast({msg: "Add Details Successfully", success: true})
-    // fetchUserData();
-  };
+  // const saveEvent = () => {
+  //   Toast({msg: "Add Details Successfully", success: true})
+  //   // fetchUserData();
+  // };
 
   // const checkboxChange = (e) => {
   //   if(!e.checked) {
@@ -166,7 +166,7 @@ function Profile() {
                       value={userData.phone}
                       placeholder="mobile number"
                       readOnly={isReadOnly}
-                    /><br/>
+                    /><br/><br/>
                     <button className={editBtnVisiblity} onClick={updateUserData}>Save</button>
                   </form>
                 </div>
