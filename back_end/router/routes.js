@@ -5,7 +5,7 @@ const middleware = require("../middleware/auth");
 const upload = require("../config/multerconfig");
 const Wishlist = require("../models/wishlist");
 const Cart_item = require("../models/cart");
-const User = require("../models/userSchema");
+const User = require("../models/user");
 const otp = require("../models/otp");
 
 

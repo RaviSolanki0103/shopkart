@@ -4,8 +4,11 @@ import Sidebar from "../../utils/sidebar/Sidebar";
 import axios from "axios";
 import "./WishlistCard.css";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 function WishlistMain() {
+  const token = useSelector((state) => state.loginToken);
+
   const [wishlistdata, setwishlistdata] = useState([]);
   const [first, setfirst] = useState(true);
 
@@ -15,12 +18,18 @@ function WishlistMain() {
   };
 
   useEffect(() => {
-    axios.get("/api/wishlist").then((res) => {
-      setwishlistdata(res.data);
-      console.log(res.data, "res");
-    });
+    axios
+      .get("/api/wishlist", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        setwishlistdata(res.data);
+        console.log(res.data, "res");
+      });
   }, [first]);
-  console.log(wishlistdata, "wishlist data-----------");
 
   return (
     <div className="wishlist-sider-body-containner">
