@@ -29,7 +29,7 @@ function ProductCategory() {
         },
       })
       .then((res) => {
-        setColorValue(res.data);
+        setColorValue(res.data.data);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -118,11 +118,10 @@ function ProductCategory() {
     getwishlistdata();
   }, [first]);
 
-  /**
-   * Handle Deletion and Addition of Product in Wishlist
-   */
   const handleWishlist = (productId) => {
-    colorValue.filter((data) => data.product_id._id === productId).length
+    colorValue.length === 0 || typeof colorValue === "undefined"
+      ? addwishlist(productId)
+      : colorValue.filter((data) => data.product_id._id === productId).length
       ? deleteWishlist(productId)
       : addwishlist(productId);
   };
@@ -176,7 +175,8 @@ function ProductCategory() {
                           colorValue.length === 0 ||
                           typeof colorValue === "undefined"
                             ? "redcolor"
-                            : colorValue.map((item) =>
+                            : colorValue &&
+                              colorValue.map((item) =>
                                 item.product_id._id === men._id
                                   ? "greycolor"
                                   : "redcolor"
@@ -240,7 +240,8 @@ function ProductCategory() {
                         colorValue.length === 0 ||
                         typeof colorValue === "undefined"
                           ? "redcolor"
-                          : colorValue.map((item) =>
+                          : colorValue &&
+                            colorValue.map((item) =>
                               item.product_id._id === women._id
                                 ? "greycolor"
                                 : "redcolor"
@@ -301,7 +302,8 @@ function ProductCategory() {
                         colorValue.length === 0 ||
                         typeof colorValue === "undefined"
                           ? "redcolor"
-                          : colorValue.map((item) =>
+                          : colorValue &&
+                            colorValue.map((item) =>
                               item.product_id._id === kid._id
                                 ? "greycolor"
                                 : "redcolor"

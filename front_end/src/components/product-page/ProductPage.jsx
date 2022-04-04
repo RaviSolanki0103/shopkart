@@ -21,6 +21,7 @@ function ProductPage() {
   const [color, setColor] = useState([]);
   const [first, setfirst] = useState(false);
   const token = useSelector((state) => state.loginToken);
+
   const getwishlistdata = () => {
     axios
       .get("/api/wishlist", {
@@ -55,7 +56,7 @@ function ProductPage() {
     }).catch((err) => {
       if (err.response.status === 401) {
         Toast({
-          msg: "Please Login"
+          msg: "Please Login",
         });
         setColorValue([]);
       } else {
@@ -77,6 +78,7 @@ function ProductPage() {
   };
 
   useEffect(() => {
+    // getCart();
     getwishlistdata();
     axios
       .get("/api/getallproducts")
@@ -104,16 +106,53 @@ function ProductPage() {
     }
   };
 
+  const getCart = (item) => {
+    console.log(item, "LPLPLPL------");
+    axios
+      .get("/api/cart", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        typeof res.data.data === "undefined"
+          ? addToCart_data(item)
+          : // res.data.status === 200
+          // res.data.data.filter((x) => item === x.product_id._id);
+          // {
+          res.data.data.filter((x) => item === x.product_id._id).length
+          ? console.log("PRODUCT ALREADY EXIST")
+          : addToCart_data(item);
+        // }
+      });
+  };
+  const addToCart_data = (item) => {
+    axios({
+      method: "post",
+      url: "/api/cart",
+      data: {
+        product_id: `${item}`,
+        quantity: 1,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+    });
+  };
+
+  console.log(colorValue);
+
   return (
     <div className="outer-div">
       {productData.map((x, key) => {
         return (
           param.id === x._id && (
-            <div className="img-div">
+            <div key={key}>
               <Card
                 className="inner-card-sp"
                 hoverable
-                key={key}
                 cover={
                   <img
                     className="img-sp"
@@ -123,7 +162,7 @@ function ProductPage() {
                 }
               >
                 <div className="action-btn">
-                  <button>
+                  <button onClick={() => getCart(x._id)}>
                     <ShoppingCartOutlined />
                     ADD TO CART
                   </button>
@@ -144,7 +183,9 @@ function ProductPage() {
                 >
                   <HeartFilled
                     className={
-                      colorValue.length === 0
+                      colorValue.length === 0 ||
+                      typeof colorValue === "undefined" ||
+                      console.log(typeof colorValue, "LLLLLPPPP")
                         ? "redcolor"
                         : colorValue.map((item) =>
                             item.product_id._id === x._id
@@ -171,9 +212,10 @@ function ProductPage() {
                   <div className="col-siz">
                     <p>Select Color</p>
                     <div className="color">
-                      {x.color.map((sel_col) => {
+                      {x.color.map((sel_col, key) => {
                         return (
                           <button
+                            key={key}
                             className={
                               color === sel_col
                                 ? "select-color-btn2"
@@ -193,9 +235,10 @@ function ProductPage() {
                   <div className="col-siz">
                     <p>Select Size</p>
                     <div className="size">
-                      {x.size.map((sel_size) => {
+                      {x.size.map((sel_size, key) => {
                         return (
                           <button
+                            key={key}
                             className={
                               sizeValue === sel_size
                                 ? "select-size-btn2"
