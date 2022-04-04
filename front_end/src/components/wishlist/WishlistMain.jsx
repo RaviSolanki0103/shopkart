@@ -16,8 +16,8 @@ function WishlistMain() {
 
   useEffect(() => {
     axios.get("/api/wishlist").then((res) => {
-      setwishlistdata(res.data);
-      console.log(res.data, "res");
+      setwishlistdata(res.data.data);
+      console.log(res.data.data, "res");
     });
   }, [first]);
   console.log(wishlistdata, "wishlist data-----------");

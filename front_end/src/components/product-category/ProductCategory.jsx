@@ -26,7 +26,7 @@ function ProductCategory() {
         },
       })
       .then((res) => {
-        setColorValue(res.data);
+        setColorValue(res.data.data);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -107,20 +107,27 @@ function ProductCategory() {
       });
   }, [first]);
 
-  const checker = (item) => {
-    if (colorValue.length === 0) {
-      addwishlist(item);
-    } else {
-      for (let i = 0; i < colorValue.length; i++) {
-        if (colorValue[i].product_id._id === item) {
-          deleteWishlist(item);
-          break;
-        } else if (i === colorValue.length - 1) {
-          addwishlist(item);
-        } else {
-        }
-      }
-    }
+  // const checker = (item) => {
+  //   if (colorValue && colorValue.length === 0) {
+  //     addwishlist(item);
+  //   } else {
+  //     for (let i = 0; i < colorValue.length; i++) {
+  //       if (colorValue[i].product_id._id === item) {
+  //         deleteWishlist(item);
+  //         break;
+  //       } else if (i === colorValue.length - 1) {
+  //         addwishlist(item);
+  //       } else {
+  //       }
+  //     }
+  //   }
+  // };
+  const checker = (productId) => {
+    typeof colorValue === "undefined"
+      ? addwishlist(productId)
+      : colorValue.filter((data) => data.product_id._id === productId).length
+      ? deleteWishlist(productId)
+      : addwishlist(productId);
   };
 
   return (
@@ -170,9 +177,10 @@ function ProductCategory() {
                     >
                       <HeartFilled
                         className={
-                          colorValue.length === 0
+                       colorValue.length === 0
                             ? "redcolor"
-                            : colorValue.map((item) =>
+                            : colorValue &&
+                              colorValue.map((item) =>
                                 item.product_id._id === men._id
                                   ? "greycolor"
                                   : "redcolor"
@@ -234,9 +242,10 @@ function ProductCategory() {
                   >
                     <HeartFilled
                       className={
-                        colorValue.length === 0
+                        colorValue && colorValue.length === 0
                           ? "redcolor"
-                          : colorValue.map((item) =>
+                          : colorValue &&
+                            colorValue.map((item) =>
                               item.product_id._id === women._id
                                 ? "greycolor"
                                 : "redcolor"
@@ -295,9 +304,10 @@ function ProductCategory() {
                   >
                     <HeartFilled
                       className={
-                        colorValue.length === 0
+                        colorValue && colorValue.length === 0
                           ? "redcolor"
-                          : colorValue.map((item) =>
+                          : colorValue &&
+                            colorValue.map((item) =>
                               item.product_id._id === kid._id
                                 ? "greycolor"
                                 : "redcolor"

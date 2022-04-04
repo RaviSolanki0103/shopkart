@@ -9,6 +9,8 @@ import "./productpage.css";
 import { BASEURL } from "../../utils/config";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Toast from "../../utils/Toast";
 
 function ProductPage() {
   const param = useParams();
@@ -20,35 +22,64 @@ function ProductPage() {
   const [color, setColor] = useState([]);
   const [first, setfirst] = useState(false);
   const [cartdata, setcartdata] = useState([]);
+  const token = useSelector((state) => state.loginToken);
+
   const getwishlistdata = () => {
-    axios.get("/api/wishlist").then((res) => {
-      setColorValue(res.data);
-    });
+    axios
+      .get("/api/wishlist", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        setColorValue(res.data.data);
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          setColorValue([]);
+        } else {
+          Toast({ msg: err.message, success: false });
+        }
+      });
   };
   const getcartdata = () => {
-    axios.get("/api/cart").then((res) => {
-      setcartdata(res.data);
-      // console.log(res.data,"cart dataaaaaa");
-    });
+    axios
+      .get("/api/cart", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        res.data.status === 200 && setcartdata(res.data.data);
+        // setcartdata(res.data.data);
+      });
   };
 
   const addwishlist = (item) => {
-    console.log("wishlist caleddddd");
-
     axios({
       method: "post",
       url: "/api/wishlist",
       data: {
         product_id: `${item}`,
-        user_id: "6241b1880cbdba7cd682d941",
+      },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
       },
     });
   };
   // delete
   const delet = (item) => {
-    console.log("deledt caleddddd");
-
-    axios.delete(`/api/wishlist/${item}`).then((res) => {});
+    axios
+      .delete(`/api/wishlist/${item}`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {});
   };
 
   useEffect(() => {
@@ -80,16 +111,26 @@ function ProductPage() {
     }
   };
 
-  const addToCart = (item) => {
-    console.log(item, "dssssssvsdv");
-    axios.get("/api/cart").then((res) => {
-      const result = res.data.filter((x) => item === x.product_id._id);
-      {
-        result.length
+  const getCart = (item) => {
+    console.log(item, "LPLPLPL------");
+    axios
+      .get("/api/cart", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        typeof res.data.data === "undefined"
+          ? addToCart_data(item)
+          : // res.data.status === 200
+          // res.data.data.filter((x) => item === x.product_id._id);
+          // {
+          res.data.data.filter((x) => item === x.product_id._id).length
           ? console.log("PRODUCT ALREADY EXIST")
           : addToCart_data(item);
-      }
-    });
+        // }
+      });
   };
   const addToCart_data = (item) => {
     axios({
@@ -97,8 +138,11 @@ function ProductPage() {
       url: "/api/cart",
       data: {
         product_id: `${item}`,
-        user_id: "6241b1880cbdba7cd682d941",
-        quantity:1
+        quantity: 1,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
       },
     });
   };
@@ -120,7 +164,7 @@ function ProductPage() {
                 }
               >
                 <div className="action-btn">
-                  <button onClick={() => addToCart(x._id)}>
+                  <button onClick={() => getCart(x._id)}>
                     <ShoppingCartOutlined />
                     ADD TO CART
                   </button>
@@ -160,7 +204,6 @@ function ProductPage() {
       <div className="right-div">
         <div className="inner-right-div">
           {productData.map((x, key) => {
-            console.log(x);
             return (
               param.id === x._id && (
                 <div key={key} className="full-width">
