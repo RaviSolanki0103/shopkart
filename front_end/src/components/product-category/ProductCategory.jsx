@@ -111,9 +111,9 @@ function ProductCategory() {
       });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllProduct();
-  },[])
+  }, []);
   useEffect(() => {
     getwishlistdata();
   }, [first]);
@@ -173,7 +173,8 @@ function ProductCategory() {
                     >
                       <HeartFilled
                         className={
-                          colorValue.length === 0
+                          colorValue.length === 0 ||
+                          typeof colorValue === "undefined"
                             ? "redcolor"
                             : colorValue.map((item) =>
                                 item.product_id._id === men._id
@@ -236,7 +237,8 @@ function ProductCategory() {
                   >
                     <HeartFilled
                       className={
-                        colorValue.length === 0
+                        colorValue.length === 0 ||
+                        typeof colorValue === "undefined"
                           ? "redcolor"
                           : colorValue.map((item) =>
                               item.product_id._id === women._id
@@ -296,7 +298,8 @@ function ProductCategory() {
                   >
                     <HeartFilled
                       className={
-                        colorValue.length === 0
+                        colorValue.length === 0 ||
+                        typeof colorValue === "undefined"
                           ? "redcolor"
                           : colorValue.map((item) =>
                               item.product_id._id === kid._id
