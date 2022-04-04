@@ -3,7 +3,7 @@ import {
   ShoppingCartOutlined,
   ThunderboltFilled,
 } from "@ant-design/icons";
-import { Button, Card } from "antd";
+import { Card } from "antd";
 import React, { useEffect, useState } from "react";
 import "./productpage.css";
 import { BASEURL } from "../../utils/config";
@@ -14,14 +14,12 @@ import Toast from "../../utils/Toast";
 
 function ProductPage() {
   const param = useParams();
-  const [status, setStatus] = useState(true);
   const [sizeToggle, setsizeToggle] = useState(false);
   const [sizeValue, setSizeValue] = useState("");
   const [productData, setproductData] = useState([]);
   const [colorValue, setColorValue] = useState([]);
   const [color, setColor] = useState([]);
   const [first, setfirst] = useState(false);
-  const [cartdata, setcartdata] = useState([]);
   const token = useSelector((state) => state.loginToken);
 
   const getwishlistdata = () => {
@@ -33,27 +31,14 @@ function ProductPage() {
         },
       })
       .then((res) => {
-        setColorValue(res.data.data);
+        setColorValue(res.data);
       })
       .catch((err) => {
         if (err.response.status === 401) {
           setColorValue([]);
         } else {
-          Toast({ msg: err.message, success: false });
+          Toast({ msg: err.message });
         }
-      });
-  };
-  const getcartdata = () => {
-    axios
-      .get("/api/cart", {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: token,
-        },
-      })
-      .then((res) => {
-        res.data.status === 200 && setcartdata(res.data.data);
-        // setcartdata(res.data.data);
       });
   };
 
@@ -68,10 +53,20 @@ function ProductPage() {
         "Content-Type": "application/json",
         authorization: token,
       },
+    }).catch((err) => {
+      if (err.response.status === 401) {
+        Toast({
+          msg: "Please Login",
+        });
+        setColorValue([]);
+      } else {
+        Toast({ msg: err.message });
+      }
     });
   };
+
   // delete
-  const delet = (item) => {
+  const deleteWishlist = (item) => {
     axios
       .delete(`/api/wishlist/${item}`, {
         headers: {
@@ -83,7 +78,7 @@ function ProductPage() {
   };
 
   useEffect(() => {
-    getcartdata();
+    // getCart();
     getwishlistdata();
     axios
       .get("/api/getallproducts")
@@ -101,9 +96,9 @@ function ProductPage() {
     } else {
       for (let i = 0; i < colorValue.length; i++) {
         if (colorValue[i].product_id._id === x) {
-          delet(x);
+          deleteWishlist(x);
           break;
-        } else if (i == colorValue.length - 1) {
+        } else if (i === colorValue.length - 1) {
           addwishlist(x);
         } else {
         }
@@ -146,6 +141,9 @@ function ProductPage() {
       },
     });
   };
+
+  console.log(colorValue);
+
   return (
     <div className="outer-div">
       {productData.map((x, key) => {
@@ -180,13 +178,14 @@ function ProductPage() {
                   className="wishlist-btn-special"
                   onClick={() => {
                     checker(x._id);
-
                     setfirst(!first);
                   }}
                 >
                   <HeartFilled
                     className={
-                      colorValue.length === 0
+                      colorValue.length === 0 ||
+                      typeof colorValue === "undefined" ||
+                      console.log(typeof colorValue, "LLLLLPPPP")
                         ? "redcolor"
                         : colorValue.map((item) =>
                             item.product_id._id === x._id

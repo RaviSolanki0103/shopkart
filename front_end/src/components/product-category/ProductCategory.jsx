@@ -10,13 +10,16 @@ import { useSelector } from "react-redux";
 
 function ProductCategory() {
   const token = useSelector((state) => state.loginToken);
-
   const [menData, setMenData] = useState([]);
   const [womenData, setWomenData] = useState([]);
   const [kidsData, setKidsData] = useState([]);
   const [colorValue, setColorValue] = useState([]);
   const [first, setfirst] = useState(false);
   const navigate = useNavigate();
+
+  /**
+   * Fetch All data from Wishlist collection
+   */
   const getwishlistdata = () => {
     axios
       .get("/api/wishlist", {
@@ -32,17 +35,20 @@ function ProductCategory() {
         if (err.response.status === 401) {
           setColorValue([]);
         } else {
-          Toast({ msg: err.message, success: false });
+          Toast({ msg: err.message });
         }
       });
   };
 
-  const addwishlist = (item) => {
+  /**
+   * Add the product in Wishlist
+   */
+  const addwishlist = (productId) => {
     axios({
       method: "post",
       url: "/api/wishlist",
       data: {
-        product_id: `${item}`,
+        product_id: `${productId}`,
       },
       headers: {
         "Content-Type": "application/json",
@@ -56,14 +62,17 @@ function ProductCategory() {
         });
         setColorValue([]);
       } else {
-        Toast({ msg: err.message, success: false });
+        Toast({ msg: err.message });
       }
     });
   };
-  // delete
-  const deleteWishlist = (item) => {
+
+  /**
+   * Delete the product from Wishlist
+   */
+  const deleteWishlist = (productId) => {
     axios
-      .delete(`/api/wishlist/${item}`, {
+      .delete(`/api/wishlist/${productId}`, {
         headers: {
           "Content-Type": "application/json",
           authorization: token,
@@ -72,58 +81,45 @@ function ProductCategory() {
       .then((res) => {});
   };
 
-  useEffect(() => {
-    getwishlistdata();
-
+  /**
+   * Fetch All data from Product collection
+   */
+  const getAllProduct = () => {
     axios
       .get("/api/getallproducts")
       .then((res) => {
-        let menarray = [];
-        let womenarray = [];
-        let kidarray = [];
-        let arrlen = res.data.data.length;
-        if (arrlen > 0) {
-          for (let cat of res.data.data) {
-            if (cat.category.name === "men") {
-              var c = cat;
-              menarray.push(c);
-            }
-            if (cat.category.name === "women") {
-              var d = cat;
-              womenarray.push(d);
-            }
-            if (cat.category.name === "kids") {
-              var e = cat;
-              kidarray.push(e);
-            }
-          }
-          setMenData(menarray.slice(0, 5));
-          setWomenData(womenarray.slice(0, 5));
-          setKidsData(kidarray.slice(0, 5));
+        if (res.data.data.length > 0) {
+          setMenData(
+            res.data.data
+              .filter((data) => data.category.name === "men")
+              .slice(0, 5)
+          );
+          setWomenData(
+            res.data.data
+              .filter((data) => data.category.name === "women")
+              .slice(0, 5)
+          );
+          setKidsData(
+            res.data.data
+              .filter((data) => data.category.name === "kids")
+              .slice(0, 5)
+          );
         }
       })
       .catch((err) => {
-        console.log(err, "SHOW PRODUCT ERROR");
+        console.log(err);
       });
+  };
+
+  useEffect(() => {
+    getAllProduct();
+  }, []);
+  useEffect(() => {
+    getwishlistdata();
   }, [first]);
 
-  // const checker = (item) => {
-  //   if (colorValue && colorValue.length === 0) {
-  //     addwishlist(item);
-  //   } else {
-  //     for (let i = 0; i < colorValue.length; i++) {
-  //       if (colorValue[i].product_id._id === item) {
-  //         deleteWishlist(item);
-  //         break;
-  //       } else if (i === colorValue.length - 1) {
-  //         addwishlist(item);
-  //       } else {
-  //       }
-  //     }
-  //   }
-  // };
-  const checker = (productId) => {
-    typeof colorValue === "undefined"
+  const handleWishlist = (productId) => {
+    colorValue.length === 0 || typeof colorValue === "undefined"
       ? addwishlist(productId)
       : colorValue.filter((data) => data.product_id._id === productId).length
       ? deleteWishlist(productId)
@@ -170,14 +166,14 @@ function ProductCategory() {
                     <button
                       className="wishlist-btn-new"
                       onClick={() => {
-                        checker(men._id);
-
+                        handleWishlist(men._id);
                         setfirst(!first);
                       }}
                     >
                       <HeartFilled
                         className={
-                       colorValue.length === 0
+                          colorValue.length === 0 ||
+                          typeof colorValue === "undefined"
                             ? "redcolor"
                             : colorValue &&
                               colorValue.map((item) =>
@@ -235,14 +231,14 @@ function ProductCategory() {
                   <button
                     className="wishlist-btn-new"
                     onClick={() => {
-                      checker(women._id);
-
+                      handleWishlist(women._id);
                       setfirst(!first);
                     }}
                   >
                     <HeartFilled
                       className={
-                        colorValue && colorValue.length === 0
+                        colorValue.length === 0 ||
+                        typeof colorValue === "undefined"
                           ? "redcolor"
                           : colorValue &&
                             colorValue.map((item) =>
@@ -297,14 +293,14 @@ function ProductCategory() {
                   <button
                     className="wishlist-btn-new"
                     onClick={() => {
-                      checker(kid._id);
-
+                      handleWishlist(kid._id);
                       setfirst(!first);
                     }}
                   >
                     <HeartFilled
                       className={
-                        colorValue && colorValue.length === 0
+                        colorValue.length === 0 ||
+                        typeof colorValue === "undefined"
                           ? "redcolor"
                           : colorValue &&
                             colorValue.map((item) =>
