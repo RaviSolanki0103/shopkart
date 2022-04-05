@@ -11,8 +11,16 @@ function AddressForm(props) {
     e.preventDefault();
     props.cancel();
   };
+  
+const getUserAddress = () => {
+     axi
+}
 
+useEffect(() => {
+  getUserAddress()
+},[])
   const updateUserAddress = async (e) => {
+    Toast({ msg: "Add Address Successfully", success: true })
     e.preventDefault();
     console.log("user address updated....", JSON.stringify(userAddress));
     await axios
@@ -35,7 +43,6 @@ function AddressForm(props) {
       )
       .then((res) => console.log("response from update data", res))
       .catch((err) => console.log("error: ", err));
-    // Toast({ msg: "Add Address Successfully", success: true })
   };
 
   const [records, setRecords] = useState([]);
@@ -85,7 +92,7 @@ function AddressForm(props) {
   return (
     <>
       <div>
-        <form className="address-form">
+        <form className="address-form" >
           <label className="addform-input-label">Name</label>
           <br />
           <br />
@@ -169,8 +176,7 @@ function AddressForm(props) {
         </form>
       </div>
       <div className="user-add-details">
-        {records.map((currElem) => {
-          const { name, address, pincode } = currElem;
+        {/*  {records && records.map(() => {
           return (
             <div>
               <div className="dropdown-container" tabIndex="-1">
@@ -184,12 +190,13 @@ function AddressForm(props) {
                   </a>
                 </div>
               </div>
-              <p>Name: {name}</p>
-              <p>Address: {address}</p>
-              <p>Pincode: {pincode}</p>
+              <p>Name: {userAddress.name}</p>
+              <p>Address: {userAddress.address}</p>
+              <p>Pincode: {userAddress.pincode}</p>
             </div>
           );
         })}
+        */}
       </div>
     </>
   );
