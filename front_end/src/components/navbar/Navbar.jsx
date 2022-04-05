@@ -12,7 +12,6 @@ import {
   openLogin,
   loginStatus,
   loginToken,
-  sendOrderDataToTrack,
 } from "../../redux/actions/index";
 import Login from "../login/Login";
 const { SubMenu } = Menu;
