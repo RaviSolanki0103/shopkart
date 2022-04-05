@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios-default-baseurl";
 import { useSelector } from "react-redux";
 import Toast from "../../utils/Toast";
@@ -6,19 +6,14 @@ import "./addressform.css";
 
 function AddressForm(props) {
   const token = useSelector((state) => state.loginToken);
+  const [records, setRecords] = useState([]);
   const [userAddress, setUserAddress] = useState({});
   const closeForm = (e) => {
     e.preventDefault();
     props.cancel();
   };
   
-const getUserAddress = () => {
-     axi
-}
 
-useEffect(() => {
-  getUserAddress()
-},[])
   const updateUserAddress = async (e) => {
     Toast({ msg: "Add Address Successfully", success: true })
     e.preventDefault();
@@ -43,9 +38,10 @@ useEffect(() => {
       )
       .then((res) => console.log("response from update data", res))
       .catch((err) => console.log("error: ", err));
+
+     props.change();
   };
 
-  const [records, setRecords] = useState([]);
   // const [useraddress, setUseraddress] = useState({
   //   name: "",
   //   email: "",
@@ -176,30 +172,35 @@ useEffect(() => {
         </form>
       </div>
       <div className="user-add-details">
-        {/*  {records && records.map(() => {
-          return (
-            <div>
-              <div className="dropdown-container" tabIndex="-1">
-                <div className="three-dots"></div>
-                <div className="dropdown">
-                  <a href="#">
-                    <div>Edit</div>
-                  </a>
-                  <a href="#">
-                    <div>Delete</div>
-                  </a>
-                </div>
-              </div>
-              <p>Name: {userAddress.name}</p>
-              <p>Address: {userAddress.address}</p>
-              <p>Pincode: {userAddress.pincode}</p>
-            </div>
-          );
-        })}
-        */}
+        
+
       </div>
+
+      
     </>
   );
 }
 
 export default AddressForm;
+
+
+// { records.map((item) => {
+//   return (
+//     <div>
+//       <div className="dropdown-container" tabIndex="-1">
+//         <div className="three-dots"></div>
+//         <div className="dropdown">
+//           <a href="#">
+//             <div>Edit</div>
+//           </a>
+//           <a href="#">
+//             <div>Delete</div>
+//           </a>
+//         </div>
+//       </div>
+//       <p>Name: {userAddress.name}</p>
+//       <p>Address: {userAddress.address}</p>
+//       <p>Pincode: {userAddress.pincode}</p>
+//     </div>
+//   );
+// })}

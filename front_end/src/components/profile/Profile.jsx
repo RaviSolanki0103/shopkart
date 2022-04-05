@@ -137,7 +137,7 @@ function Profile() {
                     <label className="form-input-radio"> Female</label>
                     </div>*/}
                     
-                    <label className="form-input-label">Email Address</label>
+                    <label className="form-input-label">Email Address</label> 
                     <br />
                     <br />
                     <input
