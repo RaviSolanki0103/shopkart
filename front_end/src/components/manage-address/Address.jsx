@@ -12,7 +12,8 @@ function Address() {
   const token = useSelector((state) => state.loginToken);
   const [open, setIsOpen] = useState(false);
   const [records, setRecords] = useState([]);
-  const [status, setstatus] = useState(false)
+  const [status, setstatus] = useState(false);
+  const [first, setfirst] = useState(true);
 
   const getUserAddress = () => {
     axios
@@ -28,14 +29,31 @@ function Address() {
       });
   };
 
+  const deleteAddress = (item) => {
+      console.log("hello", );
+    axios
+      .delete(`/api/user/`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        setRecords(res.data.data.addresses.address._id);
+        console.log(res.data.data.addresses.address._id, "res");
+      });
+  };
+
   useEffect(() => {
     getUserAddress();
   }, [status]);
 
- const change = (i) => {
-     setstatus(!status)
-
- }
+  const change = (i) => {
+    setstatus(!status);
+  };
+  const handleform = () => {
+    setIsOpen(!open);
+  };
 
   return (
     <>
@@ -55,8 +73,14 @@ function Address() {
                 <PlusCircleOutlined /> ADD NEW ADDRESS
               </button>
             </Card>
-            {open && <AddressForm cancel={() => setIsOpen(!open)}  change={change} />}
-       
+            {open && (
+              <AddressForm
+                cancel={() => setIsOpen(!open)}
+                change={change}
+                handle={handleform}
+              />
+            )}
+
             <Card>
               {records.map((item, key) => {
                 return (
@@ -65,12 +89,17 @@ function Address() {
                       <div className="dropdown-container" tabIndex="-1">
                         <div className="three-dots"></div>
                         <div className="dropdown">
-                          <a href="#">
-                            <div>Edit</div>
-                          </a>
-                          <a href="#">
-                            <div>Delete</div>
-                          </a>
+                          <div>
+                            <button className="edit-btn">Edit</button>
+                          </div>
+                          <div>
+                            <button
+                              className="delete-btn"
+                              onClick={() => deleteAddress(item.user_id._id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -88,5 +117,4 @@ function Address() {
     </>
   );
 }
-
 export default Address;

@@ -140,6 +140,37 @@ exports.updateAddress = async (req, res, next) => {
     );
 };
 
+//delete address
+// exports.deleteAddress =async (req, res) => {
+//   const user_id = req.userId;
+//   console.log(req.userId, "------");
+//   Address.deleteOne({ user_id: user_id }, function (err) {
+//     if (err) console.log(err);
+//     console.log("Successful deletion");
+//   })
+// }
+
+exports.deleteAddress = async (req, res, next) => {
+  await User.findOneAndDelete(req.userId, req.body, {
+  })
+    .then((result) =>
+      responseData({
+        res,
+        status: SUCCESS,
+        message: DELETE_ADDRESS,
+        result,
+      })
+    )
+    .catch((err) =>
+      responseData({
+        res,
+        status: NOT_FOUND,
+        message: err.message,
+      })
+    );
+};
+
+
 //forgot password
 exports.emailSend = async (req, res, next) => {
   const data = await User.findOne({ email });

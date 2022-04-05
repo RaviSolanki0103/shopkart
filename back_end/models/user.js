@@ -41,7 +41,6 @@ const userSchema = new mongoose.Schema({
   },
   addresses: {
     type: [{
-      _id: false,
       name: {
         type: 'String',
         required: true,

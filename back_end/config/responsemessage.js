@@ -7,6 +7,8 @@ const DATA_INSERT_FAILD = "Something went wrong!...";
 const INVALID_LOGIN = "Invalid Login Details";
 const LOGIN_SUCCESS = "Login Success";
 const INVALID_LOGIN_CREDENTIAL = "Invalid Login credentials";
+const DELETE_ADDRESS = "User Address deleted successfully";
+
 
 module.exports = {
   DATA_FETCH_MESSAGE,
@@ -17,5 +19,6 @@ module.exports = {
   LOGIN_SUCCESS,
   INVALID_LOGIN_CREDENTIAL,
   DATA_UPDATE_MESSAGE,
-  DATA_UPDATE_FAILED
+  DATA_UPDATE_FAILED,
+  DELETE_ADDRESS
 };
