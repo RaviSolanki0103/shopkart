@@ -29,9 +29,13 @@
 .navbar-icon {
   background-image: url("../../kart.png");
   background-position: center;
+  /* background: none; */
   background-size: contain;
   background-repeat: no-repeat;
-  width: 10%;
+  width: 3%;
+  border: none;
+  border-radius: 60%;
+  font-size: 2rem;
   height: 85%;
 }
 

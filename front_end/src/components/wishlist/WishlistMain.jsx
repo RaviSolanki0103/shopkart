@@ -13,7 +13,11 @@ function WishlistMain() {
   const [first, setfirst] = useState(true);
 
   const deleteWishlist = (item) => {
-    axios.delete(`/api/wishlist/${item}`).then((res) => {});
+    axios.delete(`/api/wishlist/${item}`,
+     { headers: {
+      "Content-Type": "application/json",
+      authorization: token,
+     }},).then((res) => {});
     setfirst(!first);
   };
 
@@ -26,7 +30,7 @@ function WishlistMain() {
         },
       })
       .then((res) => {
-        setwishlistdata(res.data);
+        setwishlistdata(res.data.data);
         console.log(res.data, "res");
       });
   }, [first]);
