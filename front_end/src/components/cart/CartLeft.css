@@ -2,6 +2,9 @@
   width: 100%;
   background-color: #f0f2f5;
 }
+.both-screen{
+  display: flex;
+}
 .Main-container_left_cart{
   border: 1px solid black;
   margin-top: 10px;
@@ -50,7 +53,7 @@
   margin-right: 70px;
 }
 .cart-add-remove {
-  width: 20%;
+  width: 22%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,6 +85,7 @@
   margin-right: 10px;
   font-weight: bold;
   border-radius: 10px;
+  width: auto;
 }
 .remove-button {
   background-color: red;
@@ -111,10 +115,13 @@
   border: none;
   border-radius: 10px;
   color: white;
-  margin: 15px;
+  /* margin: 15px; */
   font-weight: bold;
   border: 1px solid black;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  margin-left: 290px;
+  margin-top: 10px;
+
 }
 
 .remove-button {
@@ -222,11 +229,11 @@
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-weight: 600;
     line-height: normal;
-    margin: 10px;
+    /* margin: 10px; */
     min-height: 60px;
     min-width: 0;
     outline: none;
-    padding: 16px 10px;
+    /* padding: 16px 10px; */
     text-align: center;
     text-decoration: none;
     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
@@ -298,7 +305,7 @@
   line-height: 16px;
   min-height: 40px;
   outline: 0;
-  padding: 12px 14px;
+  /* padding: 12px 14px; */
   text-align: center;
   text-rendering: geometricprecision;
   text-transform: none;
@@ -306,6 +313,11 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
+}
+.placeorder{
+  width: 47%;
+  /* border: 1px solid black; */
+  text-align:center;
 }
 
 .remove_button:hover,
@@ -362,4 +374,67 @@
   box-shadow: none;
   transform: translateY(0);
 }
+
+
+
+
+/* ----------------------------------------------------------------- */
+.cart-right-container {
+  /* width: 55%; */
+  /* height: auto; */
+}
+
+.cart-right-card {
+  width: auto;
+  height: auto;
+}
+.cart-right-1 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+.cart-right-2 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+.cart-right-3 {
+  display: flex;
+  justify-content: space-between;
+  font-size: larger;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+  .cart-right-container {
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+
+  }
+  .placeorder{
+    width: 100%;
+    /* border: 1px solid black; */
+    text-align:center;
+  }
+  .cart-left-card{
+    display: block;
+  }
+  .both-screen{
+    display: block;
+  }
+  .cart-add-remove{
+    width: 100%;
+    justify-content: right;
+  }
+  .button-28{
+    width: 20%;
+  }
+
+  
+  .cart-button-inc-dec-group {
+    margin-left:120px ;
+  }
+ 
+} 
 

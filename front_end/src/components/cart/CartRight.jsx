@@ -1,13 +1,13 @@
 // import React, { useEffect } from "react";
 import "./CartRight.css";
-import { Card } from "antd";
+import { Card, Empty } from "antd";
 import { useSelector } from "react-redux";
 
 function CartRight() {
-
-  const amount = useSelector(state=>state.send_totalamount)
+ const amount = useSelector(state=>state.send_totalamount)
   const number_of_item = useSelector(state=>state.send_number_of_item)
   return (
+    number_of_item == "undefined" ? <Empty /> :
     <div className="cart-right-container">
       <Card className="cart-right-card"
         title="PRICE DETAILS"
@@ -25,7 +25,7 @@ function CartRight() {
             <p>₹{amount}</p>
         </div>
       </Card>
-    </div>
+    </div> 
   );
 }
 

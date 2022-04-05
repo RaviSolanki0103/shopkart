@@ -119,7 +119,7 @@ function ProductCategory() {
   }, [first]);
 
   const handleWishlist = (productId) => {
-    colorValue.length === 0 || typeof colorValue === "undefined"
+    typeof colorValue === "undefined"
       ? addwishlist(productId)
       : colorValue.filter((data) => data.product_id._id === productId).length
       ? deleteWishlist(productId)
@@ -172,7 +172,6 @@ function ProductCategory() {
                     >
                       <HeartFilled
                         className={
-                          colorValue.length === 0 ||
                           typeof colorValue === "undefined"
                             ? "redcolor"
                             : colorValue &&
@@ -237,7 +236,6 @@ function ProductCategory() {
                   >
                     <HeartFilled
                       className={
-                        colorValue.length === 0 ||
                         typeof colorValue === "undefined"
                           ? "redcolor"
                           : colorValue &&
@@ -299,7 +297,6 @@ function ProductCategory() {
                   >
                     <HeartFilled
                       className={
-                        colorValue.length === 0 ||
                         typeof colorValue === "undefined"
                           ? "redcolor"
                           : colorValue &&

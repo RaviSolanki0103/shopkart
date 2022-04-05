@@ -1,14 +1,15 @@
 import React from 'react'
 import CartLeft from './CartLeft'
-import CartRight from './CartRight'
 import "./Cart.css"
+import { useSelector } from 'react-redux'
 
 function Cart() {
-  return (
+  // const number_of_item = useSelector(state=>state.send_number_of_item)
+  return ( 
+    
     <div className='cart-container'>
         <CartLeft  className="cart-left"/>
         
-        <CartRight  className="cart-right"/>
     </div>
   )
 }

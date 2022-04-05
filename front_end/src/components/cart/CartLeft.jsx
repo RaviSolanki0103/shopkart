@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { send_totalamount } from "../../redux/actions";
 import { send_number_of_item } from "../../redux/actions";
 import axios from "axios";
+import "./CartRight.css";
+
 
 function CartLeft() {
   const [cartdata, setcartdata] = useState([]);
@@ -14,6 +16,10 @@ function CartLeft() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.loginToken);
 
+  //----------------
+  const amount = useSelector(state=>state.send_totalamount)
+  const number_of_item = useSelector(state=>state.send_number_of_item)
+//=--------------------
   const getcarttdata = () => {
     axios
       .get("/api/cart", {
@@ -40,12 +46,18 @@ function CartLeft() {
     incrementQuantity(value);
     setstatus(!status);
   };
-  const incrementQuantity = (value) => {
-    axios({
+  const incrementQuantity =async (value) => {
+    console.log(value._id,"okokokokok")
+
+    await axios({
       method: "patch",
       url: `/api/cart/${value._id}`,
       data: {
         quantity: value.quantity + 1,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
       },
     });
   };
@@ -55,12 +67,17 @@ function CartLeft() {
     setstatus(!status);
   };
 
-  const decrementQuantity = (value) => {
-    axios({
+  const decrementQuantity =async (value) => {
+    console.log(value);
+    await axios({
       method: "patch",
       url: `/api/cart/${value._id}`,
       data: {
         quantity: value.quantity - 1,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
       },
     });
   };
@@ -70,12 +87,18 @@ function CartLeft() {
   }, [status]);
 
   const removeItem = (id) => {
-    axios.delete(`/api/cart/${id}`).then((res) => {});
+    axios.delete(`/api/cart/${id}`, {headers: {
+      "Content-Type": "application/json",
+      authorization: token,
+    },}).then((res) => {});
     setstatus(!status);
   };
 
   const AddtoWishlist = (item) => {
-    axios.get("/api/wishlist").then((res) => {
+    axios.get("/api/wishlist", {headers: {
+      "Content-Type": "application/json",
+      authorization: token,
+    },}).then((res) => {
       const result = res.data.data.filter((x) => item === x.product_id._id);
       {
         result.length
@@ -100,7 +123,9 @@ function CartLeft() {
   };
 
   return (
+    cartdata ?
     <div className="cart-left-side-container">
+      <div className="both-screen">
       <Card
         title={`My Cart(${cartdata === undefined ? "0" : cartdata.length})`}
         className="cart-left-card"
@@ -158,10 +183,34 @@ function CartLeft() {
           <Empty />
         )}
       </Card>
-      <div className="">
+
+<div className="cart-right-container">
+      <Card className="cart-right-card"
+        title="PRICE DETAILS"
+       >
+        <div className="cart-right-1">
+            <p>Price ({number_of_item})</p> 
+            <p>₹{amount}</p> </div>
+        <div className="cart-right-2">
+            <p>Delivery Charges</p>
+            <p>free</p>
+        </div>
+        <hr />
+        <div className="cart-right-3">
+            <p>Total Amount</p>
+            <p>₹{amount}</p>
+        </div>
+      </Card>
+    </div> 
+    </div>
+
+      <div className="placeorder">
         <button className="cart-placeoreder-button_5 ">Place Order</button>
       </div>
+
+
     </div>
+    : <Empty />
   );
 }
 
