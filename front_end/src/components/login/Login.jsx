@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-// import validator from 'validator';
-// import isEmail from 'validator/lib/isEmail';
-// import { Link, useNavigate } from "react-router-dom";
 import {  Modal } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { openLogin } from "../../redux/actions";
@@ -42,39 +39,5 @@ function Login() {
   );
 }
 export default Login;
-// <div>
-// <div className="main-div">
-// <div className="container-login">
-//   <form method="POST" className="form">
-//     <input
-//       type="email"
-//       name="email"
-//       id="email"
-//       autoComplete="off"
-//       placeholder="Your Email"
-//       value={email}
-//       onChange={(e) => setemail(e.target.value)}
-//     />
-//     <input
-//       type="password"
-//       value={password}
-//       name="password"
-//       id="password"
-//       autoComplete="off"
-//       placeholder="Your Password"
-//       onChange={(e) => setpassword(e.target.value)}
-//     />
-//     <input
-//       type="submit"
-//       name="login"
-//       value="login"
-//       id="login"
-//       autoComplete="off"
-//       onClick={loginuser}
-//     />
-//   </form>
-//   </div>
-// </div>
-// </div>
 
 

@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Card } from "antd";
+import { Layout, Card, Modal, Button } from "antd";
+import { Link } from "react-router-dom";
 import "./profile.css";
 import Toast from "../../utils/Toast";
 import axios from "../../utils/axios-default-baseurl";
 import { useSelector } from "react-redux";
 import Sidebar from "../../utils/sidebar/Sidebar";
+
 const { Content } = Layout;
 
+
 function Profile() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const token = useSelector((state) => state.loginToken);
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [userData, setUserData] = useState({});
   const [editBtnVisiblity, setEditBtnVisiblity] = useState("btn-display-none");
-  
+ 
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const fetchUserData = async () => {
     await axios
@@ -30,25 +41,38 @@ function Profile() {
     e.preventDefault();
     console.log("user data updated....", JSON.stringify(userData));
     await axios
-      .patch("/user",{fname: userData.fname, lname: userData.lname, email: userData.email, phone: userData.phone},{
-        headers: {
-          "Content-Type": "application/json",
-          authorization : token,
-        //   "authorization": `Bearer ${token}`,
+      .patch(
+        "/user",
+        {
+          fname: userData.fname,
+          lname: userData.lname,
+          email: userData.email,
+          phone: userData.phone,
         },
-      }).then((res) => console.log("response from update data", res))
-      .catch((err) => console.log("error: ",err));
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+            //   "authorization": `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => console.log("response from update data", res))
+      .catch((err) => console.log("error: ", err));
   };
 
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  const cancelEvent = () =>{
+  const cancelEvent = () => {
     fetchUserData();
     setIsReadOnly(!isReadOnly);
-    setEditBtnVisiblity("btn-display-none")
-  }
+    setEditBtnVisiblity("btn-display-none");
+  };
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
   // const saveEvent = () => {
   //   Toast({msg: "Add Details Successfully", success: true})
   //   // fetchUserData();
@@ -75,13 +99,15 @@ function Profile() {
                     {isReadOnly ? (
                       <button
                         className="editbtn"
-                        onClick={() => {setIsReadOnly(!isReadOnly); setEditBtnVisiblity("btn-display-block")}}
+                        onClick={() => {
+                          setIsReadOnly(!isReadOnly);
+                          setEditBtnVisiblity("btn-display-block");
+                        }}
                       >
                         Edit
                       </button>
                     ) : (
-                      
-                      <button className="editbtn"  onClick={() => cancelEvent()}>
+                      <button className="editbtn" onClick={() => cancelEvent()}>
                         Cancel
                       </button>
                     )}
@@ -114,7 +140,7 @@ function Profile() {
                     />
                     <br />
                     <br />
-                  
+
                     {/*
                     <div onChange={checkboxChange}>
                     <input
@@ -136,8 +162,21 @@ function Profile() {
                     />
                     <label className="form-input-radio"> Female</label>
                     </div>*/}
-                    
-                    <label className="form-input-label">Email Address</label> 
+
+                    <label className="form-input-label">Email Address </label>
+                    <Button onClick={showModal}>
+                      Change Password
+                    </Button>
+                    <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
+                      title="Change Password"
+                      footer={null}
+                    >
+                      <input type="text" placeholder="Enter your old password"/><br/>
+                      <input type="text" placeholder="Enter your new password"/><br/>
+                      <input type="text" placeholder="Enter confirm password"/><br/>
+                      <button type="submit" >Submit</button>
+                      <button >Cancel</button>
+                    </Modal>
                     <br />
                     <br />
                     <input
@@ -166,8 +205,15 @@ function Profile() {
                       value={userData.phone}
                       placeholder="mobile number"
                       readOnly={isReadOnly}
-                    /><br/><br/>
-                    <button className={editBtnVisiblity} onClick={updateUserData}>Save</button>
+                    />
+                    <br />
+                    <br />
+                    <button
+                      className={editBtnVisiblity}
+                      onClick={updateUserData}
+                    >
+                      Save
+                    </button>
                   </form>
                 </div>
               </div>

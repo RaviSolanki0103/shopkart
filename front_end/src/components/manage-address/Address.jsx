@@ -30,17 +30,17 @@ function Address() {
   };
 
   const deleteAddress = (item) => {
-      console.log("hello", );
+    console.log("hello", item);
     axios
-      .delete(`/api/user/`, {
+      .delete(`/user/`, {
         headers: {
           "Content-Type": "application/json",
           authorization: token,
         },
       })
       .then((res) => {
-        setRecords(res.data.data.addresses.address._id);
-        console.log(res.data.data.addresses.address._id, "res");
+        setRecords(res.data.data.addresses._id);
+        console.log(res.data.data.addresses._id, "res");
       });
   };
 
