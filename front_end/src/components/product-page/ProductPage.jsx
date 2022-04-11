@@ -8,9 +8,10 @@ import React, { useEffect, useState } from "react";
 import "./productpage.css";
 import { BASEURL } from "../../utils/config";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Toast from "../../utils/Toast";
+import { openLogin, sendProductId } from "../../redux/actions";
 
 function ProductPage() {
   const param = useParams();
@@ -18,10 +19,16 @@ function ProductPage() {
   const [sizeValue, setSizeValue] = useState("");
   const [productData, setproductData] = useState([]);
   const [colorValue, setColorValue] = useState([]);
-  const [color, setColor] = useState([]);
+  const [color, setColor] = useState("");
   const [first, setfirst] = useState(false);
   const token = useSelector((state) => state.loginToken);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  /**
+   * Fetch All data from Wishlist collection
+   */
   const getwishlistdata = () => {
     axios
       .get("/api/wishlist", {
@@ -30,7 +37,7 @@ function ProductPage() {
           authorization: token,
         },
       })
-      .then(async (res) => {
+      .then((res) => {
         setColorValue(res.data.data);
       })
       .catch((err) => {
@@ -42,6 +49,9 @@ function ProductPage() {
       });
   };
 
+  /**
+   * Add the product in Wishlist
+   */
   const addwishlist = (item) => {
     axios({
       method: "post",
@@ -65,7 +75,9 @@ function ProductPage() {
     });
   };
 
-  // delete
+  /**
+   * Delete the product from Wishlist
+   */
   const deleteWishlist = (item) => {
     axios
       .delete(`/api/wishlist/${item}`, {
@@ -78,7 +90,6 @@ function ProductPage() {
   };
 
   useEffect(() => {
-    // getCart();
     getwishlistdata();
     axios
       .get("/api/getallproducts")
@@ -90,24 +101,18 @@ function ProductPage() {
       });
   }, [first]);
 
-  const checker = (x) => {
-    if (colorValue.length === 0) {
-      addwishlist(x);
-    } else {
-      for (let i = 0; i < colorValue.length; i++) {
-        if (colorValue[i].product_id._id === x) {
-          deleteWishlist(x);
-          break;
-        } else if (i === colorValue.length - 1) {
-          addwishlist(x);
-        } else {
-        }
-      }
-    }
+  const handleWishlist = (productId) => {
+    typeof colorValue === "undefined"
+      ? addwishlist(productId)
+      : colorValue.filter((data) => data.product_id._id === productId).length
+      ? deleteWishlist(productId)
+      : addwishlist(productId);
   };
 
+  /**
+   * Get Cart Data from Database
+   */
   const getCart = (item) => {
-    console.log(item, "LPLPLPL------");
     axios
       .get("/api/cart", {
         headers: {
@@ -117,12 +122,23 @@ function ProductPage() {
       })
       .then((res) => {
         typeof res.data.data === "undefined"
-          ? addToCart_data(item)
-          : res.data.data.filter((x) => item === x.product_id._id).length
-          ? console.log("PRODUCT ALREADY EXIST")
-          : addToCart_data(item);
+          ? color
+            ? sizeValue
+              ? Toast({ msg: "Added to cart", success: true }) &&
+                addToCart_data(item)
+              : Toast({ msg: "Please select size" })
+            : Toast({ msg: "Please select color" })
+          : res.data.data.filter((product) => item === product.product_id._id)
+              .length
+          ? Toast({ msg: "Product Already Exist in Cart" })
+          : Toast({ msg: "Added to cart", success: true }) &&
+            addToCart_data(item);
       });
   };
+
+  /**
+   * Add Product into the Cart
+   */
   const addToCart_data = (item) => {
     axios({
       method: "post",
@@ -130,6 +146,8 @@ function ProductPage() {
       data: {
         product_id: `${item}`,
         quantity: 1,
+        color: color,
+        size: sizeValue,
       },
       headers: {
         "Content-Type": "application/json",
@@ -138,13 +156,49 @@ function ProductPage() {
     });
   };
 
-  console.log(colorValue, "OKIOKJIOOIUGY");
+  /**
+   *  If Logged in (Navigate to Payment page) else (Login)
+   */
+  const buyProduct = (id) => {
+    color
+      ? sizeValue
+        ? buyTheProduct(id)
+        : Toast({ msg: "Please select size" })
+      : Toast({ msg: "Please select color" });
+  };
+  const buyTheProduct = (id) => {
+    const productDetail = [
+      {
+        product_id: id,
+        product_color: color,
+        product_size: sizeValue,
+        product_quantity: 1,
+      },
+    ];
+    dispatch(sendProductId(productDetail));
+    axios
+      .get("/api/user", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data, "KKOKKK");
+        // navigate(`/payment/${id}/${color}/${sizeValue}`);
+        navigate(`/payment`);
+      })
+      .catch((err) => {
+        Toast({ msg: "Please Login first!" });
+        dispatch(openLogin(true));
+      });
+  };
 
   return (
     <div className="outer-div">
-      {productData.map((x, key) => {
+      {productData.map((product, key) => {
         return (
-          param.id === x._id && (
+          param.id === product._id && (
             <div key={key}>
               <Card
                 className="inner-card-sp"
@@ -153,16 +207,16 @@ function ProductPage() {
                   <img
                     className="img-sp"
                     alt="example"
-                    src={`${BASEURL}/uploads/${x.product_img}`}
+                    src={`${BASEURL}/uploads/${product.product_img}`}
                   />
                 }
               >
                 <div className="action-btn">
-                  <button onClick={() => getCart(x._id)}>
+                  <button onClick={() => getCart(product._id)}>
                     <ShoppingCartOutlined />
                     ADD TO CART
                   </button>
-                  <button>
+                  <button onClick={() => buyProduct(product._id)}>
                     <ThunderboltFilled />
                     BUY NOW
                   </button>
@@ -173,7 +227,7 @@ function ProductPage() {
                 <button
                   className="wishlist-btn-special"
                   onClick={() => {
-                    checker(x._id);
+                    handleWishlist(product._id);
                     setfirst(!first);
                   }}
                 >
@@ -182,7 +236,7 @@ function ProductPage() {
                       typeof colorValue === "undefined"
                         ? "redcolor"
                         : colorValue.map((item) =>
-                            item.product_id._id === x._id
+                            item.product_id._id === product._id
                               ? "greycolor"
                               : "redcolor"
                           )
@@ -196,17 +250,17 @@ function ProductPage() {
       })}
       <div className="right-div">
         <div className="inner-right-div">
-          {productData.map((x, key) => {
+          {productData.map((product, key) => {
             return (
-              param.id === x._id && (
+              param.id === product._id && (
                 <div key={key} className="full-width">
-                  <h3 style={{ fontSize: "1.5rem" }}>{x.name}</h3>
-                  <h2 style={{ fontSize: "2.5rem" }}>₹{x.price}</h2>
-                  <h2>{x.description}</h2>
+                  <h3 style={{ fontSize: "1.5rem" }}>{product.name}</h3>
+                  <h2 style={{ fontSize: "2.5rem" }}>₹{product.price}</h2>
+                  <h2>{product.description}</h2>
                   <div className="col-siz">
                     <p>Select Color</p>
                     <div className="color">
-                      {x.color.map((sel_col, key) => {
+                      {product.color.map((sel_col, key) => {
                         return (
                           <button
                             key={key}
@@ -229,7 +283,7 @@ function ProductPage() {
                   <div className="col-siz">
                     <p>Select Size</p>
                     <div className="size">
-                      {x.size.map((sel_size, key) => {
+                      {product.size.map((sel_size, key) => {
                         return (
                           <button
                             key={key}

@@ -3,9 +3,10 @@ import "./CartLeft.css";
 import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import { Card, Empty } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { send_totalamount } from "../../redux/actions";
+import { sendProductId, send_totalamount } from "../../redux/actions";
 import { send_number_of_item } from "../../redux/actions";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CartLeft() {
   const [cartdata, setcartdata] = useState([]);
@@ -13,6 +14,8 @@ function CartLeft() {
   const [first, setfirst] = useState();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.loginToken);
+  const [second, setsecond] = useState([])
+const navigate = useNavigate();
 
   const getcarttdata = () => {
     axios
@@ -77,11 +80,9 @@ function CartLeft() {
   const AddtoWishlist = (item) => {
     axios.get("/api/wishlist").then((res) => {
       const result = res.data.data.filter((x) => item === x.product_id._id);
-      {
-        result.length
-          ? console.log("PRODUCT ALREADY EXIST")
-          : addDataToWishlist(item);
-      }
+      result.length
+        ? console.log("PRODUCT ALREADY EXIST")
+        : addDataToWishlist(item);
     });
   };
 
@@ -119,6 +120,10 @@ function CartLeft() {
                   </div>
                   <div className="cart-detail">
                     <p className="productname">{item.product_id.name}</p>
+                    <p className="productname">
+                      Color: {item.color} &nbsp;&nbsp;&nbsp; Size:
+                      {item.size}
+                    </p>
                     <p className="cart-price">
                       ₹{item.product_id.price * item.quantity}
                     </p>
@@ -159,7 +164,9 @@ function CartLeft() {
         )}
       </Card>
       <div className="">
-        <button className="cart-placeoreder-button_5 ">Place Order</button>
+        <button className="cart-placeoreder-button_5 " onClick={()=>{dispatch(sendProductId(cartdata))
+        navigate("/payment")
+        }}>Place Order</button>
       </div>
     </div>
   );

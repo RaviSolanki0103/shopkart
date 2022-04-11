@@ -185,7 +185,7 @@ const ViewOrder = () => {
   // onIndividualProductClick
   const onIndividualProductClick = (product) => {
     dispatch(sendOrderDataToTrack(product));
-    navigate("/order-track");
+    navigate("/ordertrack");
   };
 
   return (

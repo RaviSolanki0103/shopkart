@@ -41,11 +41,17 @@ exports.getCart = async (req, res) => {
 exports.addCart = async (req, res) => {
   console.log("ADD CART CALLED");
 
-  const { product_id, quantity } = await req.body;
+  const { product_id, quantity, color, size } = await req.body;
   const user_id = await req.userId;
 
   console.log(product_id, quantity, user_id, "____");
-  const cartItem = new Cart_item({ product_id, user_id, quantity });
+  const cartItem = new Cart_item({
+    product_id,
+    user_id,
+    quantity,
+    color,
+    size,
+  });
   console.log(cartItem, "LLGFGFFGFFG");
   await cartItem
     .save()

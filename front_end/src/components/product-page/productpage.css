@@ -12,7 +12,8 @@ p {
   display: flex;
   justify-content: space-evenly;
 }
-.img-div{
+
+.img-div {
   display: flex;
   justify-content: center;
 }
@@ -124,8 +125,8 @@ p {
   border: none;
   z-index: 10;
   position: relative;
-  top: -20rem;
-  right: 10%;
+  top: -43rem;
+  right: -40%;
   background: none;
   transform: scale(3) !important;
 }
@@ -134,9 +135,11 @@ h3 {
   font-size: 2rem;
   text-align: left;
 }
+
 .redcolor {
   color: #cccccc !important;
 }
+
 .greycolor {
   color: red !important;
 }
@@ -204,7 +207,8 @@ h3 {
   }
 
   .wishlist-btn-special {
-    top: -15.5rem;
+    top: -33rem;
+    right: -35%;
   }
 
   .action-btn {
@@ -246,9 +250,11 @@ h3 {
   .wishlist-btn-special {
     top: -14rem;
   }
+
   .select-size-btn {
     transform: scale(0.9);
   }
+
   .select-color-btn {
     transform: scale(0.9);
   }

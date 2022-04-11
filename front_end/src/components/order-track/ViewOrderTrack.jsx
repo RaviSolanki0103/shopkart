@@ -6,9 +6,8 @@ import Moment from "react-moment";
 
 const { Step } = Steps;
 const ViewOrderTrack = () => {
-  const productDetails = useSelector((state) => state.orderTrackData);
+  const productDetails = useSelector((state) => state.sendOrderDataToTrack);
   const orderStatus = ["Ordered", "Shipped", "Out For Delivery", "Delivered"];
-
   const customDot = (dot, { description, title }) => (
     <Popover
       content={

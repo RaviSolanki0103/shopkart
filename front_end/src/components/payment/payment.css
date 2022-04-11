@@ -1,0 +1,64 @@
+.radio-div {
+    background-color: rgba(231, 236, 236, 0.404);
+    padding: 5px;
+}
+
+.group {
+    width: 100%;
+}
+
+.space {
+    width: 100%;
+    text-align: left;
+}
+
+.img-order {
+    width: 4rem;
+}
+
+.radio {
+    width: 100%;
+}
+
+.radio-btn {
+    background: none;
+    width: 100%;
+}
+
+.deliver-btn {
+    border: none;
+    background-color: #fb641b;
+    color: aliceblue;
+    width: 8rem;
+    font-size: larger;
+    font-weight: 500;
+    height: 2.5rem;
+}
+
+.order-div {
+    display: flex;
+    justify-content: flex-start;
+    border: 1px solid rgba(78, 75, 75, 0.274);
+    margin: 1rem 0;
+}
+
+.left-img-div {
+    margin:0 1rem ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.right-detail-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 2rem;
+}
+.total-amount{
+    font-size: 2rem;
+    margin-right:1rem ;
+    font-weight: bold;
+
+}

@@ -6,6 +6,7 @@ import senddataWishlist from "./senddataWishlist";
 import send_totalamount from "./send_totalamount";
 import send_number_of_item from "./send_number_of_item";
 import sendOrderDataToTrack from "./sendOrderDataToTrack";
+import sendProductId from "./sendProductId";
 
 const rootReducer = combineReducers({
   openLogin,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   senddataWishlist,
   send_totalamount,
   send_number_of_item,
-  orderTrackData: sendOrderDataToTrack,
+  sendOrderDataToTrack,
+  sendProductId,
 });
 
 export default rootReducer;

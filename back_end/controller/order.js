@@ -114,7 +114,7 @@ exports.getOrder = async (req, res, next) => {
 };
 
 // add orders
-exports.addOrder = async (req, res, next) => {
+exports. addOrder = async (req, res, next) => {
   let totalPrice = 0;
   req.body.products.map((product) => {
     totalPrice += product.price;

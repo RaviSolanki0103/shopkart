@@ -6,6 +6,7 @@ import {
   SENDDATA_WISHLIST,
   SEND_TOTALAMOUNT,
   SENT_ORDER_DATA_TO_TRACK,
+  SENTPRODUCT_ID,
 } from "./action-types";
 
 export const openLogin = (data) => {
@@ -57,5 +58,11 @@ export const sendOrderDataToTrack = (product_details) => {
   return {
     type: SENT_ORDER_DATA_TO_TRACK,
     payload: product_details,
+  };
+};
+export const sendProductId = (product_id) => {
+  return {
+    type: SENTPRODUCT_ID,
+    payload: product_id,
   };
 };

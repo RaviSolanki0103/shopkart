@@ -10,6 +10,14 @@ const cartSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  color: {
+    type: String,
+    required: true,
+  },
+  size: {
+    type: String,
+    required: true,
+  },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "USER", // collection name
