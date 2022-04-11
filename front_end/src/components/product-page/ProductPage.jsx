@@ -9,8 +9,9 @@ import "./productpage.css";
 import { BASEURL } from "../../utils/config";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Toast from "../../utils/Toast";
+import { send_number_of_item } from "../../redux/actions";
 
 function ProductPage() {
   const param = useParams();
@@ -21,6 +22,8 @@ function ProductPage() {
   const [color, setColor] = useState([]);
   const [first, setfirst] = useState(false);
   const token = useSelector((state) => state.loginToken);
+  const dispatch = useDispatch();
+  const [numberof_itm, setnumberof_itm] = useState();
 
   const getwishlistdata = () => {
     axios
@@ -106,6 +109,23 @@ function ProductPage() {
     }
   };
 
+  //-----------------
+  const numberofCartItem = () => {
+    axios
+      .get("/api/cart", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        // console.log("cvzxvzxvxzczxc",res.data.data.length);
+        setnumberof_itm(res.data.data.length);
+        dispatch(send_number_of_item(res.data.data.length));
+      });
+  };
+  //----------------
+  // const number_of_item = useSelector(state=>state.send_number_of_item)
   const getCart = (item) => {
     console.log(item, "LPLPLPL------");
     axios
@@ -135,6 +155,8 @@ function ProductPage() {
         "Content-Type": "application/json",
         authorization: token,
       },
+    }).then(() => {
+      numberofCartItem();
     });
   };
 

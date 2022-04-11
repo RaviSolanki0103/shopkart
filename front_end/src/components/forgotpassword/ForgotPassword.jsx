@@ -5,7 +5,9 @@ import "./forgotpassword.css";
 
 function LoginForm(props) {
     const [email, setemail] = useState("");
-    const forgotuser =()=>{}
+    const forgotuser =()=>{
+        
+    }
     
     
     return (

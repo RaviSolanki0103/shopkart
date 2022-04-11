@@ -1,3 +1,4 @@
+var nodemailer = require('nodemailer');
 const { DATA_INSERT_MESSAGE, DATA_INSERT_FAILD, INVALID_LOGIN, LOGIN_SUCCESS, INVALID_LOGIN_CREDENTIAL, DATA_FETCH_MESSAGE } = require("../config/responsemessage");
 const { CREATED, BAD_REQUEST, SUCCESS, NOT_FOUND } = require("../config/statuscode");
 const responseData = require("../helper/response");
@@ -77,9 +78,13 @@ exports.getUserById = async (req, res, next) => {
 
 //forgot password
 exports.emailSend = async (req, res, next) => {
-  const data =  await User.findOne({email});
+  console.log("email sendcalled");
+  const useremail=req.body.email
+  const data =  await User.findOne({email:useremail});
+  console.log(data,"okookoko");
+    //  User.findOne({email:useremail}) 
   const response = {};
-  if(data){
+  if(data !== null){
     const otpcode = Math.floor((Math.random()*10000)+1);
     const otpData = new Otp({
       email:req.body.email,
@@ -87,15 +92,54 @@ exports.emailSend = async (req, res, next) => {
       expireIn: new Date(). getTime() + 300*1000
     })
     const otpResponse = await otpData.save();
+
+    // send mail 
+    var transporter = nodemailer.createTransport({
+     
+      service: 'gmail',
+      auth: {
+        user: '',
+        pass: ''
+      }
+    });       
+    
+    var mailOptions = {
+      from: 'ronakc.itpath@gmail.com',
+      to: 'ronaldt.itpath@gmail.com',
+      subject: 'otp for forgot password',
+      text: `This is your reset password  code ${otpcode} `
+    };
+    res.send("ok")
+    
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    
+    });
+
+
+//-------------------------------
+
+
     response.statusText = "success"
     response.message= "Please check your Email ID";
   }else{
+    console.log("else");
     response.statusText = "error"
     response.message= "Email ID does not exist";
+    res.send(" errror")
   }
+
   
 };
 
 exports.changePassword = async (req, res, next) => {
   res.status(200).json("okay");
 };
+
+
+
+

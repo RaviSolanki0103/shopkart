@@ -2,10 +2,10 @@
   width: 100%;
   background-color: #f0f2f5;
 }
-.both-screen{
+.both-screen {
   display: flex;
 }
-.Main-container_left_cart{
+.Main-container_left_cart {
   border: 1px solid black;
   margin-top: 10px;
   padding-top: 10px;
@@ -73,10 +73,10 @@
   font-size: 25px;
   margin: 5px;
 }
-.productname{
+.productname {
   font-size: 1.7rem;
 }
-.cart-price{
+.cart-price {
   font-size: 1.3rem;
 }
 
@@ -121,7 +121,6 @@
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
   margin-left: 290px;
   margin-top: 10px;
-
 }
 
 .remove-button {
@@ -133,7 +132,7 @@
     width: 100%;
     height: auto;
   }
-  
+
   .cart-img {
     height: auto;
     width: 50%;
@@ -211,22 +210,23 @@
   }
 }
 @media only screen and (max-width: 1024px) {
- 
 }
 @media only screen and (max-width: 1440px) {
   .cart-add-remove {
     width: 40%;
   }
-  .button-28{
+  .button-28 {
     appearance: none;
     background-color: transparent;
-    border: 2px solid #1A1A1A;
+    border: 2px solid #1a1a1a;
     border-radius: 15px;
     box-sizing: border-box;
-    color: #3B3B3B;
+    color: #3b3b3b;
     cursor: pointer;
     display: inline-block;
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
     font-weight: 600;
     line-height: normal;
     /* margin: 10px; */
@@ -236,7 +236,7 @@
     /* padding: 16px 10px; */
     text-align: center;
     text-decoration: none;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
@@ -250,20 +250,21 @@
   background-clip: padding-box;
   background-color: #fa6400;
   border: 1px solid transparent;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
   display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   justify-content: center;
   line-height: 1.25;
   margin: 0;
   min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
@@ -286,20 +287,20 @@
 
 .bcart-placeoreder-button_5:active {
   background-color: #c85000;
-  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   transform: translateY(0);
 }
 
 .remove_button {
-  background: #FF4742;
-  border: 1px solid #FF4742;
+  background: #ff4742;
+  border: 1px solid #ff4742;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
   font-size: 16px;
   font-weight: 800;
   line-height: 16px;
@@ -314,33 +315,34 @@
   touch-action: manipulation;
   vertical-align: middle;
 }
-.placeorder{
+.placeorder {
   width: 47%;
   /* border: 1px solid black; */
-  text-align:center;
+  text-align: center;
 }
 
 .remove_button:hover,
 .remove_button:active {
   background-color: initial;
   background-position: 0 0;
-  color: #FF4742;
+  color: #ff4742;
 }
 
 .remove_button:active {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .button-28 {
   appearance: none;
   background-color: transparent;
-  border: 2px solid #1A1A1A;
+  border: 2px solid #1a1a1a;
   border-radius: 15px;
   box-sizing: border-box;
-  color: #3B3B3B;
+  color: #3b3b3b;
   cursor: pointer;
   display: inline-block;
-  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   /* font-size: 16px; */
   font-weight: 600;
   line-height: normal;
@@ -351,7 +353,7 @@
   padding: 16px 10px;
   text-align: center;
   text-decoration: none;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -365,7 +367,7 @@
 
 .button-28:hover {
   color: #fff;
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
@@ -375,14 +377,7 @@
   transform: translateY(0);
 }
 
-
-
-
 /* ----------------------------------------------------------------- */
-.cart-right-container {
-  /* width: 55%; */
-  /* height: auto; */
-}
 
 .cart-right-card {
   width: auto;
@@ -410,31 +405,27 @@
     width: 100%;
     display: block;
     margin-top: 20px;
-
   }
-  .placeorder{
+  .placeorder {
     width: 100%;
     /* border: 1px solid black; */
-    text-align:center;
+    text-align: center;
   }
-  .cart-left-card{
+  .cart-left-card {
     display: block;
   }
-  .both-screen{
+  .both-screen {
     display: block;
   }
-  .cart-add-remove{
+  .cart-add-remove {
     width: 100%;
     justify-content: right;
   }
-  .button-28{
+  .button-28 {
     width: 20%;
   }
 
-  
   .cart-button-inc-dec-group {
-    margin-left:120px ;
+    margin-left: 120px;
   }
- 
-} 
-
+}

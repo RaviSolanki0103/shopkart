@@ -8,7 +8,6 @@ import { send_number_of_item } from "../../redux/actions";
 import axios from "axios";
 import "./CartRight.css";
 
-
 function CartLeft() {
   const [cartdata, setcartdata] = useState([]);
   const [status, setstatus] = useState(true);
@@ -17,9 +16,9 @@ function CartLeft() {
   const token = useSelector((state) => state.loginToken);
 
   //----------------
-  const amount = useSelector(state=>state.send_totalamount)
-  const number_of_item = useSelector(state=>state.send_number_of_item)
-//=--------------------
+  const amount = useSelector((state) => state.send_totalamount);
+  const number_of_item = useSelector((state) => state.send_number_of_item);
+  //=--------------------
   const getcarttdata = () => {
     axios
       .get("/api/cart", {
@@ -46,8 +45,8 @@ function CartLeft() {
     incrementQuantity(value);
     setstatus(!status);
   };
-  const incrementQuantity =async (value) => {
-    console.log(value._id,"okokokokok")
+  const incrementQuantity = async (value) => {
+    console.log(value._id, "okokokokok");
 
     await axios({
       method: "patch",
@@ -67,7 +66,7 @@ function CartLeft() {
     setstatus(!status);
   };
 
-  const decrementQuantity =async (value) => {
+  const decrementQuantity = async (value) => {
     console.log(value);
     await axios({
       method: "patch",
@@ -87,25 +86,33 @@ function CartLeft() {
   }, [status]);
 
   const removeItem = (id) => {
-    axios.delete(`/api/cart/${id}`, {headers: {
-      "Content-Type": "application/json",
-      authorization: token,
-    },}).then((res) => {});
+    axios
+      .delete(`/api/cart/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {});
     setstatus(!status);
   };
 
   const AddtoWishlist = (item) => {
-    axios.get("/api/wishlist", {headers: {
-      "Content-Type": "application/json",
-      authorization: token,
-    },}).then((res) => {
-      const result = res.data.data.filter((x) => item === x.product_id._id);
-      {
-        result.length
-          ? console.log("PRODUCT ALREADY EXIST")
-          : addDataToWishlist(item);
-      }
-    });
+    axios
+      .get("/api/wishlist", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        const result = res.data.data.filter((x) => item === x.product_id._id);
+        {
+          result.length
+            ? console.log("PRODUCT ALREADY EXIST")
+            : addDataToWishlist(item);
+        }
+      });
   };
 
   const addDataToWishlist = (item) => {
@@ -122,95 +129,92 @@ function CartLeft() {
     });
   };
 
-  return (
-    cartdata ?
+  return cartdata ? (
     <div className="cart-left-side-container">
       <div className="both-screen">
-      <Card
-        title={`My Cart(${cartdata === undefined ? "0" : cartdata.length})`}
-        className="cart-left-card"
-      >
-        {cartdata ? (
-          cartdata.map((item, key) => {
-            return (
-              <div key={key} className="Main-container_left_cart">
-                <div className="cart-img-detail-container">
-                  <div>
-                    <img
-                      src={`uploads/${item.product_id.product_img}`}
-                      alt=""
-                      className="cart-img"
-                    />
+        <Card
+          title={`My Cart(${cartdata === undefined ? "0" : cartdata.length})`}
+          className="cart-left-card"
+        >
+          {cartdata ? (
+            cartdata.map((item, key) => {
+              return (
+                <div key={key} className="Main-container_left_cart">
+                  <div className="cart-img-detail-container">
+                    <div>
+                      <img
+                        src={`uploads/${item.product_id.product_img}`}
+                        alt=""
+                        className="cart-img"
+                      />
+                    </div>
+                    <div className="cart-detail">
+                      <p className="productname">{item.product_id.name}</p>
+                      <p className="cart-price">
+                        ₹{item.product_id.price * item.quantity}
+                      </p>
+                    </div>
                   </div>
-                  <div className="cart-detail">
-                    <p className="productname">{item.product_id.name}</p>
-                    <p className="cart-price">
-                      ₹{item.product_id.price * item.quantity}
-                    </p>
+                  <div className="cart-buttons">
+                    <div className="cart-button-inc-dec-group">
+                      <MinusCircleOutlined
+                        className="cart-minus-button"
+                        onClick={() => Decrement(item)}
+                      />
+                      <h2>{item.quantity}</h2>
+                      <PlusCircleOutlined
+                        className="cart-plus-button"
+                        onClick={() => Increment(item)}
+                      />
+                    </div>
+                    <div className="cart-add-remove">
+                      <button
+                        className="button-28 "
+                        onClick={() => AddtoWishlist(item.product_id._id)}
+                      >
+                        Add to wishlist
+                      </button>
+                      <button
+                        className="remove_button"
+                        onClick={() => removeItem(item.product_id._id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="cart-buttons">
-                  <div className="cart-button-inc-dec-group">
-                    <MinusCircleOutlined
-                      className="cart-minus-button"
-                      onClick={() => Decrement(item)}
-                    />
-                    <h2>{item.quantity}</h2>
-                    <PlusCircleOutlined
-                      className="cart-plus-button"
-                      onClick={() => Increment(item)}
-                    />
-                  </div>
-                  <div className="cart-add-remove">
-                    <button
-                      className="button-28 "
-                      onClick={() => AddtoWishlist(item.product_id._id)}
-                    >
-                      Add to wishlist
-                    </button>
-                    <button
-                      className="remove_button"
-                      onClick={() => removeItem(item.product_id._id)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <Empty />
-        )}
-      </Card>
+              );
+            })
+          ) : (
+            <Empty />
+          )}
+        </Card>
 
-<div className="cart-right-container">
-      <Card className="cart-right-card"
-        title="PRICE DETAILS"
-       >
-        <div className="cart-right-1">
-            <p>Price ({number_of_item})</p> 
-            <p>₹{amount}</p> </div>
-        <div className="cart-right-2">
-            <p>Delivery Charges</p>
-            <p>free</p>
+        <div className="cart-right-container">
+          <Card className="cart-right-card" title="PRICE DETAILS">
+            <div className="cart-right-1">
+              <p>Price ({number_of_item})</p>
+              <p>₹{amount}</p>{" "}
+            </div>
+            <div className="cart-right-2">
+              <p>Delivery Charges</p>
+              <p>free</p>
+            </div>
+            <hr />
+            <div className="cart-right-3">
+              <p>Total Amount</p>
+              <p>₹{amount}</p>
+            </div>
+          </Card>
         </div>
-        <hr />
-        <div className="cart-right-3">
-            <p>Total Amount</p>
-            <p>₹{amount}</p>
-        </div>
-      </Card>
-    </div> 
-    </div>
+      </div>
 
       <div className="placeorder">
         <button className="cart-placeoreder-button_5 ">Place Order</button>
       </div>
-
-
     </div>
-    : <Empty />
+  ) : (
+    <Empty />
   );
 }
 
