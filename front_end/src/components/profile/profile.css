@@ -80,9 +80,27 @@ input::-webkit-inner-spin-button {
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
-
 }
 
+.modalstyle{
+width: 500%;
+height: 300%;
+border-radius: 60px;
+
+}
+.changepwd-form-button{
+  width: 100%;
+}
+.changepwdbtn{
+  border:none;
+  font-weight: bold;
+  font-size: 15px;
+  color: #1890ff;
+}
+.changepwdform{
+  height: 100%;
+  width: 100%;
+}
 @media only screen and (max-width: 768px) {
  
   .main-title{

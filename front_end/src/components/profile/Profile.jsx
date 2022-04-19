@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Card, Modal, Button } from "antd";
+import { Layout, Form, Card, Input, Modal, Button } from "antd";
 import { Link } from "react-router-dom";
 import "./profile.css";
 import Toast from "../../utils/Toast";
@@ -13,10 +13,17 @@ const { Content } = Layout;
 function Profile() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const token = useSelector((state) => state.loginToken);
+  const [pwd, setPwd] = useState("");
+  const [newPwd, setNewPwd] = useState("");
+  const [confirmPwd, setConfirmPwd] = useState("");
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [userData, setUserData] = useState({});
   const [editBtnVisiblity, setEditBtnVisiblity] = useState("btn-display-none");
- 
+
+  //Modal
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -25,6 +32,7 @@ function Profile() {
     setIsModalVisible(false);
   };
 
+  //profile
   const fetchUserData = async () => {
     await axios
       .get("/user", {
@@ -39,6 +47,7 @@ function Profile() {
 
   const updateUserData = async (e) => {
     e.preventDefault();
+    Toast({ msg: "Data updated successfully", success: true });
     console.log("user data updated....", JSON.stringify(userData));
     await axios
       .patch(
@@ -53,7 +62,6 @@ function Profile() {
           headers: {
             "Content-Type": "application/json",
             authorization: token,
-            //   "authorization": `Bearer ${token}`,
           },
         }
       )
@@ -70,14 +78,14 @@ function Profile() {
     setIsReadOnly(!isReadOnly);
     setEditBtnVisiblity("btn-display-none");
   };
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-  // const saveEvent = () => {
-  //   Toast({msg: "Add Details Successfully", success: true})
-  //   // fetchUserData();
-  // };
 
+  // const SubmitpwdForm = () =>{
+  //   setIsModalVisible(false);
+  //   Toast({ msg: "Password updated successfully", success: true });
+  //   console.log("submitpwd");
+   
+  // }
+  
   // const checkboxChange = (e) => {
   //   if(!e.checked) {
   //     console.log("name: ", e.target.value);
@@ -164,19 +172,77 @@ function Profile() {
                     </div>*/}
 
                     <label className="form-input-label">Email Address </label>
-                    <Button onClick={showModal}>
+                    <Button className="changepwdbtn" onClick={showModal}>
                       Change Password
                     </Button>
-                    <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
-                      title="Change Password"
-                      footer={null}
-                    >
-                      <input type="text" placeholder="Enter your old password"/><br/>
-                      <input type="text" placeholder="Enter your new password"/><br/>
-                      <input type="text" placeholder="Enter confirm password"/><br/>
-                      <button type="submit" >Submit</button>
-                      <button >Cancel</button>
-                    </Modal>
+                    <div>
+                      <Modal
+                        className="modalstyle"
+                        visible={isModalVisible}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        title="Change Password"
+                        footer={null}
+                      >
+                        <Form className="changepwdform">
+                          <Form.Item
+                            value={pwd}
+                            onChange={(e) => setPwd(e.target.value)}
+                            name="oldpwd"
+                            label="Enter your old password"
+                            rules={[
+                              {
+                                required: true,
+                                message: "This field is required",
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+
+                          <Form.Item
+                            name="newpwd"
+                            label="Enter your new password"
+                            value={newPwd}
+                            onChange={(e) => setNewPwd(e.target.value)}
+                            rules={[
+                              {
+                                required: true,
+                                message: "This field is required",
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+
+                          <Form.Item
+                            name="confirmPwd "
+                            label="Enter Confirm Password"
+                            value={confirmPwd}
+                            onChange={(e) => setConfirmPwd(e.target.value)}
+                            rules={[
+                              {
+                                required: true,
+                                message: "This field is required",
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                          <br />
+                          <Form.Item>
+                            <Button
+                              type="primary"
+                              htmlType="submit"
+                              className="changepwd-form-button"
+                              
+                            >
+                              Submit
+                            </Button>
+                          </Form.Item>
+                        </Form>
+                      </Modal>
+                    </div>
                     <br />
                     <br />
                     <input

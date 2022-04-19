@@ -100,9 +100,6 @@ function LoginForm(props) {
         <Button className="forgot-btn" onClick={() => onForgot()}>
           Forgot Password?
         </Button>
-        {/*    <a className="login-form-forgot" href="/">
-            Forgot Password?
-        </a> */}
       </Form.Item>
 
       <Form.Item>
