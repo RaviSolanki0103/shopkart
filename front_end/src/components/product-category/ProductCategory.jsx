@@ -53,6 +53,7 @@ function ProductCategory() {
       headers: {
         "Content-Type": "application/json",
         authorization: token,
+        
       },
     }).catch((err) => {
       if (err.response.status === 401) {

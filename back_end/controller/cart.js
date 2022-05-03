@@ -89,3 +89,28 @@ exports.updateCart = async (req, res) =>{
       console.log("Successful deletion");
     });
   };
+
+
+
+
+// Front end Patch
+  // await axios
+  //       .patch(
+  //         "/user",
+  //         {
+  //           $push: {
+  //             addresses: {
+  //               address: userAddress.address,
+  //               pincode: userAddress.pincode,
+  //             },
+  //           },
+  //         },
+  //         {
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             authorization: token,
+  //           },
+  //         }
+  //       )
+  //       .then((res) => console.log("response from update data", res))
+  //       .catch((err) => console.log("error: ", err));

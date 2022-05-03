@@ -38,7 +38,7 @@ router.get("/cart", middleware, controller.cart.getCart);
 router.post("/cart", middleware, controller.cart.addCart);
 router.patch("/cart/:id", middleware, controller.cart.updateCart);
 // router.delete("/cart/:id", controller.cart.delete);
-router.delete("/cart/:id", middleware,controller.cart.delete)
+router.delete("/cart/:id", middleware, controller.cart.delete);
 // product routes
 router.post(
   "/products",
@@ -69,10 +69,5 @@ router.get("/userdetail", (req, res) => {
 //   });
 // });
 
-
-
 router.get("/getallproducts", controller.product.getAllProduct);
 module.exports = router;
-
-
-
