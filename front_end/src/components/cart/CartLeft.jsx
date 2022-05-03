@@ -7,6 +7,7 @@ import { sendProductId, send_totalamount } from "../../redux/actions";
 import { send_number_of_item } from "../../redux/actions";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./CartRight.css";
 
 function CartLeft() {
   const [cartdata, setcartdata] = useState([]);
@@ -17,6 +18,10 @@ function CartLeft() {
   const [second, setsecond] = useState([])
 const navigate = useNavigate();
 
+  //----------------
+  const amount = useSelector((state) => state.send_totalamount);
+  const number_of_item = useSelector((state) => state.send_number_of_item);
+  //=--------------------
   const getcarttdata = () => {
     axios
       .get("/api/cart", {
@@ -43,12 +48,18 @@ const navigate = useNavigate();
     incrementQuantity(value);
     setstatus(!status);
   };
-  const incrementQuantity = (value) => {
-    axios({
+  const incrementQuantity = async (value) => {
+    console.log(value._id, "okokokokok");
+
+    await axios({
       method: "patch",
       url: `/api/cart/${value._id}`,
       data: {
         quantity: value.quantity + 1,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
       },
     });
   };
@@ -58,12 +69,17 @@ const navigate = useNavigate();
     setstatus(!status);
   };
 
-  const decrementQuantity = (value) => {
-    axios({
+  const decrementQuantity = async (value) => {
+    console.log(value);
+    await axios({
       method: "patch",
       url: `/api/cart/${value._id}`,
       data: {
         quantity: value.quantity - 1,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
       },
     });
   };
@@ -73,17 +89,33 @@ const navigate = useNavigate();
   }, [status]);
 
   const removeItem = (id) => {
-    axios.delete(`/api/cart/${id}`).then((res) => {});
+    axios
+      .delete(`/api/cart/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {});
     setstatus(!status);
   };
 
   const AddtoWishlist = (item) => {
-    axios.get("/api/wishlist").then((res) => {
-      const result = res.data.data.filter((x) => item === x.product_id._id);
-      result.length
-        ? console.log("PRODUCT ALREADY EXIST")
-        : addDataToWishlist(item);
-    });
+    axios
+      .get("/api/wishlist", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        const result = res.data.data.filter((x) => item === x.product_id._id);
+        {
+          result.length
+            ? console.log("PRODUCT ALREADY EXIST")
+            : addDataToWishlist(item);
+        }
+      });
   };
 
   const addDataToWishlist = (item) => {
@@ -100,24 +132,33 @@ const navigate = useNavigate();
     });
   };
 
-  return (
+  return cartdata ? (
     <div className="cart-left-side-container">
-      <Card
-        title={`My Cart(${cartdata === undefined ? "0" : cartdata.length})`}
-        className="cart-left-card"
-      >
-        {cartdata ? (
-          cartdata.map((item, key) => {
-            return (
-              <div key={key} className="Main-container_left_cart">
-                <div className="cart-img-detail-container">
-                  <div>
-                    <img
-                      src={`uploads/${item.product_id.product_img}`}
-                      alt=""
-                      className="cart-img"
-                    />
+      <div className="both-screen">
+        <Card
+          title={`My Cart(${cartdata === undefined ? "0" : cartdata.length})`}
+          className="cart-left-card"
+        >
+          {cartdata ? (
+            cartdata.map((item, key) => {
+              return (
+                <div key={key} className="Main-container_left_cart">
+                  <div className="cart-img-detail-container">
+                    <div>
+                      <img
+                        src={`uploads/${item.product_id.product_img}`}
+                        alt=""
+                        className="cart-img"
+                      />
+                    </div>
+                    <div className="cart-detail">
+                      <p className="productname">{item.product_id.name}</p>
+                      <p className="cart-price">
+                        ₹{item.product_id.price * item.quantity}
+                      </p>
+                    </div>
                   </div>
+                  <div>
                   <div className="cart-detail">
                     <p className="productname">{item.product_id.name}</p>
                     <p className="productname">
@@ -169,6 +210,9 @@ const navigate = useNavigate();
         }}>Place Order</button>
       </div>
     </div>
+    </div>
+  ) : (
+    <Empty />
   );
 }
 

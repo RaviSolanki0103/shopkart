@@ -72,3 +72,20 @@ exports.addCart = async (req, res) => {
       });
     });
 };
+
+exports.updateCart = async (req, res) =>{
+  console.log(req.body,"gygyygygy",req.params.id);
+  Cart_item.findByIdAndUpdate(req.params.id, req.body,
+    {returnNewDocument: true})
+    .then(result=> console.log("result: ",result))
+    .catch(err=> console.log(err))
+  }
+
+
+  exports.delete = async (req, res) => {
+    const pro_id = req.params.id;
+    Cart_item.deleteOne({ product_id: pro_id }, function (err) {
+      if (err) console.log(err);
+      console.log("Successful deletion");
+    });
+  };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import {
   LoginOutlined,
@@ -6,17 +6,14 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Input, Badge } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  openLogin,
-  loginStatus,
-  loginToken,
-} from "../../redux/actions/index";
+import { openLogin, loginStatus, loginToken } from "../../redux/actions/index";
 import Login from "../login/Login";
 const { SubMenu } = Menu;
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState("");
   const [searchValue, setSearchValue] = useState("");
 
@@ -27,9 +24,12 @@ export default function Navbar() {
     setCurrent(e.key);
   };
 
+  const numberofCartItem = useSelector((state) => state.send_number_of_item);
+
   return (
     <nav className="main-navbar">
-      <div className="navbar-icon"></div>
+      {/* <div className="navbar-icon"><button onClick={()=>navigate("/")}></button></div> */}
+      <button className="navbar-icon" onClick={() => navigate("/")}></button>
       <div className="navbar-search">
         <Input
           placeholder="input with clear icon"
@@ -74,8 +74,8 @@ export default function Navbar() {
               </Menu.ItemGroup>
             </SubMenu>
             {/* cart button with badge  */}
-            <Menu.Item key="cart">
-              <Badge count={1} offset={[4, 2]}>
+            <Menu.Item key="cart" onClick={() => navigate("/cart")}>
+              <Badge count={numberofCartItem} offset={[4, 2]}>
                 <ShoppingCartOutlined className="svg-icon shopping-cart-icon" />
               </Badge>
             </Menu.Item>

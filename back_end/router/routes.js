@@ -36,7 +36,9 @@ router.delete("/wishlist/:id", middleware, controller.wishlist.deleteWishlist);
 //cart
 router.get("/cart", middleware, controller.cart.getCart);
 router.post("/cart", middleware, controller.cart.addCart);
-
+router.patch("/cart/:id", middleware, controller.cart.updateCart);
+// router.delete("/cart/:id", controller.cart.delete);
+router.delete("/cart/:id", middleware,controller.cart.delete)
 // product routes
 router.post(
   "/products",
@@ -59,13 +61,18 @@ router.get("/userdetail", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.delete("/cart/:id", (req, res) => {
-  const pro_id = req.params.id;
-  Cart_item.deleteOne({ product_id: pro_id }, function (err) {
-    if (err) console.log(err);
-    console.log("Successful deletion");
-  });
-});
+// router.delete("/cart/:id", (req, res) => {
+//   const pro_id = req.params.id;
+//   Cart_item.deleteOne({ product_id: pro_id }, function (err) {
+//     if (err) console.log(err);
+//     console.log("Successful deletion");
+//   });
+// });
+
+
 
 router.get("/getallproducts", controller.product.getAllProduct);
 module.exports = router;
+
+
+
