@@ -95,10 +95,35 @@
     padding: 0px;
   }
   .navbar-icon {
-    width: 20%;
+    width: 15%;
+    margin: 0 5%;
   }
   .navbar-menu ul {
     width: 35%;
     height: 32%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar-icon {
+    width: 10%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .navbar-icon {
+    width: 13%;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .navbar-icon {
+    width: 14%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .navbar-icon {
+    width: 15%;
   }
 }

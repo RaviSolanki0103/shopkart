@@ -28,8 +28,7 @@ export default function Navbar() {
 
   return (
     <nav className="main-navbar">
-      {/* <div className="navbar-icon"><button onClick={()=>navigate("/")}></button></div> */}
-      <button className="navbar-icon" onClick={() => navigate("/")}></button>
+      <Link to="/" className="navbar-icon" />
       <div className="navbar-search">
         <Input
           placeholder="input with clear icon"
