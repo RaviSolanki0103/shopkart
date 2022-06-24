@@ -47,7 +47,6 @@
   } 
 
    .dropdown {
-    background-color: rgb(183, 183, 207);
     border-radius:5px;
     padding: 5px;
     opacity: 0;
@@ -55,6 +54,7 @@
     max-height: 0;
     float: right;
     position: relative;
+    
   }
   
   .dropdown-container:focus .dropdown {
@@ -63,7 +63,15 @@
     max-height: 100vh;
   }
  
-  
+  .edit-btn{
+    width: 55px;
+    font-weight: bold;
+  }
+
+  .delete-btn{
+    width: 55px;
+    font-weight: bold;
+  }
   @media only screen and (max-width: 768px) {
  
     .card-title{

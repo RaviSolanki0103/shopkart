@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout, Card } from "antd";
+import {Link} from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { loginStatus, loginToken } from "../../redux/actions/index";
 import "./sidebar.css";
@@ -10,7 +11,7 @@ import {
   HeartFilled,
   ProfileTwoTone,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+
 const { Sider } = Layout;
 
 function Sidebar() {

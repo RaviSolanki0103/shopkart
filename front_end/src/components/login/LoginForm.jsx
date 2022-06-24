@@ -23,6 +23,7 @@ function LoginForm(props) {
         params: { email, password },
       })
       .then((res) => {
+        console.log(res, "hekfjhdjbm");
         dispatch(loginToken(res.data.data.token));
         Toast({ msg: "Login Sucess", success: true });
         dispatch(openLogin(false));
@@ -99,9 +100,6 @@ function LoginForm(props) {
         <Button className="forgot-btn" onClick={() => onForgot()}>
           Forgot Password?
         </Button>
-        {/*    <a className="login-form-forgot" href="/">
-            Forgot Password?
-        </a> */}
       </Form.Item>
 
       <Form.Item>

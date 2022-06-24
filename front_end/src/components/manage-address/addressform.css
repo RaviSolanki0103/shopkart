@@ -38,10 +38,10 @@
       padding: 5px;
       cursor: pointer;
   }
-  .addform-save:hover{
+  /* .addform-save:hover{
     background-color:#2d2ae996;
     border: 1px solid #4330a1;
-  }
+  } */
 
   .addform-cancel{
     width: 80px;
@@ -55,11 +55,17 @@
       cursor: pointer;
 }
 
-.addform-cancel:hover{
+.user-add-details{
+  border: 1px solid rgba(102, 98, 98, 0.294);
+    text-align:left;
+    padding:20px;
+    background-color:white;
+}
+/* .addform-cancel:hover{
     background-color:#2d2ae996;
     border: 1px solid #4330a1;
     
-  }
+  } */
 
   @media only screen and (max-width: 768px) {
     .address-form{

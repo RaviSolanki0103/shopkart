@@ -34,7 +34,6 @@ function Registration(props) {
       })
       .then((res) => {
         Toast({ msg: "User Registration Successfull", success: true });
-        // toast.success('', { autoClose: 3000 });
         onLogin();
       })
       .catch((error) => {
@@ -74,7 +73,6 @@ function Registration(props) {
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Enter Firstname"
-              // required
             />
           </Form.Item>
 
@@ -95,6 +93,7 @@ function Registration(props) {
               placeholder="Enter  Lastname"
             />
           </Form.Item>
+
           <Form.Item
             name="email"
             autoComplete="off"
@@ -113,6 +112,7 @@ function Registration(props) {
               placeholder="Enter Email"
             />
           </Form.Item>
+     
           <Form.Item
             name="phone"
             value={phone}
@@ -178,7 +178,6 @@ function Registration(props) {
               id="login"
               htmlType="submit"
               className="registration-form-button"
-              // onClick={registerUser}
             >
               Register
             </Button>

@@ -10,6 +10,9 @@ const otp = require("../models/otp");
 
 // registration routes
 router.post("/user", controller.user.registerUser);
+// router.patch("/user", middleware, controller.user.updateUser);
+router.patch("/user", middleware, controller.user.updateAddress);
+router.delete("/user/:_id", middleware, controller.user.getUserAddById);
 router.get("/user", middleware, controller.user.getUserById);
 router.get("/loginUser", controller.user.loginUser);
 router.post("/emailSend", controller.user.emailSend);

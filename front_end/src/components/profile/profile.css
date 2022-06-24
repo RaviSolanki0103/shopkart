@@ -65,6 +65,42 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.btn-display-none{
+  display: none;
+}
+
+.btn-display-block{
+  display: block;
+  width: 80px;
+  margin-left:20px;
+  border: none;
+  background-color:#1890ff;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.modalstyle{
+width: 500%;
+height: 300%;
+border-radius: 60px;
+
+}
+.changepwd-form-button{
+  width: 100%;
+}
+.changepwdbtn{
+  border:none;
+  font-weight: bold;
+  font-size: 15px;
+  color: #1890ff;
+}
+.changepwdform{
+  height: 100%;
+  width: 100%;
+}
 @media only screen and (max-width: 768px) {
  
   .main-title{
